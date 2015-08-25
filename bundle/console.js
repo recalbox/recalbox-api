@@ -28,8 +28,8 @@ application.addBundle("server", new _solfegejsServer2["default"].HttpServer());
 // Add the internal bundle
 application.addBundle("api", new _Api2["default"]());
 
-//let configuration = require(__dirname + "/../config/default");
-//application.overrideConfiguration(configuration);
+var configuration = require(__dirname + "/../config/default");
+application.overrideConfiguration(configuration);
 
 // Start the application
 application.start();

@@ -23,9 +23,11 @@
     },
     "scripts"       :
     {
-        "start"         : "pm2 start ./process.json",
+        "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
+        "start-dev"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
         "stop"          : "pm2 stop api",
-        "monitoring"    : "pm2 monit",
+        "monitoring"    : "pm2 monit api",
+        "logs"          : "pm2 logs api",
         "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
         "es6-watch"     : "babel bundle-es6 --blacklist regenerator --watch --out-dir bundle",
         "es6-compile"   : "babel bundle-es6 --blacklist regenerator --out-dir bundle"

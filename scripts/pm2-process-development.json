@@ -1,0 +1,30 @@
+{
+    "apps" : [
+        {
+            "name"               : "api-dev-es6-watch",
+            "exec_interpreter"   : "node",
+            "exec_mode"          : "cluster",
+            "instances"          : 1,
+            "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+            "max_memory_restart" : "100M",
+            "merge_logs"         : true,
+            "cwd"                : ".",
+            "script"             : "node_modules/.bin/babel",
+            "args"               : ["bundle-es6", "--blacklist", "regenerator", "--out-dir", "bundle"],
+        },
+        {
+            "name"               : "api-dev-website",
+            "exec_interpreter"   : "node",
+            "exec_mode"          : "cluster",
+            "instances"          : 1,
+            "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+            "max_memory_restart" : "100M",
+            "merge_logs"         : true,
+            "node_args"          : ["--harmony", "--harmony-proxies"],
+            "cwd"                : "bundle",
+            "script"             : "console.js",
+            "watch"              : true,
+            "args"               : ["server:start"]
+        }
+    ]
+}

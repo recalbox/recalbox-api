@@ -13,8 +13,8 @@ application.addBundle("server", new server.HttpServer);
 // Add the internal bundle
 application.addBundle("api", new Api);
 
-//let configuration = require(__dirname + "/../config/default");
-//application.overrideConfiguration(configuration);
+let configuration = require(__dirname + "/../config/default");
+application.overrideConfiguration(configuration);
 
 // Start the application
 application.start();
