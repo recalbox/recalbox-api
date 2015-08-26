@@ -10,7 +10,14 @@
             "merge_logs"         : true,
             "cwd"                : ".",
             "script"             : "node_modules/.bin/babel",
-            "args"               : ["bundle-es6", "--blacklist", "regenerator", "--out-dir", "bundle"],
+            "args"               : [
+                "bundle-es6", 
+                "--blacklist", 
+                "regenerator", 
+                "--out-dir", 
+                "bundle", 
+                "--watch"
+            ]
         },
         {
             "name"               : "api-dev-website",

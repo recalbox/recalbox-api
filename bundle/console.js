@@ -14,6 +14,10 @@ var _solfegejsServer = require("solfegejs-server");
 
 var _solfegejsServer2 = _interopRequireDefault(_solfegejsServer);
 
+var _solfegejsServerRouter = require("solfegejs-server-router");
+
+var _solfegejsServerRouter2 = _interopRequireDefault(_solfegejsServerRouter);
+
 var _Api = require("./Api");
 
 var _Api2 = _interopRequireDefault(_Api);
@@ -24,6 +28,7 @@ var application = new _solfegejs2["default"].kernel.Application(__dirname);
 // Add the external bundles
 application.addBundle("console", new _solfegejsCli2["default"].Console());
 application.addBundle("server", new _solfegejsServer2["default"].HttpServer());
+application.addBundle("router", new _solfegejsServerRouter2["default"].Router());
 
 // Add the internal bundle
 application.addBundle("api", new _Api2["default"]());

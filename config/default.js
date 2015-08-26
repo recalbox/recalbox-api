@@ -1,18 +1,30 @@
 var packageSettings = require(__dirname + "/../package");
+var routes = require("./routes");
 
 module.exports = {
-    "api":
+    api:
     {
     },
 
-    "console":
+    // Command line configuration
+    console:
     {
-        "title": "Recalbox API " + packageSettings.version
+        title: "Recalbox API " + packageSettings.version
     },
 
-    "server": {
-        "port": 7521,
-        "middlewares": [
+    // Server configuration
+    server: {
+        port: 8002,
+        middlewares: [
+            // The router to handle URIs
+            "@router.middleware"
         ]
+    },
+
+    // Configuration of the router bundle
+    router: {
+        // The routes
+        routes: routes
     }
+
 };

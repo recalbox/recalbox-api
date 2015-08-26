@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import controllersPackage from "./controllers"
 
 /**
  * The API bundle
@@ -12,5 +13,7 @@ export default class Api
      */
     constructor()
     {
+        // The controllers package
+        this.controllers = controllersPackage;
     }
 }

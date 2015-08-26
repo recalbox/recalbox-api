@@ -13,10 +13,11 @@
     },
     "main": "./bundle/Api.js",
     "dependencies": {
-        "pm2"               : "0.14.*",
-        "solfegejs"         : "1.4.*",
-        "solfegejs-cli"     : "1.4.*",
-        "solfegejs-server"  : "1.5.*"
+        "pm2"                       : "0.14.*",
+        "solfegejs"                 : "1.4.*",
+        "solfegejs-cli"             : "1.4.*",
+        "solfegejs-server"          : "1.5.*",
+        "solfegejs-server-router"   : "1.3.*"
     },
     "devDependencies": {
         "babel"         : "5.6.*"
@@ -24,10 +25,13 @@
     "scripts"       :
     {
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
-        "start-dev"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
-        "stop"          : "pm2 stop api",
-        "monitoring"    : "pm2 monit api",
-        "logs"          : "pm2 logs api",
+        "stop"          : "pm2 stop ./scripts/pm2-process-production.json",
+        "monitoring"    : "pm2 monit ./scripts/pm2-process-production.json",
+        "logs"          : "pm2 logs ./scripts/pm2-process-production.json",
+
+        "dev-start"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
+        "dev-stop"      : "pm2 stop ./scripts/pm2-process-development.json",
+
         "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
         "es6-watch"     : "babel bundle-es6 --blacklist regenerator --watch --out-dir bundle",
         "es6-compile"   : "babel bundle-es6 --blacklist regenerator --out-dir bundle"
