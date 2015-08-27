@@ -14,8 +14,9 @@ export default class Home
      */
     *index(request, response)
     {
+        response.setHeader('Content-Type', 'text/plain');
+        response.statusCode = 200;
         response.body = "Recalbox API";
-
     }
 }
 

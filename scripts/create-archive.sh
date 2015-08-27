@@ -4,7 +4,7 @@ currentDirectory=$(dirname "$PWD/$0")
 
 cd $currentDirectory/..
 
-zip -r api.zip \
+tar cvf api.tar \
     package.json \
     start.sh \
     stop.sh \
@@ -15,6 +15,7 @@ zip -r api.zip \
     node_modules/.bin \
     node_modules/npm \
     node_modules/solfegejs \
-    node_modules/solfegejs-server \
     node_modules/solfegejs-cli \
+    node_modules/solfegejs-server \
+    node_modules/solfegejs-server-router \
     node_modules/pm2

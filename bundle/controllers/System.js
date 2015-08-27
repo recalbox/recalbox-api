@@ -35,6 +35,9 @@ var System = (function () {
      */
     value: function* configuration(request, response) {
       var content = yield _solfegejs2["default"].util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
+
+      response.setHeader('Content-Type', 'text/plain');
+      response.statusCode = 200;
       response.body = content;
     }
   }]);

@@ -15,6 +15,9 @@ export default class System
     *configuration(request, response)
     {
         let content = yield solfege.util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
+
+        response.setHeader('Content-Type', 'text/plain');
+        response.statusCode = 200;
         response.body = content;
     }
 }
