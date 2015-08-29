@@ -14,11 +14,15 @@ export default class System
      */
     *configuration(request, response)
     {
+        // Get the content of the main configuration
         let content = yield solfege.util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
 
-        response.setHeader('Content-Type', 'text/plain');
         response.statusCode = 200;
         response.body = content;
+        response.parameters = {
+            a: "b",
+            c: 42
+        };
     }
 }
 

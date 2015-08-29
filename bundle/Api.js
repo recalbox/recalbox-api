@@ -1,8 +1,10 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -22,16 +24,86 @@ var _controllers2 = _interopRequireDefault(_controllers);
  * @class   Api
  */
 
-var Api =
-/**
- * Constructor
- */
-function Api() {
-  _classCallCheck(this, Api);
+var Api = (function () {
+    /**
+     * Constructor
+     */
 
-  // The controllers package
-  this.controllers = _controllers2["default"];
-};
+    function Api() {
+        _classCallCheck(this, Api);
+
+        // The controllers package
+        this.controllers = _controllers2["default"];
+    }
+
+    /**
+     * Format the response
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     * @param   {GeneratorFunction}                 next        The next function
+     */
+
+    _createClass(Api, [{
+        key: "formatMiddleware",
+        value: function* formatMiddleware(request, response, next) {
+            // Execute the next middleware
+            yield* next;
+
+            // Convert the body to the requested format
+            var format = request.getHeader("Content-Type");
+            switch (format) {
+                // Plain text
+                default:
+                case "text":
+                case "text/plain":
+                    response.setHeader("Content-Type", "text/plain");
+
+                    // If the body is empty, then use the parameters
+                    if (!response.body && response.parameters) {
+                        var _body = "";
+                        for (var key in response.parameters) {
+                            _body += key + "=" + response.parameters[key] + "\n";
+                        }
+                        response.body = _body;
+                    }
+                    break;
+
+                // XML key values
+                case "xml":
+                case "text/xml":
+                case "application/xml":
+                    response.setHeader("Content-Type", "application/xml");
+
+                    var body = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<response>\n";
+                    for (var key in response.parameters) {
+                        body += "<" + key + ">";
+                        if (typeof response.parameters[key] === "number") {
+                            body += response.parameters[key];
+                        } else {
+                            body += "<![CDATA[" + response.parameters[key] + "]]>";
+                        }
+                        body += "</" + key + ">\n";
+                    }
+                    body += "</response>";
+                    response.body = body;
+                    break;
+
+                // JSON key values
+                case "json":
+                case "text/json":
+                case "application/json":
+                    response.setHeader("Content-Type", "application/json");
+
+                    response.body = JSON.stringify(response.parameters, null, "    ");
+                    break;
+            }
+        }
+    }]);
+
+    return Api;
+})();
 
 exports["default"] = Api;
 module.exports = exports["default"];

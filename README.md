@@ -16,9 +16,11 @@ Documentation
 
 Available formats:
 
-- `text`
-- `json`
-- `xml`
+| Format | MIME type          |
+| ------ | ------------------ |
+| `text` | `text/plain`       |
+| `json` | `application/json` |
+| `xml`  | `application/xml`  |
 
 
 | Method | Endpoint | Description |
@@ -32,4 +34,9 @@ Available formats:
 | `GET`  | `/system/configuration/locale` | Get the locale |
 
 
+Examples:
 
+```sh
+curl http://192.168.0.42:8002/system/configuration
+curl --header "Content-Type: application/xml" http://192.168.0.42:8002/system/configuration
+```

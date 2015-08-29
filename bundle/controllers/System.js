@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -19,30 +19,34 @@ var _solfegejs2 = _interopRequireDefault(_solfegejs);
  */
 
 var System = (function () {
-  function System() {
-    _classCallCheck(this, System);
-  }
-
-  _createClass(System, [{
-    key: "configuration",
-
-    /**
-     * The main configuration
-     *
-     * @public
-     * @param   {solfege.bundle.server.Request}     request     The request
-     * @param   {solfege.bundle.server.Response}    response    The response
-     */
-    value: function* configuration(request, response) {
-      var content = yield _solfegejs2["default"].util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
-
-      response.setHeader('Content-Type', 'text/plain');
-      response.statusCode = 200;
-      response.body = content;
+    function System() {
+        _classCallCheck(this, System);
     }
-  }]);
 
-  return System;
+    _createClass(System, [{
+        key: "configuration",
+
+        /**
+         * The main configuration
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+        value: function* configuration(request, response) {
+            // Get the content of the main configuration
+            var content = yield _solfegejs2["default"].util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
+
+            response.statusCode = 200;
+            response.body = content;
+            response.parameters = {
+                a: "b",
+                c: 42
+            };
+        }
+    }]);
+
+    return System;
 })();
 
 exports["default"] = System;
