@@ -7,7 +7,8 @@ REST API for [recalbox](http://recalbox.com)
 Installation
 ------------
 
-TODO
+- [Install the service on the Recalbox 3.3.x](documentation/install-on-recalbox.md)
+- [Install the developer environment](documentation/install-dev-environment.md)
 
 
 

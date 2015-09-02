@@ -2,6 +2,10 @@
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+var _fs = require("fs");
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
@@ -33,7 +37,17 @@ application.addBundle("router", new _solfegejsServerRouter2["default"].Router())
 // Add the internal bundle
 application.addBundle("api", new _Api2["default"]());
 
+// Get the configuration
+// Check if the file parameters.json exists
 var configuration = require(__dirname + "/../config/default");
+try {
+    var parameters = require(__dirname + "/../config/parameters.json");
+    if (parameters.port) {
+        configuration.server.port = parameters.port;
+    }
+} catch (error) {}
+
+// Override the application configuration
 application.overrideConfiguration(configuration);
 
 // Start the application

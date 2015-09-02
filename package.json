@@ -27,10 +27,11 @@
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
         "stop"          : "pm2 stop ./scripts/pm2-process-production.json",
         "monitoring"    : "pm2 monit ./scripts/pm2-process-production.json",
-        "logs"          : "pm2 logs ./scripts/pm2-process-production.json",
+        "logs"          : "pm2 logs --lines 5",
 
         "dev-start"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
         "dev-stop"      : "pm2 stop ./scripts/pm2-process-development.json",
+        "dev-logs"      : "pm2 logs --lines 5",
 
         "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
         "es6-watch"     : "babel bundle-es6 --blacklist regenerator --watch --out-dir bundle",

@@ -14,9 +14,10 @@ module.exports = {
 
     // Server configuration
     server: {
-        port: 8002,
+        port: 1337,
         middlewares: [
             // Response formatter
+            // @todo Create a project for that
             "@api.formatMiddleware",
 
             // The router to handle URIs
