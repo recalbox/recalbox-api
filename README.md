@@ -12,10 +12,10 @@ Installation
 
 
 
-Documentation
--------------
+API
+---
 
-Available formats:
+### Available formats
 
 | Format | MIME type          |
 | ------ | ------------------ |
@@ -23,21 +23,23 @@ Available formats:
 | `json` | `application/json` |
 | `xml`  | `application/xml`  |
 
-
-| Method | Endpoint | Description |
-| ------ | -------- | ----------- |
-| `GET`  | `/system/configuration` | Get the main configuration |
-| `GET`  | `/system/configuration/hostname` | Get the hostname |
-| `PUT`  | `/system/configuration/hostname` | Update the hostname |
-| `GET`  | `/system/configuration/kodi` | Get Kodi settings |
-| `GET`  | `/system/configuration/kodi/enabled` | Indicates that Kodi is enabled or not |
-| `PUT`  | `/system/configuration/kodi/enabled` | Enable/Disable Kodi |
-| `GET`  | `/system/configuration/locale` | Get the locale |
+To get a specific response format, you have to send the HTTP header `Content-Type` with a listed MIME type above.
 
 
-Examples:
+### Endpoints
+
+| GET | PUT | Endpoint | Description |
+|:---:|:---:| -------- | ----------- |
+|  ✔  |  ✔  | `/system/configuration` | The main configuration |
+|  ✔  |  ✔  | `/system/configuration/hostname` | The hostname |
+|  ✔  |     | `/system/configuration/kodi` | Get Kodi settings |
+|  ✔  |  ✔  | `/system/configuration/kodi/enabled` | Enable/disable Kodi |
+|  ✔  |  ✔  | `/system/configuration/locale` | The locale |
+
+
+### Examples
 
 ```sh
-curl http://192.168.0.42:8002/system/configuration
-curl --header "Content-Type: application/xml" http://192.168.0.42:8002/system/configuration
+curl http://192.168.0.42:1337/system/configuration
+curl --header "Content-Type: application/xml" http://192.168.0.42:1337/system/configuration
 ```
