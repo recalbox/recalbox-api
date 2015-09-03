@@ -40,7 +40,7 @@ This command displays the process logs of the server and the watcher. It is usef
 
 
 
-4 - Stop the server and the watchers
+5 - Stop the server and the watchers
 ------------------------------------
 
 ```bash
