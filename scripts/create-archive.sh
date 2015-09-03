@@ -7,6 +7,7 @@ cd $currentDirectory/..
 tar cvf api.tar \
     package.json \
     start.sh \
+    monitoring.sh \
     stop.sh \
     LICENSE \
     scripts/ \
@@ -18,4 +19,5 @@ tar cvf api.tar \
     node_modules/solfegejs-cli \
     node_modules/solfegejs-server \
     node_modules/solfegejs-server-router \
+    node_modules/ini \
     node_modules/pm2

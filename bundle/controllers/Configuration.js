@@ -86,7 +86,7 @@ var Configuration = (function () {
         key: "kodiEnabled",
         value: function* kodiEnabled(request, response) {
             var settings = {
-                "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled")
+                "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled", 1)
             };
 
             response.statusCode = 200;

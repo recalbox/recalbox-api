@@ -61,7 +61,7 @@ export default class Configuration
     *kodiEnabled(request, response)
     {
         let settings = {
-            "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled")
+            "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled", 1)
         };
 
         response.statusCode = 200;
