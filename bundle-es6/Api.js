@@ -57,11 +57,12 @@ export default class Api
 
                 let body = `<?xml version="1.0" encoding="UTF-8" ?>\n<response>\n`;
                 for (let key in response.parameters) {
+                    let value = response.parameters[key];
                     body += `<${key}>`;
-                    if (typeof response.parameters[key] === "number") {
-                        body += response.parameters[key];
+                    if (!isNaN(value)) {
+                        body += value;
                     } else {
-                        body += `<![CDATA[${response.parameters[key]}]]>`;
+                        body += `<![CDATA[${value}]]>`;
                     }
                     body += `</${key}>\n`;
                 }
