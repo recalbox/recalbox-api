@@ -40,8 +40,8 @@ This command displays the process logs of the server and the watcher. It is usef
 
 
 
-5 - Stop the server and the watchers
-------------------------------------
+5 - Stop the server and the watcher
+-----------------------------------
 
 ```bash
 npm run dev-stop
