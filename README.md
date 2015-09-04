@@ -84,6 +84,6 @@ To get a specific response format, you have to send the HTTP header `Content-Typ
 ### Examples
 
 ```sh
-curl http://192.168.0.42:1337/system/configuration
-curl --header "Content-Type: application/xml" http://192.168.0.42:1337/system/configuration
+curl http://192.168.0.42:1337/configuration
+curl --header "Content-Type: application/xml" http://192.168.0.42:1337/configuration
 ```
