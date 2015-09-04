@@ -7,13 +7,13 @@ import ini from "ini";
 export default class Configuration
 {
     /**
-     * The main configuration file
+     * Get the main configuration file
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *index(request, response)
+    *getConfiguration(request, response)
     {
         // Get the content of the main configuration
         let content = yield this.getMainConfigurationContent();
@@ -28,13 +28,13 @@ export default class Configuration
     }
 
     /**
-     * The Kodi settings
+     * Get the Kodi settings
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *kodi(request, response)
+    *getKodi(request, response)
     {
         let settings = {};
 
@@ -52,13 +52,13 @@ export default class Configuration
     }
 
     /**
-     * The Kodi "enabled" setting
+     * Get the Kodi "enabled" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *kodiEnabled(request, response)
+    *getKodiEnabled(request, response)
     {
         let settings = {
             "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled", 1)
@@ -66,6 +66,20 @@ export default class Configuration
 
         response.statusCode = 200;
         response.parameters = settings;
+    }
+
+    /**
+     * Set the Kodi "enabled" setting
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setKodiEnabled(request, response)
+    {
+        // @todo
+        response.statusCode = 200;
+        response.body = "done";
     }
 
     /**

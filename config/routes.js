@@ -9,19 +9,27 @@ module.exports = [
         id: "configuration",
         url: "/configuration",
         controller: "@api.controllers.Configuration",
-        action: "index"
+        action: "getConfiguration"
     },
     {
         id: "kodi",
         url: "/kodi",
         controller: "@api.controllers.Configuration",
-        action: "kodi"
+        action: "getKodi"
     },
     {
         id: "kodi.enabled",
         url: "/kodi/enabled",
         controller: "@api.controllers.Configuration",
-        action: "kodiEnabled"
+        action: "getKodiEnabled",
+        policies: ["methodIsGet"]
+    },
+    {
+        id: "kodi.enabled:update",
+        url: "/kodi/enabled",
+        controller: "@api.controllers.Configuration",
+        action: "setKodiEnabled",
+        policies: ["methodIsPut"]
     }
 ];
 

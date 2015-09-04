@@ -28,16 +28,16 @@ var Configuration = (function () {
     }
 
     _createClass(Configuration, [{
-        key: "index",
+        key: "getConfiguration",
 
         /**
-         * The main configuration file
+         * Get the main configuration file
          *
          * @public
          * @param   {solfege.bundle.server.Request}     request     The request
          * @param   {solfege.bundle.server.Response}    response    The response
          */
-        value: function* index(request, response) {
+        value: function* getConfiguration(request, response) {
             // Get the content of the main configuration
             var content = yield this.getMainConfigurationContent();
 
@@ -51,15 +51,15 @@ var Configuration = (function () {
         }
 
         /**
-         * The Kodi settings
+         * Get the Kodi settings
          *
          * @public
          * @param   {solfege.bundle.server.Request}     request     The request
          * @param   {solfege.bundle.server.Response}    response    The response
          */
     }, {
-        key: "kodi",
-        value: function* kodi(request, response) {
+        key: "getKodi",
+        value: function* getKodi(request, response) {
             var settings = {};
 
             // Extract the settings from the main configuration
@@ -76,21 +76,36 @@ var Configuration = (function () {
         }
 
         /**
-         * The Kodi "enabled" setting
+         * Get the Kodi "enabled" setting
          *
          * @public
          * @param   {solfege.bundle.server.Request}     request     The request
          * @param   {solfege.bundle.server.Response}    response    The response
          */
     }, {
-        key: "kodiEnabled",
-        value: function* kodiEnabled(request, response) {
+        key: "getKodiEnabled",
+        value: function* getKodiEnabled(request, response) {
             var settings = {
                 "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled", 1)
             };
 
             response.statusCode = 200;
             response.parameters = settings;
+        }
+
+        /**
+         * Set the Kodi "enabled" setting
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setKodiEnabled",
+        value: function* setKodiEnabled(request, response) {
+            // @todo
+            response.statusCode = 200;
+            response.body = "done";
         }
 
         /**
