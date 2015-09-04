@@ -14,20 +14,20 @@ module.exports = [
     {
         id: "kodi",
         url: "/kodi",
-        controller: "@api.controllers.Configuration",
+        controller: "@api.controllers.Kodi",
         action: "getKodi"
     },
     {
         id: "kodi.enabled",
         url: "/kodi/enabled",
-        controller: "@api.controllers.Configuration",
+        controller: "@api.controllers.Kodi",
         action: "getKodiEnabled",
         policies: ["methodIsGet"]
     },
     {
         id: "kodi.enabled:update",
         url: "/kodi/enabled",
-        controller: "@api.controllers.Configuration",
+        controller: "@api.controllers.Kodi",
         action: "setKodiEnabled",
         policies: ["methodIsPut"]
     }

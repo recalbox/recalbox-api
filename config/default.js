@@ -4,6 +4,7 @@ var routes = require("./routes");
 module.exports = {
     api:
     {
+        mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf"
     },
 
     // Command line configuration

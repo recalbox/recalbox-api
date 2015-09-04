@@ -1,5 +1,7 @@
 import solfege from "solfegejs";
-import ini from "ini";
+import IniFile from "../utils/IniFile";
+import config from "../../config/default";
+
 
 /**
  * The access points of the configuration
@@ -15,117 +17,13 @@ export default class Configuration
      */
     *getConfiguration(request, response)
     {
-        // Get the content of the main configuration
-        let content = yield this.getMainConfigurationContent();
+        let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        let content = yield iniFile.getContent();
+        let parameters = yield iniFile.getParameters();
 
-        // Parse the content and extract the parameters
-        let parameters = ini.parse(content);
-
-        // Write the response
         response.statusCode = 200;
         response.body = content;
         response.parameters = parameters;
-    }
-
-    /**
-     * Get the Kodi settings
-     *
-     * @public
-     * @param   {solfege.bundle.server.Request}     request     The request
-     * @param   {solfege.bundle.server.Response}    response    The response
-     */
-    *getKodi(request, response)
-    {
-        let settings = {};
-
-        // Extract the settings from the main configuration
-        let parameters = yield this.getMainConfigurationParameters();
-        let regexp = /^kodi\./;
-        for (let key in parameters) {
-            if (key.match(regexp)) {
-                settings[key] = parameters[key];
-            }
-        }
-
-        response.statusCode = 200;
-        response.parameters = settings;
-    }
-
-    /**
-     * Get the Kodi "enabled" setting
-     *
-     * @public
-     * @param   {solfege.bundle.server.Request}     request     The request
-     * @param   {solfege.bundle.server.Response}    response    The response
-     */
-    *getKodiEnabled(request, response)
-    {
-        let settings = {
-            "kodi.enabled": yield this.getMainConfigurationSetting("kodi.enabled", 1)
-        };
-
-        response.statusCode = 200;
-        response.parameters = settings;
-    }
-
-    /**
-     * Set the Kodi "enabled" setting
-     *
-     * @public
-     * @param   {solfege.bundle.server.Request}     request     The request
-     * @param   {solfege.bundle.server.Response}    response    The response
-     */
-    *setKodiEnabled(request, response)
-    {
-        // @todo
-        response.statusCode = 200;
-        response.body = "done";
-    }
-
-    /**
-     * Get the main configuration content
-     *
-     * @private
-     * @return  {string}    The content
-     */
-    *getMainConfigurationContent()
-    {
-        // Get the content of the main configuration
-        let content = yield solfege.util.Node.fs.readFile("/recalbox/share/system/recalbox.conf");
-        content = content.toString("utf8");
-
-        return content;
-    }
-
-    /**
-     * Get the main configuration parameters
-     *
-     * @private
-     * @return  {object}    The parameters
-     */
-    *getMainConfigurationParameters()
-    {
-        let content = yield this.getMainConfigurationContent();
-        let parameters = ini.parse(content);
-
-        return parameters;
-    }
-
-    /**
-     * Get a setting value from the main configuration
-     *
-     * @param   {string}        name            The setting name
-     * @param   {string|number} defaultValue    The default value
-     */
-    *getMainConfigurationSetting(name, defaultValue)
-    {
-        // Extract the value from the main configuration
-        let parameters = yield this.getMainConfigurationParameters();
-        if (parameters.hasOwnProperty(name)) {
-            return parameters[name];
-        }
-
-        return defaultValue;
     }
 }
 
