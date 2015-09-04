@@ -16,7 +16,7 @@
         "pm2"                       : "0.14.*",
         "solfegejs"                 : "1.4.*",
         "solfegejs-cli"             : "1.4.*",
-        "solfegejs-server"          : "1.5.*",
+        "solfegejs-server"          : "1.6.*",
         "solfegejs-server-router"   : "1.4.*",
         "ini"                       : "1.3.*"
     },

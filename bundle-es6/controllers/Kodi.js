@@ -51,9 +51,21 @@ export default class Kodi
      */
     *setKodiEnabled(request, response)
     {
-        // @todo
-        response.statusCode = 200;
-        response.body = "done";
+        // Get the raw body from the request
+        let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        let body = yield request.getRawBody();
+
+        // Normalize the new value
+        let newValue = body.toString();
+        if (!isNaN(newValue)) {
+            body = new Number(body);
+        }
+
+        // Update the parameter
+        yield iniFile.setParameterValue("kodi.enabled", newValue);
+
+        // Display the new value
+        yield this.getKodiEnabled(request, response);
     }
 }
 

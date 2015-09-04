@@ -25,5 +25,26 @@ export default class Configuration
         response.body = content;
         response.parameters = parameters;
     }
+
+    /**
+     * Set the main configuration file
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setConfiguration(request, response)
+    {
+        // Get the raw body from the request
+        let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        let body = yield request.getRawBody();
+
+        // Update the file
+        let newContent = body.toString();
+        yield iniFile.setContent(newContent);
+
+        // Display the new content
+        yield this.getConfiguration(request, response);
+    }
 }
 

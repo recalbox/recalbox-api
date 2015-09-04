@@ -85,5 +85,14 @@ To get a specific response format, you have to send the HTTP header `Content-Typ
 
 ```sh
 curl http://192.168.0.42:1337/configuration
+```
+
+```sh
 curl --header "Content-Type: application/xml" http://192.168.0.42:1337/configuration
 ```
+
+```sh
+curl -X PUT -d "1" http://192.168.0.42:1337/kodi/enabled
+```
+
+

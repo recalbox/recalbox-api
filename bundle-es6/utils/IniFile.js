@@ -11,7 +11,7 @@ export default class IniFile
      *
      * @param   {string}    filePath    The INI file path
      */
-    constructor(filePath)
+    constructor(filePath:string)
     {
         // Save the file path
         this.filePath = filePath;
@@ -29,6 +29,17 @@ export default class IniFile
         content = content.toString("utf8");
 
         return content;
+    }
+
+    /**
+     * Set the new file content
+     *
+     * @public
+     * @param   {string}    content     The new content
+     */
+    *setContent(content)
+    {
+        yield solfege.util.Node.fs.writeFile(this.filePath, content);
     }
 
     /**
@@ -64,7 +75,7 @@ export default class IniFile
      * @param   {string|number} defaultValue    The default value
      * @return  {string|number}                 The value
      */
-    *getParameterValue(name, defaultValue)
+    *getParameterValue(name:string, defaultValue)
     {
         // Extract the value from the main configuration
         let parameters = yield this.getParameters();
@@ -73,5 +84,38 @@ export default class IniFile
         }
 
         return defaultValue;
+    }
+
+    /**
+     * Set a parameter value
+     *
+     * @param   {string}        name    The parameter name
+     * @param   {string|number} value   The new value
+     */
+    *setParameterValue(name:string, value)
+    {
+        // Get the content
+        let content = yield this.getContent();
+
+        // The pattern to find the parameter line
+        let regexp = new RegExp(`;?${name} *=.*`, "im");
+
+        // If the value is not a number, 
+        // then wrap the value with double quotes
+        if (isNaN(value)) {
+            value = ini.safe(value);
+            content = content.replace(
+                regexp,
+                `${name}="${value}"`
+            );
+        } else {
+            content = content.replace(
+                regexp,
+                `${name}=${value}`
+            );
+        }
+
+        // Update the content
+        yield this.setContent(content);
     }
 }

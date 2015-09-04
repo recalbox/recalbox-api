@@ -53,6 +53,18 @@ var IniFile = (function () {
         }
 
         /**
+         * Set the new file content
+         *
+         * @public
+         * @param   {string}    content     The new content
+         */
+    }, {
+        key: "setContent",
+        value: function* setContent(content) {
+            yield _solfegejs2["default"].util.Node.fs.writeFile(this.filePath, content);
+        }
+
+        /**
          * Extract parameters from the file
          *
          * @public
@@ -98,6 +110,34 @@ var IniFile = (function () {
             }
 
             return defaultValue;
+        }
+
+        /**
+         * Set a parameter value
+         *
+         * @param   {string}        name    The parameter name
+         * @param   {string|number} value   The new value
+         */
+    }, {
+        key: "setParameterValue",
+        value: function* setParameterValue(name, value) {
+            // Get the content
+            var content = yield this.getContent();
+
+            // The pattern to find the parameter line
+            var regexp = new RegExp(";?" + name + " *=.*", "im");
+
+            // If the value is not a number,
+            // then wrap the value with double quotes
+            if (isNaN(value)) {
+                value = _ini2["default"].safe(value);
+                content = content.replace(regexp, name + "=\"" + value + "\"");
+            } else {
+                content = content.replace(regexp, name + "=" + value);
+            }
+
+            // Update the content
+            yield this.setContent(content);
         }
     }]);
 

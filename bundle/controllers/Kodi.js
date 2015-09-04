@@ -79,9 +79,21 @@ var Kodi = (function () {
     }, {
         key: "setKodiEnabled",
         value: function* setKodiEnabled(request, response) {
-            // @todo
-            response.statusCode = 200;
-            response.body = "done";
+            // Get the raw body from the request
+            var iniFile = new _utilsIniFile2["default"](_configDefault2["default"].api.mainConfigurationFilePath);
+            var body = yield request.getRawBody();
+
+            // Normalize the new value
+            var newValue = body.toString();
+            if (!isNaN(newValue)) {
+                body = new Number(body);
+            }
+
+            // Update the parameter
+            yield iniFile.setParameterValue("kodi.enabled", newValue);
+
+            // Display the new value
+            yield this.getKodiEnabled(request, response);
         }
     }]);
 
