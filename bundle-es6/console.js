@@ -17,15 +17,7 @@ application.addBundle("router", new router.Router);
 application.addBundle("api", new Api);
 
 // Get the configuration
-// Check if the file parameters.json exists
-let configuration = require(__dirname + "/../config/default");
-try {
-    let parameters = require(__dirname + "/../config/parameters.json");
-    if (parameters.port) {
-        configuration.server.port = parameters.port;
-    }
-} catch (error) {
-}
+let configuration = require(__dirname + "/../config/config");
 
 // Override the application configuration
 application.overrideConfiguration(configuration);

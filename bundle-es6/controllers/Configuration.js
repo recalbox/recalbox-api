@@ -1,6 +1,6 @@
 import solfege from "solfegejs";
 import IniFile from "../utils/IniFile";
-import config from "../../config/default";
+import config from "../../config/config";
 
 
 /**

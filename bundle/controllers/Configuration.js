@@ -18,9 +18,9 @@ var _utilsIniFile = require("../utils/IniFile");
 
 var _utilsIniFile2 = _interopRequireDefault(_utilsIniFile);
 
-var _configDefault = require("../../config/default");
+var _configConfig = require("../../config/config");
 
-var _configDefault2 = _interopRequireDefault(_configDefault);
+var _configConfig2 = _interopRequireDefault(_configConfig);
 
 /**
  * The access points of the configuration
@@ -42,7 +42,7 @@ var Configuration = (function () {
          * @param   {solfege.bundle.server.Response}    response    The response
          */
         value: function* getConfiguration(request, response) {
-            var iniFile = new _utilsIniFile2["default"](_configDefault2["default"].api.mainConfigurationFilePath);
+            var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
             var content = yield iniFile.getContent();
             var parameters = yield iniFile.getParameters();
 
@@ -62,7 +62,7 @@ var Configuration = (function () {
         key: "setConfiguration",
         value: function* setConfiguration(request, response) {
             // Get the raw body from the request
-            var iniFile = new _utilsIniFile2["default"](_configDefault2["default"].api.mainConfigurationFilePath);
+            var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
             var body = yield request.getRawBody();
 
             // Update the file

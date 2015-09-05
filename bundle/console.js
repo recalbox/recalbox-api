@@ -38,14 +38,7 @@ application.addBundle("router", new _solfegejsServerRouter2["default"].Router())
 application.addBundle("api", new _Api2["default"]());
 
 // Get the configuration
-// Check if the file parameters.json exists
-var configuration = require(__dirname + "/../config/default");
-try {
-    var parameters = require(__dirname + "/../config/parameters.json");
-    if (parameters.port) {
-        configuration.server.port = parameters.port;
-    }
-} catch (error) {}
+var configuration = require(__dirname + "/../config/config");
 
 // Override the application configuration
 application.overrideConfiguration(configuration);

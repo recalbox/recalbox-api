@@ -1,7 +1,7 @@
 var packageSettings = require(__dirname + "/../package");
 var routes = require("./routes");
 
-module.exports = {
+var configuration = {
     api:
     {
         mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf"
@@ -33,3 +33,15 @@ module.exports = {
     }
 
 };
+
+// Override the configuration with the file parameters.json
+try {
+    var parameters = require(__dirname + "/parameters.json");
+    if (parameters.port) {
+        configuration.server.port = parameters.port;
+    }
+} catch (error) {
+}
+
+// Expose the configuration
+module.exports = configuration;
