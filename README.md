@@ -26,6 +26,22 @@ API
 To get a specific response format, you have to send the HTTP header `Content-Type` with a listed MIME type above.
 
 
+### Pagination
+
+On endpoints that return a collection, you can paginate the result with these queries :
+
+| name  | Type    | Default | Description |
+| ----- | ------- | ------- |------------ | 
+| page  | Integer | `1`     | The page (start at `1`) |
+| count | Integer | `25`    | The amount of item to return |
+| range | String  | `null`  | The index range to return |
+
+The response returns the items with 2 headers :
+
+- `Content-Range`
+- `Accept-Range`
+
+
 ### Endpoints
 
 | HTTP VERB   | Endpoint | Description |
@@ -94,6 +110,14 @@ curl --header "Content-Type: application/xml" http://192.168.0.42:1337/configura
 
 ```sh
 curl -X PUT -d "1" http://192.168.0.42:1337/kodi/enabled
+```
+
+```sh
+curl --header "Content-Type: application/json" "http://192.168.0.42:1337/bios?count=5&page=2"
+```
+
+```sh
+curl --head "http://192.168.0.42:1337/bios?count=5&page=2"
 ```
 
 

@@ -4,7 +4,9 @@ var routes = require("./routes");
 var configuration = {
     api:
     {
-        mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf"
+        mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf",
+        biosDirectoryPath: "/recalbox/share/bios",
+        romsDirectoryPath: "/recalbox/share/roms"
     },
 
     // Command line configuration
@@ -37,8 +39,17 @@ var configuration = {
 // Override the configuration with the file parameters.json
 try {
     var parameters = require(__dirname + "/parameters.json");
+
     if (parameters.port) {
         configuration.server.port = parameters.port;
+    }
+
+    if (parameters.biosDirectoryPath) {
+        configuration.api.biosDirectoryPath = parameters.biosDirectoryPath;
+    }
+
+    if (parameters.romsDirectoryPath) {
+        configuration.api.romsDirectoryPath = parameters.romsDirectoryPath;
     }
 } catch (error) {
 }

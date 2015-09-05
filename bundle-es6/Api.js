@@ -75,7 +75,6 @@ export default class Api
             case "text/json":
             case "application/json":
                 response.setHeader("Content-Type", "application/json");
-
                 response.body = JSON.stringify(response.parameters, null, "    ");
                 break;
         }

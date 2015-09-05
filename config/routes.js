@@ -13,10 +13,10 @@ module.exports = [
         url: "/configuration",
         controller: "@api.controllers.Configuration",
         action: "getConfiguration",
-        policies: ["methodIsGet"]
+        policies: ["methodIsGetOrHead"]
     },
     {
-    id: "configuration:update",
+        id: "configuration:update",
         url: "/configuration",
         controller: "@api.controllers.Configuration",
         action: "setConfiguration",
@@ -35,7 +35,7 @@ module.exports = [
         url: "/kodi/enabled",
         controller: "@api.controllers.Kodi",
         action: "getKodiEnabled",
-        policies: ["methodIsGet"]
+        policies: ["methodIsGetOrHead"]
     },
     {
         id: "kodi.enabled:update",
@@ -51,7 +51,7 @@ module.exports = [
         url: "/bios",
         controller: "@api.controllers.Bios",
         action: "listBios",
-        policies: ["methodIsGet"]
+        policies: ["methodIsGetOrHead"]
     }
 ];
 
