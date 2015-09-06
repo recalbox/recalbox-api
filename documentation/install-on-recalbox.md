@@ -9,7 +9,7 @@ Install the API on the Recalbox
 Execute this command line on the recalbox :
 
 ```sh
-curl -sS https://raw.githubusercontent.com/neolao/recalbox-api/master/scripts/install.sh | sh
+wget -q -O- https://raw.githubusercontent.com/neolao/recalbox-api/master/scripts/install.sh | sh
 ```
 
 
@@ -21,7 +21,7 @@ curl -sS https://raw.githubusercontent.com/neolao/recalbox-api/master/scripts/in
 
 ```sh
 mkdir api
-xz -c -d recalbox-api.tar.xz | tar -x -v -C api -f -
+xz -c -d recalbox-api-1.0.0.tar.xz | tar -x -v -C api -f -
 ```
 
 
@@ -35,3 +35,5 @@ Execute the command line in the API directory :
 ```sh
 ./start.sh
 ```
+
+Now the REST API is accessible on port `1337`.
