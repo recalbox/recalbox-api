@@ -7,8 +7,10 @@ cd $currentDirectory/..
 tar cvf api.tar \
     package.json \
     start.sh \
-    monitoring.sh \
     stop.sh \
+    monitoring.sh \
+    logs.sh \
+    list-services.sh \
     LICENSE \
     scripts/ \
     config/config.js \
