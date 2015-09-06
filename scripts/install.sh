@@ -8,6 +8,7 @@ mkdir api
 xz -c -d recalbox-api-$version.tar.xz | tar -x -v -C api -f -
 
 cd api
+./scripts/clean-pm2.sh
 ./scripts/install-startup.sh
 ./start.sh
 
