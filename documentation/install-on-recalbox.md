@@ -1,10 +1,9 @@
 Install the API on the Recalbox
 ===============================
 
-1 - Get the last version
-------------------------
 
-### Method 1
+Method 1: Install script
+------------------------
 
 Execute this command line on the recalbox :
 
@@ -12,12 +11,22 @@ Execute this command line on the recalbox :
 wget -q -O- https://raw.githubusercontent.com/neolao/recalbox-api/master/scripts/install.sh | sh
 ```
 
+The REST API is now accessible on port `1337`.
 
-### Method 2
 
-1. Download the last release here : [releases](https://github.com/neolao/recalbox-api/releases)
-2. Copy the file into the recalbox
-3. Create a directory and extract the files
+
+
+
+Method 2: Manual install
+------------------------
+
+### Download
+
+- Download the last release here : [releases](https://github.com/neolao/recalbox-api/releases)
+- Copy the file into the recalbox
+
+
+### Create a directory and extract the files
 
 ```sh
 mkdir api
@@ -25,10 +34,7 @@ xz -c -d recalbox-api-1.0.0.tar.xz | tar -x -v -C api -f -
 ```
 
 
-
-
-2 - Start the service
----------------------
+### Start the service
 
 Execute the command line in the API directory :
 
@@ -36,4 +42,14 @@ Execute the command line in the API directory :
 ./start.sh
 ```
 
-Now the REST API is accessible on port `1337`.
+The REST API is now accessible on port `1337`.
+
+
+### Start the service at startup
+
+Execute the command line in the API directory :
+
+```sh
+./scripts/install-startup.sh
+```
+
