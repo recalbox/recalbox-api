@@ -27,8 +27,10 @@
     {
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
         "stop"          : "pm2 stop ./scripts/pm2-process-production.json",
+        "delete"        : "pm2 delete ./scripts/pm2-process-production.json",
         "monitoring"    : "pm2 monit ./scripts/pm2-process-production.json",
         "logs"          : "pm2 logs --lines 5",
+        "services"      : "pm2 ls",
 
         "dev-start"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
         "dev-stop"      : "pm2 stop ./scripts/pm2-process-development.json",
