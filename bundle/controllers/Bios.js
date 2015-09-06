@@ -42,19 +42,27 @@ var Bios = (function () {
          * @param   {solfege.bundle.server.Response}    response    The response
          */
         value: function* listBios(request, response) {
+            var max = 50;
+
             // Get the files
             var directoryPath = _configConfig2["default"].api.biosDirectoryPath;
             var files = yield _solfegejs2["default"].util.Node.fs.readdir(directoryPath);
             var total = files.length;
 
             // Pagination
-            var pagination = new _utilsPagination2["default"](files, request);
+            var pagination = new _utilsPagination2["default"](files, max, request);
             var list = pagination.getList();
             var offset = pagination.offset;
             var limit = pagination.limit;
 
-            response.statusCode = 200;
+            var statusCode = 200;
+            if (list.length < total) {
+                // Partial content
+                statusCode = 206;
+            }
+            response.statusCode = statusCode;
             response.setHeader("Content-Range", offset + "-" + limit + "/" + total);
+            response.setHeader("Accept-Range", "bios " + max);
             response.parameters = list;
         }
     }]);

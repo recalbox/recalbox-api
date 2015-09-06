@@ -16,19 +16,28 @@ export default class Bios
      */
     *listBios(request, response)
     {
+        let max = 50;
+
         // Get the files
         let directoryPath = config.api.biosDirectoryPath;
         let files = yield solfege.util.Node.fs.readdir(directoryPath);
         let total = files.length;
 
         // Pagination
-        let pagination = new Pagination(files, request);
+        let pagination = new Pagination(files, max, request);
         let list = pagination.getList();
         let offset = pagination.offset;
         let limit = pagination.limit;
 
-        response.statusCode = 200;
+
+        let statusCode = 200;
+        if (list.length < total) {
+            // Partial content
+            statusCode = 206;
+        }
+        response.statusCode = statusCode;
         response.setHeader("Content-Range", `${offset}-${limit}/${total}`);
+        response.setHeader("Accept-Range", `bios ${max}`);
         response.parameters = list;
     }
 }

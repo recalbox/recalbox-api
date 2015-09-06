@@ -120,4 +120,8 @@ curl --header "Content-Type: application/json" "http://192.168.0.42:1337/bios?co
 curl --head "http://192.168.0.42:1337/bios?count=5&page=2"
 ```
 
+```sh
+curl "http://192.168.0.42:1337/bios?range=2-7"
+```
+
 

@@ -22,11 +22,12 @@ var Pagination = (function () {
     /**
      * Constructor
      *
-     * @param   {array}                         items       The item
+     * @param   {array}                         items       The items
+     * @param   {Integer}                       max         The maximum items to paginate
      * @param   {solfege.bundle.server.Request} request     The request
      */
 
-    function Pagination(items, request) {
+    function Pagination(items, max, request) {
         _classCallCheck(this, Pagination);
 
         this.items = items;
@@ -39,6 +40,11 @@ var Pagination = (function () {
         var limit = null;
         var total = items.length;
 
+        // Cap the items to return
+        if (count > max) {
+            count = max;
+        }
+
         // Override the values with the request
         if (!isNaN(request.query.count)) {
             count = parseInt(request.query.count);
@@ -47,23 +53,36 @@ var Pagination = (function () {
             page = parseInt(request.query.page);
         }
         if (request.query.range) {
+            // Paginate with the range parameter
             var rangeSplit = request.query.range.split("-");
             if (rangeSplit.length === 2) {
                 offset = parseInt(rangeSplit[0]);
                 limit = parseInt(rangeSplit[1]);
+
+                // Cap the items to return
+                if (limit - offset + 1 > max) {
+                    limit = offset + max - 1;
+                }
+
+                // Calculate the item count to return
+                count = limit - offset + 1;
             }
         }
 
+        // Calculate the offset and limit if the ranger parameter is not used
         if (offset === null) {
             offset = (page - 1) * count;
         }
         if (limit === null) {
             limit = offset + count - 1;
         }
+
+        // The limit cannot exceed the total (obviously)
         if (limit >= total) {
             limit = total - 1;
         }
 
+        // Calculate the page count
         var pageCount = Math.ceil(total / count);
 
         // Expose the values
@@ -75,7 +94,7 @@ var Pagination = (function () {
     }
 
     /**
-     * Get the list
+     * Get the paginated items
      *
      * @return  {array}     The list
      */
