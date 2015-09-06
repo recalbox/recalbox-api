@@ -8,6 +8,6 @@ mkdir api
 xz -c -d recalbox-api-$version.tar.xz | tar -x -v -C api -f -
 
 cd api
-./start.sh
 ./scripts/install-startup.sh
+./start.sh
 
