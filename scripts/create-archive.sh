@@ -11,7 +11,9 @@ tar cvf api.tar \
     stop.sh \
     LICENSE \
     scripts/ \
-    config/ \
+    config/config.js \
+    config/routes.js \
+    config/parameters.json.dist \
     bundle/ \
     node_modules/.bin \
     node_modules/npm \
@@ -21,3 +23,5 @@ tar cvf api.tar \
     node_modules/solfegejs-server-router \
     node_modules/ini \
     node_modules/pm2
+
+xz --compress --verbose --extreme api.tar
