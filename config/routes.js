@@ -52,6 +52,13 @@ module.exports = [
         controller: "@api.controllers.Bios",
         action: "listBios",
         policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "bios:add",
+        url: "/bios",
+        controller: "@api.controllers.Bios",
+        action: "addBios",
+        policies: ["methodIsPost"]
     }
 ];
 

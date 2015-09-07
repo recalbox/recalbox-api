@@ -124,4 +124,8 @@ curl --head "http://192.168.0.42:1337/bios?count=5&page=2"
 curl "http://192.168.0.42:1337/bios?range=2-7"
 ```
 
+```sh
+curl -X POST -F 'file=@SCPH5502.BIN' "http://192.168.0.42:1337/bios"
+```
+
 

@@ -65,6 +65,35 @@ var Bios = (function () {
             response.setHeader("Accept-Range", "bios " + max);
             response.parameters = list;
         }
+
+        /**
+         * Add a bios
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "addBios",
+        value: function* addBios(request, response) {
+            var directoryPath = _configConfig2["default"].api.biosDirectoryPath;
+            var files = yield request.getFiles();
+            var createdFiles = [];
+            for (var field in files) {
+                var file = files[field];
+                var size = file.size;
+                var _name = file.name;
+                var path = file.path;
+
+                // Move the file to the directory
+                var newPath = directoryPath + "/" + _name;
+                yield _solfegejs2["default"].util.Node.fs.rename(path, newPath);
+                createdFiles.push(_name);
+            }
+
+            response.statusCode = 201;
+            response.parameters = createdFiles;
+        }
     }]);
 
     return Bios;
