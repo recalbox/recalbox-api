@@ -1,6 +1,7 @@
 import solfege from "solfegejs";
 import IniFile from "../utils/IniFile";
 import config from "../../config/config";
+import defaultValues from "../../config/recalboxDefaultValues.json";
 
 /**
  * The access points of the Kodi configuration
@@ -18,6 +19,7 @@ export default class Kodi
     {
         // Extract the settings from the main configuration
         let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        iniFile.setDefaultValues(defaultValues);
         let parameters = yield iniFile.getParameters(/^kodi\./);
 
         response.statusCode = 200;
@@ -34,8 +36,9 @@ export default class Kodi
     *getKodiEnabled(request, response)
     {
         let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        iniFile.setDefaultValues(defaultValues);
         let settings = {
-            "kodi.enabled": yield iniFile.getParameterValue("kodi.enabled", 1)
+            "kodi.enabled": yield iniFile.getParameterValue("kodi.enabled")
         };
 
         response.statusCode = 200;

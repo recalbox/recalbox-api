@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,16 +36,30 @@ var IniFile = (function () {
 
         // Save the file path
         this.filePath = filePath;
+
+        // The default values
+        this.defaultValues = {};
     }
 
     /**
-     * Get the file content
+     * Set the optional default values
      *
-     * @public
-     * @return  {string}    The content
+     * @param   {object}    values  the default values
      */
 
     _createClass(IniFile, [{
+        key: "setDefaultValues",
+        value: function setDefaultValues(values) {
+            this.defaultValues = values;
+        }
+
+        /**
+         * Get the file content
+         *
+         * @public
+         * @return  {string}    The content
+         */
+    }, {
         key: "getContent",
         value: function* getContent() {
             var content = yield _solfegejs2["default"].util.Node.fs.readFile(this.filePath);
@@ -76,8 +92,10 @@ var IniFile = (function () {
         value: function* getParameters() {
             var regexp = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 
+            // Build the parameters based on the default values and the values from the INI file
             var content = yield this.getContent();
-            var parameters = _ini2["default"].parse(content);
+            var iniParameters = _ini2["default"].parse(content);
+            var parameters = _extends(this.defaultValues, iniParameters);
 
             // Filter the parameters if the regexp is provided
             if (regexp instanceof RegExp) {

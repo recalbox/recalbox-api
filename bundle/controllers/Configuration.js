@@ -22,6 +22,10 @@ var _configConfig = require("../../config/config");
 
 var _configConfig2 = _interopRequireDefault(_configConfig);
 
+var _configRecalboxDefaultValuesJson = require("../../config/recalboxDefaultValues.json");
+
+var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDefaultValuesJson);
+
 /**
  * The access points of the configuration
  */
@@ -43,6 +47,8 @@ var Configuration = (function () {
          */
         value: function* getConfiguration(request, response) {
             var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+            iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
+
             var content = yield iniFile.getContent();
             var parameters = yield iniFile.getParameters();
 

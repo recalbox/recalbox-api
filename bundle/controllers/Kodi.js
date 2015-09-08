@@ -22,6 +22,10 @@ var _configConfig = require("../../config/config");
 
 var _configConfig2 = _interopRequireDefault(_configConfig);
 
+var _configRecalboxDefaultValuesJson = require("../../config/recalboxDefaultValues.json");
+
+var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDefaultValuesJson);
+
 /**
  * The access points of the Kodi configuration
  */
@@ -44,6 +48,7 @@ var Kodi = (function () {
         value: function* getKodi(request, response) {
             // Extract the settings from the main configuration
             var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+            iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
             var parameters = yield iniFile.getParameters(/^kodi\./);
 
             response.statusCode = 200;
@@ -61,8 +66,9 @@ var Kodi = (function () {
         key: "getKodiEnabled",
         value: function* getKodiEnabled(request, response) {
             var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+            iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
             var settings = {
-                "kodi.enabled": yield iniFile.getParameterValue("kodi.enabled", 1)
+                "kodi.enabled": yield iniFile.getParameterValue("kodi.enabled")
             };
 
             response.statusCode = 200;

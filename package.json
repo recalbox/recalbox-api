@@ -3,7 +3,7 @@
     "license": "MIT",
     "name": "recalbox-api",
     "description": "REST API for Recalbox",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/neolao/recalbox-api.git"
@@ -21,7 +21,8 @@
         "ini"                       : "1.3.*"
     },
     "devDependencies": {
-        "babel"         : "5.6.*"
+        "babel"         : "5.6.*",
+        "babel-plugin-object-assign": "1.2.*"
     },
     "scripts"       :
     {
@@ -37,8 +38,8 @@
         "dev-logs"      : "pm2 logs --lines 5",
 
         "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
-        "es6-watch"     : "babel bundle-es6 --blacklist regenerator --watch --out-dir bundle",
-        "es6-compile"   : "babel bundle-es6 --blacklist regenerator --out-dir bundle"
+        "es6-watch"     : "babel bundle-es6 --blacklist=regenerator --plugins=object-assign --watch --out-dir bundle",
+        "es6-compile"   : "babel bundle-es6 --blacklist=regenerator --plugins=object-assign --out-dir bundle"
     }
 
 }

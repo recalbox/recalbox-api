@@ -1,6 +1,7 @@
 import solfege from "solfegejs";
 import IniFile from "../utils/IniFile";
 import config from "../../config/config";
+import defaultValues from "../../config/recalboxDefaultValues.json";
 
 
 /**
@@ -18,6 +19,8 @@ export default class Configuration
     *getConfiguration(request, response)
     {
         let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        iniFile.setDefaultValues(defaultValues);
+
         let content = yield iniFile.getContent();
         let parameters = yield iniFile.getParameters();
 

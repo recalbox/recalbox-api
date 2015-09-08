@@ -11,8 +11,8 @@
             "script"             : "node_modules/.bin/babel",
             "args"               : [
                 "bundle-es6", 
-                "--blacklist", 
-                "regenerator", 
+                "--blacklist=regenerator", 
+                "--plugins=object-assign",
                 "--out-dir", 
                 "bundle", 
                 "--watch"

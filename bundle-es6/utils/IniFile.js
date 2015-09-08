@@ -15,6 +15,19 @@ export default class IniFile
     {
         // Save the file path
         this.filePath = filePath;
+
+        // The default values
+        this.defaultValues = {};
+    }
+
+    /**
+     * Set the optional default values
+     *
+     * @param   {object}    values  the default values
+     */
+    setDefaultValues(values)
+    {
+        this.defaultValues = values;
     }
 
     /**
@@ -51,8 +64,10 @@ export default class IniFile
      */
     *getParameters(regexp = null)
     {
+        // Build the parameters based on the default values and the values from the INI file
         let content = yield this.getContent();
-        let parameters = ini.parse(content);
+        let iniParameters = ini.parse(content);
+        let parameters = Object.assign(this.defaultValues, iniParameters);
 
         // Filter the parameters if the regexp is provided
         if (regexp instanceof RegExp) {

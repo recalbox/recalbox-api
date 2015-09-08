@@ -1,0 +1,66 @@
+{
+    "kodi.enabled": 1,
+    "kodi.atstartup": 0,
+    "kodi.xbutton": 1,
+
+    "system.hostname": "RECALBOX",
+
+    "wifi.enabled": 0,
+    "wifi.ssid": "",
+    "wifi.key": "",
+
+    "audio.device": "auto",
+    "audio.volume": 90,
+    "audio.bgmusic": 1,
+
+    "controllers.ps3.enabled": 1,
+    "controllers.ps3.driver": "official",
+    "controllers.xboxdrv.enabled": 0,
+    "controllers.xboxdrv.nbcontrols": 2,
+    "controllers.gpio.enabled": 0,
+    "controllers.gpio.args": "map=1,2",
+    "controllers.db9.enabled": 0,
+    "controllers.db9.args": "map=1",
+    "controllers.gamecon.enabled": 0,
+    "controllers.gamecon.args": "map=1",
+    "system.language": "en_US",
+    "system.kblayout": "us",
+    "system.timezone": null,
+
+    "updates.enabled": 1,
+
+    "global.videomode": "CEA 4 HDMI",
+    "global.shaders": "",
+    "global.ratio": "auto",
+    "global.smooth": 1,
+    "global.rewind": 0,
+    "global.inputdriver": "auto",
+    "global.configfile": null,
+
+    "snes.emulator": "libretro",
+    "snes.core": "snes9x_next",
+    "snes.shaders": "/recalbox/share/shaders/shaders_glsl/mysnesshader.gplsp",
+    "snes.videomode": null,
+    "snes.ratio": null,
+    "snes.smooth": null,
+    "snes.rewind": null,
+    "snes.configfile": null,
+
+    "neogeo.emulator": "fba2x",
+    "neogeo.core": "fba",
+    "neogeo.shaders": null,
+    "neogeo.videomode": null,
+    "neogeo.ratio": null,
+    "neogeo.smooth": null,
+    "neogeo.rewind": null,
+    "neogeo.configfile": null,
+
+    "n64.emulator": null,
+    "n64.core": "n64",
+    "n64.shaders": null,
+    "n64.videomode": "CEA 4 HDMI",
+    "n64.ratio": null,
+    "n64.smooth": null,
+    "n64.rewind": null,
+    "n64.configfile": null
+}
