@@ -30,6 +30,9 @@ export default class Api
         // Execute the next middleware
         yield *next;
 
+        // Allow cross domain access
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
         // Convert the body to the requested format
         let format = request.getHeader("Content-Type");
         switch (format) {
