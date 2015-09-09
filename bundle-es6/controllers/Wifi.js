@@ -2,101 +2,101 @@ import solfege from "solfegejs";
 import * as ControllerUtil from "../utils/ControllerUtil";
 
 /**
- * The access points of the Kodi configuration
+ * The access points of the Wifi configuration
  */
-export default class Kodi
+export default class Wifi
 {
     /**
-     * Get the Kodi settings
+     * Get the Wifi settings
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *getKodi(request, response)
+    *getWifi(request, response)
     {
-        yield ControllerUtil.getMainConfigurationParameters(/^kodi\./, request, response);
+        yield ControllerUtil.getMainConfigurationParameters(/^wifi\./, request, response);
     }
 
     /**
-     * Get the Kodi "enabled" setting
+     * Get the Wifi "enabled" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *getKodiEnabled(request, response)
+    *getWifiEnabled(request, response)
     {
-        yield ControllerUtil.getMainConfigurationParameterValue("kodi.enabled", request, response);
+        yield ControllerUtil.getMainConfigurationParameterValue("wifi.enabled", request, response);
     }
 
     /**
-     * Set the Kodi "enabled" setting
+     * Set the Wifi "enabled" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *setKodiEnabled(request, response)
+    *setWifiEnabled(request, response)
     {
-        yield ControllerUtil.setMainConfigurationParameterValue("kodi.enabled", request, response);
+        yield ControllerUtil.setMainConfigurationParameterValue("wifi.enabled", request, response);
 
         // Display the new value
-        yield this.getKodiEnabled(request, response);
+        yield this.getWifiEnabled(request, response);
     }
 
     /**
-     * Get the Kodi "atstartup" setting
+     * Get the Wifi "ssid" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *getKodiAtstartup(request, response)
+    *getWifiSsid(request, response)
     {
-        yield ControllerUtil.getMainConfigurationParameterValue("kodi.atstartup", request, response);
+        yield ControllerUtil.getMainConfigurationParameterValue("wifi.ssid", request, response);
     }
 
     /**
-     * Set the Kodi "atstartup" setting
+     * Set the Wifi "ssid" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *setKodiAtstartup(request, response)
+    *setWifiSsid(request, response)
     {
-        yield ControllerUtil.setMainConfigurationParameterValue("kodi.atstartup", request, response);
+        yield ControllerUtil.setMainConfigurationParameterValue("wifi.ssid", request, response);
 
         // Display the new value
-        yield this.getKodiAtstartup(request, response);
+        yield this.getWifiSsid(request, response);
     }
 
     /**
-     * Get the Kodi "xbutton" setting
+     * Get the Wifi "key" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *getKodiXbutton(request, response)
+    *getWifiKey(request, response)
     {
-        yield ControllerUtil.getMainConfigurationParameterValue("kodi.xbutton", request, response);
+        yield ControllerUtil.getMainConfigurationParameterValue("wifi.key", request, response);
     }
 
     /**
-     * Set the Kodi "xbutton" setting
+     * Set the Wifi "key" setting
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *setKodiXbutton(request, response)
+    *setWifiKey(request, response)
     {
-        yield ControllerUtil.setMainConfigurationParameterValue("kodi.xbutton", request, response);
+        yield ControllerUtil.setMainConfigurationParameterValue("wifi.key", request, response);
 
         // Display the new value
-        yield this.getKodiXbutton(request, response);
+        yield this.getWifiKey(request, response);
     }
 
 }
