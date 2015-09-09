@@ -25,44 +25,50 @@ var _utilsControllerUtil = require("../utils/ControllerUtil");
 var ControllerUtil = _interopRequireWildcard(_utilsControllerUtil);
 
 /**
- * The access points of the BIOS
+ * The access points of the game systems
  */
 
-var Bios = (function () {
-    function Bios() {
-        _classCallCheck(this, Bios);
+var GameSystem = (function () {
+    function GameSystem() {
+        _classCallCheck(this, GameSystem);
     }
 
-    _createClass(Bios, [{
-        key: "listBios",
+    _createClass(GameSystem, [{
+        key: "getSystems",
 
         /**
-         * List the bios
+         * Get the system list
          *
          * @public
          * @param   {solfege.bundle.server.Request}     request     The request
          * @param   {solfege.bundle.server.Response}    response    The response
          */
-        value: function* listBios(request, response) {
-            yield ControllerUtil.listDirectory(_configConfig2["default"].api.biosDirectoryPath, "bios", null, request, response);
+        value: function* getSystems(request, response) {
+            var list = ["atari2600", "atari7800", "fba", "fba_libretro", "fds", "gamegear", "gb", "gba", "gbc", "gw", "lutro", "lynx", "mame", "mastersystem", "megadrive", "msx", "n64", "neogeo", "nes", "ngp", "pcengine", "prboom", "psx", "scummvm", "sega32x", "segacd", "sg1000", "snes", "vectrex", "virtualboy", "wswan"];
+
+            response.statusCode = 200;
+            response.parameters = list;
         }
 
         /**
-         * Add a bios
+         * Get the rom list of the specified system
          *
          * @public
          * @param   {solfege.bundle.server.Request}     request     The request
          * @param   {solfege.bundle.server.Response}    response    The response
          */
     }, {
-        key: "addBios",
-        value: function* addBios(request, response) {
-            yield ControllerUtil.uploadFile(_configConfig2["default"].api.biosDirectoryPath, request, response);
+        key: "getRoms",
+        value: function* getRoms(request, response) {
+            var systemId = request.getParameter("id");
+            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+
+            yield ControllerUtil.listDirectory(directoryPath, "rom", null, request, response);
         }
     }]);
 
-    return Bios;
+    return GameSystem;
 })();
 
-exports["default"] = Bios;
+exports["default"] = GameSystem;
 module.exports = exports["default"];

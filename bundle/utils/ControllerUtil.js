@@ -1,11 +1,13 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.getMainConfigurationParameterValue = getMainConfigurationParameterValue;
 exports.getMainConfigurationParameters = getMainConfigurationParameters;
 exports.setMainConfigurationParameterValue = setMainConfigurationParameterValue;
+exports.listDirectory = listDirectory;
+exports.uploadFile = uploadFile;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -25,6 +27,10 @@ var _configRecalboxDefaultValuesJson = require("../../config/recalboxDefaultValu
 
 var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDefaultValuesJson);
 
+var _Pagination = require("./Pagination");
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
 /**
  * Helpers for the controllers
  */
@@ -39,13 +45,13 @@ var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDe
  */
 
 function* getMainConfigurationParameterValue(name, request, response) {
-  var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
-  iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
-  var settings = {};
-  settings[name] = yield iniFile.getParameterValue(name);
+    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
+    var settings = {};
+    settings[name] = yield iniFile.getParameterValue(name);
 
-  response.statusCode = 200;
-  response.parameters = settings;
+    response.statusCode = 200;
+    response.parameters = settings;
 }
 
 /**
@@ -58,13 +64,13 @@ function* getMainConfigurationParameterValue(name, request, response) {
  */
 
 function* getMainConfigurationParameters(pattern, request, response) {
-  // Extract the settings from the main configuration
-  var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
-  iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
-  var parameters = yield iniFile.getParameters(pattern);
+    // Extract the settings from the main configuration
+    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
+    var parameters = yield iniFile.getParameters(pattern);
 
-  response.statusCode = 200;
-  response.parameters = parameters;
+    response.statusCode = 200;
+    response.parameters = parameters;
 }
 
 /**
@@ -77,16 +83,79 @@ function* getMainConfigurationParameters(pattern, request, response) {
  */
 
 function* setMainConfigurationParameterValue(name, request, response) {
-  // Get the raw body from the request
-  var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
-  var body = yield request.getRawBody();
+    // Get the raw body from the request
+    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    var body = yield request.getRawBody();
 
-  // Normalize the new value
-  var newValue = body.toString();
-  if (!isNaN(newValue)) {
-    body = new Number(body);
-  }
+    // Normalize the new value
+    var newValue = body.toString();
+    if (!isNaN(newValue)) {
+        body = new Number(body);
+    }
 
-  // Update the parameter
-  yield iniFile.setParameterValue(name, newValue);
+    // Update the parameter
+    yield iniFile.setParameterValue(name, newValue);
+}
+
+/**
+ * List files in a directory
+ *
+ * @public
+ * @param   {string}                            path        The directory path
+ * @param   {string}                            itemName    The item name found in the directory
+ * @param   {object}                            options     The options
+ * @param   {solfege.bundle.server.Request}     request     The request
+ * @param   {solfege.bundle.server.Response}    response    The response
+ */
+
+function* listDirectory(path, itemName, options, request, response) {
+    var max = 50;
+
+    // Get the files
+    var files = yield _solfegejs2["default"].util.Node.fs.readdir(path);
+    var total = files.length;
+
+    // Pagination
+    var pagination = new _Pagination2["default"](files, max, request);
+    var list = pagination.getList();
+    var offset = pagination.offset;
+    var limit = pagination.limit;
+
+    var statusCode = 200;
+    if (list.length < total) {
+        // Partial content
+        statusCode = 206;
+    }
+    response.statusCode = statusCode;
+    response.setHeader("Content-Range", offset + "-" + limit + "/" + total);
+    response.setHeader("Accept-Range", itemName + " " + max);
+    response.parameters = list;
+}
+
+/**
+ * Upload a file
+ *
+ * @public
+ * @param   {string}                            directoryPath   The directory path
+ * @param   {solfege.bundle.server.Request}     request         The request
+ * @param   {solfege.bundle.server.Response}    response        The response
+ */
+
+function* uploadFile(directoryPath, request, response) {
+    var files = yield request.getFiles();
+    var createdFiles = [];
+    for (var field in files) {
+        var file = files[field];
+        var size = file.size;
+        var _name = file.name;
+        var path = file.path;
+
+        // Move the file to the directory
+        var newPath = directoryPath + "/" + _name;
+        yield _solfegejs2["default"].util.Node.fs.rename(path, newPath);
+        createdFiles.push(_name);
+    }
+
+    response.statusCode = 201;
+    response.parameters = createdFiles;
 }

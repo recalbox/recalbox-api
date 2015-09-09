@@ -137,6 +137,22 @@ module.exports = [
         controller: "@api.controllers.Bios",
         action: "addBios",
         policies: ["methodIsPost"]
+    },
+
+    // Game systems
+    {
+        id: "systems",
+        url: "/systems",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystems",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.roms",
+        url: "/systems/:id/roms",
+        controller: "@api.controllers.GameSystem",
+        action: "getRoms",
+        policies: ["methodIsGetOrHead"]
     }
 ];
 
