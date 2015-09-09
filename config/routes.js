@@ -148,11 +148,18 @@ module.exports = [
         policies: ["methodIsGetOrHead"]
     },
     {
-        id: "systems.roms",
+        id: "system.roms",
         url: "/systems/:id/roms",
         controller: "@api.controllers.GameSystem",
         action: "getRoms",
         policies: ["methodIsGetOrHead"]
-    }
+    },
+    {
+        id: "system.roms:add",
+        url: "/systems/:id/roms",
+        controller: "@api.controllers.GameSystem",
+        action: "addRom",
+        policies: ["methodIsPost"]
+    },
 ];
 

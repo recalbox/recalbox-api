@@ -65,6 +65,22 @@ var GameSystem = (function () {
 
             yield ControllerUtil.listDirectory(directoryPath, "rom", null, request, response);
         }
+
+        /**
+         * Add a ROM
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "addRom",
+        value: function* addRom(request, response) {
+            var systemId = request.getParameter("id");
+            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+
+            yield ControllerUtil.uploadFile(directoryPath, request, response);
+        }
     }]);
 
     return GameSystem;
