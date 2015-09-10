@@ -32,6 +32,7 @@ export default class Api
 
         // Allow cross domain access
         response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
 
         // Convert the body to the requested format
         let format = request.getHeader("Content-Type");
