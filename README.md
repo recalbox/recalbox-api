@@ -23,7 +23,7 @@ API
 | `json` | `application/json` |
 | `xml`  | `application/xml`  |
 
-To get a specific response format, you have to send the HTTP header `Content-Type` with a listed MIME type above.
+To get a specific response format, you have to send the HTTP header `Accept` with a listed MIME type above.
 
 
 ### Pagination
@@ -105,7 +105,7 @@ curl http://192.168.0.42:1337/configuration
 ```
 
 ```sh
-curl --header "Content-Type: application/xml" http://192.168.0.42:1337/configuration
+curl --header "Accept: application/xml" http://192.168.0.42:1337/configuration
 ```
 
 ```sh
@@ -113,7 +113,7 @@ curl -X PUT -d "1" http://192.168.0.42:1337/kodi/enabled
 ```
 
 ```sh
-curl --header "Content-Type: application/json" "http://192.168.0.42:1337/bios?count=5&page=2"
+curl --header "Accept: application/json" "http://192.168.0.42:1337/bios?count=5&page=2"
 ```
 
 ```sh

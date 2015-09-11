@@ -56,36 +56,15 @@ var Api = (function () {
             response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
 
             // Convert the body to the requested format
-            // @todo The request should provide the accepted formats
-            var format = request.getHeader("Content-Type");
-            if (!format) {
-                var acceptedFormats = request.getHeader("Accept");
-                if (acceptedFormats) {
-                    var acceptedFormatsSplit = acceptedFormats.split(",");
-                    format = acceptedFormatsSplit[0].trim();
-                }
-            }
-            switch (format) {
-                // Plain text
-                default:
-                case "text":
-                case "text/plain":
-                    response.setHeader("Content-Type", "text/plain");
-
-                    // If the body is empty, then use the parameters
-                    if (!response.body && response.parameters) {
-                        var _body = "";
-                        for (var key in response.parameters) {
-                            _body += key + "=" + response.parameters[key] + "\n";
-                        }
-                        response.body = _body;
-                    }
+            switch (request.acceptsTypes("json", "xml", "text")) {
+                // JSON key values
+                case "json":
+                    response.setHeader("Content-Type", "application/json");
+                    response.body = JSON.stringify(response.parameters, null, "    ");
                     break;
 
                 // XML key values
                 case "xml":
-                case "text/xml":
-                case "application/xml":
                     response.setHeader("Content-Type", "application/xml");
 
                     var body = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<response>\n";
@@ -103,12 +82,19 @@ var Api = (function () {
                     response.body = body;
                     break;
 
-                // JSON key values
-                case "json":
-                case "text/json":
-                case "application/json":
-                    response.setHeader("Content-Type", "application/json");
-                    response.body = JSON.stringify(response.parameters, null, "    ");
+                // Plain text
+                default:
+                case "text":
+                    response.setHeader("Content-Type", "text/plain");
+
+                    // If the body is empty, then use the parameters
+                    if (!response.body && response.parameters) {
+                        var _body = "";
+                        for (var key in response.parameters) {
+                            _body += key + "=" + response.parameters[key] + "\n";
+                        }
+                        response.body = _body;
+                    }
                     break;
             }
         }
