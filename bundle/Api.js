@@ -56,7 +56,15 @@ var Api = (function () {
             response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
 
             // Convert the body to the requested format
+            // @todo The request should provide the accepted formats
             var format = request.getHeader("Content-Type");
+            if (!format) {
+                var acceptedFormats = request.getHeader("Accept");
+                if (acceptedFormats) {
+                    var acceptedFormatsSplit = acceptedFormats.split(",");
+                    format = acceptedFormatsSplit[0].trim();
+                }
+            }
             switch (format) {
                 // Plain text
                 default:

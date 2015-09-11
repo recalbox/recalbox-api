@@ -35,7 +35,15 @@ export default class Api
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
 
         // Convert the body to the requested format
+        // @todo The request should provide the accepted formats
         let format = request.getHeader("Content-Type");
+        if (!format) {
+            let acceptedFormats = request.getHeader("Accept");
+            if (acceptedFormats) {
+                let acceptedFormatsSplit = acceptedFormats.split(",");
+                format = acceptedFormatsSplit[0].trim();
+            }
+        }
         switch (format) {
             // Plain text
             default:
