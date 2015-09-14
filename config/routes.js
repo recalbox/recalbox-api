@@ -282,6 +282,41 @@ module.exports = [
         action: "setControllerPs3Driver",
         policies: ["methodIsPut"]
     },
+    {
+        id: "controllers.xboxdrv",
+        url: "/controllers/xboxdrv",
+        controller: "@api.controllers.Controller",
+        action: "getControllerXboxdrv",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.xboxdrv.enabled",
+        url: "/controllers/xboxdrv/enabled",
+        controller: "@api.controllers.Controller",
+        action: "getControllerXboxdrvEnabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.xboxdrv.enabled:update",
+        url: "/controllers/xboxdrv/enabled",
+        controller: "@api.controllers.Controller",
+        action: "setControllerXboxdrvEnabled",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "controllers.xboxdrv.nbcontrols",
+        url: "/controllers/xboxdrv/nbcontrols",
+        controller: "@api.controllers.Controller",
+        action: "getControllerXboxdrvNbControls",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.xboxdrv.nbcontrols:update",
+        url: "/controllers/xboxdrv/nbcontrols",
+        controller: "@api.controllers.Controller",
+        action: "setControllerXboxdrvNbControls",
+        policies: ["methodIsPut"]
+    },
 
 
     // BIOS

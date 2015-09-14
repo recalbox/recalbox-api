@@ -100,6 +100,77 @@ var Controller = (function () {
       // Display the new value
       yield this.getControllerPs3Driver(request, response);
     }
+
+    /**
+     * Get the XBOXDRV settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerXboxdrv",
+    value: function* getControllerXboxdrv(request, response) {
+      yield ControllerUtil.getMainConfigurationParameters(/^controllers\.xboxdrv\./, request, response);
+    }
+
+    /**
+     * Indicates if the XBOXDRV is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerXboxdrvEnabled",
+    value: function* getControllerXboxdrvEnabled(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable XBOXDRV
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerXboxdrvEnabled",
+    value: function* setControllerXboxdrvEnabled(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
+
+      // Display the new value
+      yield this.getControllerXboxdrvEnabled(request, response);
+    }
+
+    /**
+     * Get the amount of controllers to use with XBOXDRV
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerXboxdrvNbControls",
+    value: function* getControllerXboxdrvNbControls(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
+    }
+
+    /**
+     * Set the amount of controllers to use with xboxdrv (0..4)
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerXboxdrvNbControls",
+    value: function* setControllerXboxdrvNbControls(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
+
+      // Display the new value
+      yield this.getControllerXboxdrvNbControls(request, response);
+    }
   }]);
 
   return Controller;
