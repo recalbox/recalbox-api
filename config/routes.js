@@ -23,6 +23,64 @@ module.exports = [
         policies: ["methodIsPut"]
     },
 
+    // Miscellaneous
+    {
+        id: "hostname",
+        url: "/hostname",
+        controller: "@api.controllers.Configuration",
+        action: "getHostname",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "hostname:update",
+        url: "/hostname",
+        controller: "@api.controllers.Configuration",
+        action: "setHostname",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "locale",
+        url: "/locale",
+        controller: "@api.controllers.Configuration",
+        action: "getLocale",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "locale:update",
+        url: "/locale",
+        controller: "@api.controllers.Configuration",
+        action: "setLocale",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "keyboardlayout",
+        url: "/keyboardlayout",
+        controller: "@api.controllers.Configuration",
+        action: "getKeyboardLayout",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "keyboardlayout:update",
+        url: "/keyboardlayout",
+        controller: "@api.controllers.Configuration",
+        action: "setKeyboardLayout",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "timezone",
+        url: "/timezone",
+        controller: "@api.controllers.Configuration",
+        action: "getTimezone",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "timezone:update",
+        url: "/timezone",
+        controller: "@api.controllers.Configuration",
+        action: "setTimezone",
+        policies: ["methodIsPut"]
+    },
+
     // Kodi
     {
         id: "kodi",
