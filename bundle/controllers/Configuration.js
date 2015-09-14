@@ -200,6 +200,35 @@ var Configuration = (function () {
       // Display the new value
       yield this.getTimezone(request, response);
     }
+
+    /**
+     * Indicates if the updates are enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getUpdatesEnabled",
+    value: function* getUpdatesEnabled(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("updates.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable the updates
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setUpdatesEnabled",
+    value: function* setUpdatesEnabled(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("updates.enabled", request, response);
+
+      // Display the new value
+      yield this.getUpdatesEnabled(request, response);
+    }
   }]);
 
   return Configuration;

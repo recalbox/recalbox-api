@@ -80,6 +80,20 @@ module.exports = [
         action: "setTimezone",
         policies: ["methodIsPut"]
     },
+    {
+        id: "updates.enabled",
+        url: "/updates/enabled",
+        controller: "@api.controllers.Configuration",
+        action: "getUpdatesEnabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "updates.enabled:update",
+        url: "/updates/enabled",
+        controller: "@api.controllers.Configuration",
+        action: "setUpdatesEnabled",
+        policies: ["methodIsPut"]
+    },
 
     // Kodi
     {
