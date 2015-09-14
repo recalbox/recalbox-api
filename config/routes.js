@@ -246,6 +246,44 @@ module.exports = [
         policies: ["methodIsPut"]
     },
 
+    // Controllers
+    {
+        id: "controllers.ps3",
+        url: "/controllers/ps3",
+        controller: "@api.controllers.Controller",
+        action: "getControllerPs3",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.ps3.enabled",
+        url: "/controllers/ps3/enabled",
+        controller: "@api.controllers.Controller",
+        action: "getControllerPs3Enabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.ps3.enabled:update",
+        url: "/controllers/ps3/enabled",
+        controller: "@api.controllers.Controller",
+        action: "setControllerPs3Enabled",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "controllers.ps3.driver",
+        url: "/controllers/ps3/driver",
+        controller: "@api.controllers.Controller",
+        action: "getControllerPs3Driver",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.ps3.driver:update",
+        url: "/controllers/ps3/driver",
+        controller: "@api.controllers.Controller",
+        action: "setControllerPs3Driver",
+        policies: ["methodIsPut"]
+    },
+
+
     // BIOS
     {
         id: "bios",
