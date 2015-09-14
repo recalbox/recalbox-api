@@ -195,6 +195,57 @@ module.exports = [
         policies: ["methodIsPut"]
     },
 
+    // AUDIO
+    {
+        id: "audio",
+        url: "/audio",
+        controller: "@api.controllers.Audio",
+        action: "getAudio",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "audio.device",
+        url: "/audio/device",
+        controller: "@api.controllers.Audio",
+        action: "getAudioDevice",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "audio.device:update",
+        url: "/audio/device",
+        controller: "@api.controllers.Audio",
+        action: "setAudioDevice",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "audio.volume",
+        url: "/audio/volume",
+        controller: "@api.controllers.Audio",
+        action: "getAudioVolume",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "audio.volume:update",
+        url: "/audio/volume",
+        controller: "@api.controllers.Audio",
+        action: "setAudioVolume",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "audio.bgmusic",
+        url: "/audio/bgmusic",
+        controller: "@api.controllers.Audio",
+        action: "getAudioBackgroundMusic",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "audio.bgmusic:update",
+        url: "/audio/bgmusic",
+        controller: "@api.controllers.Audio",
+        action: "setAudioBackgroundMusic",
+        policies: ["methodIsPut"]
+    },
+
     // BIOS
     {
         id: "bios",
