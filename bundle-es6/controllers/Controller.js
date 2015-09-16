@@ -206,5 +206,72 @@ export default class Controller
     }
 
 
+    /**
+     * Get the DB9 driver settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerDb9(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameters(/^controllers\.db9\./, request, response);
+    }
+
+    /**
+     * Indicates if the DB9 driver is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerDb9Enabled(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerDb9Enabled(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.enabled", request, response);
+
+        // Display the new value
+        yield this.getControllerDb9Enabled(request, response);
+    }
+
+    /**
+     * Get the arguments of DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerDb9Args(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.args", request, response);
+    }
+
+    /**
+     * Set the arguments of DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerDb9Args(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.args", request, response);
+
+        // Display the new value
+        yield this.getControllerDb9Args(request, response);
+    }
+
+
 }
 

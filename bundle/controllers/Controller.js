@@ -242,6 +242,77 @@ var Controller = (function () {
       // Display the new value
       yield this.getControllerGpioArgs(request, response);
     }
+
+    /**
+     * Get the DB9 driver settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerDb9",
+    value: function* getControllerDb9(request, response) {
+      yield ControllerUtil.getMainConfigurationParameters(/^controllers\.db9\./, request, response);
+    }
+
+    /**
+     * Indicates if the DB9 driver is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerDb9Enabled",
+    value: function* getControllerDb9Enabled(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerDb9Enabled",
+    value: function* setControllerDb9Enabled(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.enabled", request, response);
+
+      // Display the new value
+      yield this.getControllerDb9Enabled(request, response);
+    }
+
+    /**
+     * Get the arguments of DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerDb9Args",
+    value: function* getControllerDb9Args(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.args", request, response);
+    }
+
+    /**
+     * Set the arguments of DB9 driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerDb9Args",
+    value: function* setControllerDb9Args(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.args", request, response);
+
+      // Display the new value
+      yield this.getControllerDb9Args(request, response);
+    }
   }]);
 
   return Controller;

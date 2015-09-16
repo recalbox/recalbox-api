@@ -352,6 +352,41 @@ module.exports = [
         action: "setControllerGpioArgs",
         policies: ["methodIsPut"]
     },
+    {
+        id: "controllers.db9",
+        url: "/controllers/db9",
+        controller: "@api.controllers.Controller",
+        action: "getControllerDb9",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.db9.enabled",
+        url: "/controllers/db9/enabled",
+        controller: "@api.controllers.Controller",
+        action: "getControllerDb9Enabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.db9.enabled:update",
+        url: "/controllers/db9/enabled",
+        controller: "@api.controllers.Controller",
+        action: "setControllerDb9Enabled",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "controllers.db9.args",
+        url: "/controllers/db9/args",
+        controller: "@api.controllers.Controller",
+        action: "getControllerDb9Args",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.db9.args:update",
+        url: "/controllers/db9/args",
+        controller: "@api.controllers.Controller",
+        action: "setControllerDb9Args",
+        policies: ["methodIsPut"]
+    },
 
 
     // BIOS
