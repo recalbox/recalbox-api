@@ -129,4 +129,8 @@ curl "http://192.168.0.42:1337/bios?range=2-7"
 curl -X POST -F 'file=@SCPH5502.BIN' "http://192.168.0.42:1337/bios"
 ```
 
+```sh
+curl -X DELETE -I "http://192.168.0.42:1337/systems/snes/roms/Zelda.sfc"
+```
+
 
