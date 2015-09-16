@@ -313,6 +313,77 @@ var Controller = (function () {
       // Display the new value
       yield this.getControllerDb9Args(request, response);
     }
+
+    /**
+     * Get the Gamecon driver settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerGamecon",
+    value: function* getControllerGamecon(request, response) {
+      yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gamecon\./, request, response);
+    }
+
+    /**
+     * Indicates if the Gamecon driver is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerGameconEnabled",
+    value: function* getControllerGameconEnabled(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerGameconEnabled",
+    value: function* setControllerGameconEnabled(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
+
+      // Display the new value
+      yield this.getControllerGameconEnabled(request, response);
+    }
+
+    /**
+     * Get the arguments of Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "getControllerGameconArgs",
+    value: function* getControllerGameconArgs(request, response) {
+      yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.args", request, response);
+    }
+
+    /**
+     * Set the arguments of Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+  }, {
+    key: "setControllerGameconArgs",
+    value: function* setControllerGameconArgs(request, response) {
+      yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.args", request, response);
+
+      // Display the new value
+      yield this.getControllerGameconArgs(request, response);
+    }
   }]);
 
   return Controller;

@@ -273,5 +273,72 @@ export default class Controller
     }
 
 
+    /**
+     * Get the Gamecon driver settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGamecon(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gamecon\./, request, response);
+    }
+
+    /**
+     * Indicates if the Gamecon driver is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGameconEnabled(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerGameconEnabled(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
+
+        // Display the new value
+        yield this.getControllerGameconEnabled(request, response);
+    }
+
+    /**
+     * Get the arguments of Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGameconArgs(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.args", request, response);
+    }
+
+    /**
+     * Set the arguments of Gamecon driver
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerGameconArgs(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.args", request, response);
+
+        // Display the new value
+        yield this.getControllerGameconArgs(request, response);
+    }
+
+
 }
 

@@ -387,6 +387,41 @@ module.exports = [
         action: "setControllerDb9Args",
         policies: ["methodIsPut"]
     },
+    {
+        id: "controllers.gamecon",
+        url: "/controllers/gamecon",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGamecon",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gamecon.enabled",
+        url: "/controllers/gamecon/enabled",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGameconEnabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gamecon.enabled:update",
+        url: "/controllers/gamecon/enabled",
+        controller: "@api.controllers.Controller",
+        action: "setControllerGameconEnabled",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "controllers.gamecon.args",
+        url: "/controllers/gamecon/args",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGameconArgs",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gamecon.args:update",
+        url: "/controllers/gamecon/args",
+        controller: "@api.controllers.Controller",
+        action: "setControllerGameconArgs",
+        policies: ["methodIsPut"]
+    },
 
 
     // BIOS
