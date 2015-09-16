@@ -9,7 +9,7 @@
         "url": "https://github.com/neolao/recalbox-api.git"
     },
     "engines": {
-        "node": ">=0.12"
+        "node": ">=0.12 <4.0"
     },
     "main": "./bundle/Api.js",
     "dependencies": {
@@ -18,7 +18,8 @@
         "solfegejs-cli"             : "1.4.*",
         "solfegejs-server"          : "1.6.*",
         "solfegejs-server-router"   : "1.4.*",
-        "ini"                       : "1.3.*"
+        "ini"                       : "1.3.*",
+        "file-size"                 : "1.0.*"
     },
     "devDependencies": {
         "babel"         : "5.6.*",

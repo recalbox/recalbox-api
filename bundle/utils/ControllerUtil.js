@@ -31,6 +31,10 @@ var _Pagination = require("./Pagination");
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
+var _FileInfo = require("./FileInfo");
+
+var _FileInfo2 = _interopRequireDefault(_FileInfo);
+
 /**
  * Helpers for the controllers
  */
@@ -121,15 +125,44 @@ function* listDirectory(path, itemName, options, request, response) {
     var offset = pagination.offset;
     var limit = pagination.limit;
 
+    // Get file informations
+    var listWithMetadata = [];
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = list[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var fileName = _step.value;
+
+            var fileInfo = new _FileInfo2["default"](path + "/" + fileName);
+            var metadata = yield fileInfo.getMetadata();
+            listWithMetadata.push(metadata);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator["return"]) {
+                _iterator["return"]();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+
     var statusCode = 200;
-    if (list.length < total) {
+    if (listWithMetadata.length < total) {
         // Partial content
         statusCode = 206;
     }
     response.statusCode = statusCode;
     response.setHeader("Content-Range", offset + "-" + limit + "/" + total);
     response.setHeader("Accept-Range", itemName + " " + max);
-    response.parameters = list;
+    response.parameters = listWithMetadata;
 }
 
 /**

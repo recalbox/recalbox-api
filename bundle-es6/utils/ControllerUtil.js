@@ -3,6 +3,7 @@ import IniFile from "./IniFile";
 import config from "../../config/config";
 import defaultValues from "../../config/recalboxDefaultValues.json";
 import Pagination from "./Pagination";
+import FileInfo from "./FileInfo";
 
 /**
  * Helpers for the controllers
@@ -95,16 +96,24 @@ export function* listDirectory(path:string, itemName:string, options:object, req
     let offset = pagination.offset;
     let limit = pagination.limit;
 
+    // Get file informations
+    let listWithMetadata = [];
+    for (let fileName of list) {
+        let fileInfo = new FileInfo(`${path}/${fileName}`);
+        let metadata = yield fileInfo.getMetadata();
+        listWithMetadata.push(metadata);
+    }
+
 
     let statusCode = 200;
-    if (list.length < total) {
+    if (listWithMetadata.length < total) {
         // Partial content
         statusCode = 206;
     }
     response.statusCode = statusCode;
     response.setHeader("Content-Range", `${offset}-${limit}/${total}`);
     response.setHeader("Accept-Range", `${itemName} ${max}`);
-    response.parameters = list;
+    response.parameters = listWithMetadata;
 }
 
 /**
