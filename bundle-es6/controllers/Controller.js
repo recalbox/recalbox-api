@@ -139,5 +139,72 @@ export default class Controller
     }
 
 
+    /**
+     * Get the GPIO settings
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGpio(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gpio\./, request, response);
+    }
+
+    /**
+     * Indicates if the GPIO is enabled
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGpioEnabled(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
+    }
+
+    /**
+     * Enable/disable GPIO
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerGpioEnabled(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
+
+        // Display the new value
+        yield this.getControllerGpioEnabled(request, response);
+    }
+
+    /**
+     * Get the arguments of mk_gpio
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getControllerGpioArgs(request, response)
+    {
+        yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.args", request, response);
+    }
+
+    /**
+     * Set the arguments of mk_gpio
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setControllerGpioArgs(request, response)
+    {
+        yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.args", request, response);
+
+        // Display the new value
+        yield this.getControllerGpioArgs(request, response);
+    }
+
+
 }
 

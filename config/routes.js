@@ -317,6 +317,41 @@ module.exports = [
         action: "setControllerXboxdrvNbControls",
         policies: ["methodIsPut"]
     },
+    {
+        id: "controllers.gpio",
+        url: "/controllers/gpio",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGpio",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gpio.enabled",
+        url: "/controllers/gpio/enabled",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGpioEnabled",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gpio.enabled:update",
+        url: "/controllers/gpio/enabled",
+        controller: "@api.controllers.Controller",
+        action: "setControllerGpioEnabled",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "controllers.gpio.args",
+        url: "/controllers/gpio/args",
+        controller: "@api.controllers.Controller",
+        action: "getControllerGpioArgs",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "controllers.gpio.args:update",
+        url: "/controllers/gpio/args",
+        controller: "@api.controllers.Controller",
+        action: "setControllerGpioArgs",
+        policies: ["methodIsPut"]
+    },
 
 
     // BIOS
