@@ -59,6 +59,34 @@ var Bios = (function () {
         value: function* addBios(request, response) {
             yield ControllerUtil.uploadFile(_configConfig2["default"].api.biosDirectoryPath, request, response);
         }
+
+        /**
+         * Get a file informations
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getBiosFile",
+        value: function* getBiosFile(request, response) {
+            var fileName = request.getParameter("fileName");
+            yield ControllerUtil.getFileMetadata(_configConfig2["default"].api.biosDirectoryPath + "/" + fileName, request, response);
+        }
+
+        /**
+         * Delete a file
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "deleteBiosFile",
+        value: function* deleteBiosFile(request, response) {
+            var fileName = request.getParameter("fileName");
+            yield ControllerUtil.deleteFile(_configConfig2["default"].api.biosDirectoryPath + "/" + fileName, request, response);
+        }
     }]);
 
     return Bios;

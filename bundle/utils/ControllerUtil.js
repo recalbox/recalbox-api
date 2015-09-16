@@ -8,6 +8,8 @@ exports.getMainConfigurationParameters = getMainConfigurationParameters;
 exports.setMainConfigurationParameterValue = setMainConfigurationParameterValue;
 exports.listDirectory = listDirectory;
 exports.uploadFile = uploadFile;
+exports.getFileMetadata = getFileMetadata;
+exports.deleteFile = deleteFile;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -191,4 +193,45 @@ function* uploadFile(directoryPath, request, response) {
 
     response.statusCode = 201;
     response.parameters = createdFiles;
+}
+
+/**
+ * Get file metadata
+ *
+ * @public
+ * @param   {string}                            filePath    The file path
+ * @param   {solfege.bundle.server.Request}     request     The request
+ * @param   {solfege.bundle.server.Response}    response    The response
+ */
+
+function* getFileMetadata(filePath, request, response) {
+    try {
+        var fileInfo = new _FileInfo2["default"](filePath);
+        var metadata = yield fileInfo.getMetadata();
+
+        response.statusCode = 200;
+        response.parameters = metadata;
+    } catch (error) {
+        response.statusCode = 404;
+        response.parameters = [];
+    }
+}
+
+/**
+ * Delete a file
+ *
+ * @public
+ * @param   {string}                            filePath    The file path
+ * @param   {solfege.bundle.server.Request}     request     The request
+ * @param   {solfege.bundle.server.Response}    response    The response
+ */
+
+function* deleteFile(filePath, request, response) {
+    try {
+        yield _solfegejs2["default"].util.Node.fs.unlink(filePath);
+
+        response.statusCode = 204;
+    } catch (error) {
+        response.statusCode = 404;
+    }
 }

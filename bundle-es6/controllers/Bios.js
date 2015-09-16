@@ -41,5 +41,39 @@ export default class Bios
             response
         );
     }
+
+    /**
+     * Get a file informations
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getBiosFile(request, response)
+    {
+        let fileName = request.getParameter("fileName");
+        yield ControllerUtil.getFileMetadata(
+            config.api.biosDirectoryPath+"/"+fileName,
+            request,
+            response
+        );
+    }
+
+    /**
+     * Delete a file
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *deleteBiosFile(request, response)
+    {
+        let fileName = request.getParameter("fileName");
+        yield ControllerUtil.deleteFile(
+            config.api.biosDirectoryPath+"/"+fileName,
+            request,
+            response
+        );
+    }
 }
 

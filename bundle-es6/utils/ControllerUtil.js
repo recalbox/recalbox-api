@@ -144,5 +144,47 @@ export function* uploadFile(directoryPath:string, request, response)
     response.parameters = createdFiles;
 }
 
+/**
+ * Get file metadata
+ *
+ * @public
+ * @param   {string}                            filePath    The file path
+ * @param   {solfege.bundle.server.Request}     request     The request
+ * @param   {solfege.bundle.server.Response}    response    The response
+ */
+export function* getFileMetadata(filePath:string, request, response)
+{
+    try {
+        let fileInfo = new FileInfo(filePath);
+        let metadata = yield fileInfo.getMetadata();
+
+        response.statusCode = 200;
+        response.parameters = metadata;
+    } catch (error) {
+        response.statusCode = 404;
+        response.parameters = [];
+    }
+}
+
+
+/**
+ * Delete a file
+ *
+ * @public
+ * @param   {string}                            filePath    The file path
+ * @param   {solfege.bundle.server.Request}     request     The request
+ * @param   {solfege.bundle.server.Response}    response    The response
+ */
+export function* deleteFile(filePath:string, request, response)
+{
+    try {
+        yield solfege.util.Node.fs.unlink(filePath);
+
+        response.statusCode = 204;
+    } catch (error) {
+        response.statusCode = 404;
+    }
+}
+
 
 

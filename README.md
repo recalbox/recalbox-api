@@ -80,6 +80,7 @@ The response returns the items with 2 headers :
 | `GET` `PUT` | `/controllers/gamecon/enabled` | Enable/disable gamecon driver |
 | `GET` `PUT` | `/controllers/gamecon/args` | Gamecon driver arguments |
 | `GET` `POST` | `/bios` | The bios list for all systems |
+| `GET` `DELETE` | `/bios/:fileName` | The file information |
 | `GET`       | `/systems` | The system list |
 | `GET`       | `/systems/default` | The default system settings |
 | `GET` `PUT` | `/systems/default/videomode` | The default resolution |

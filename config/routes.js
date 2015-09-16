@@ -439,6 +439,20 @@ module.exports = [
         action: "addBios",
         policies: ["methodIsPost"]
     },
+    {
+        id: "bios.file",
+        url: "/bios/:fileName",
+        controller: "@api.controllers.Bios",
+        action: "getBiosFile",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "bios.file:delete",
+        url: "/bios/:fileName",
+        controller: "@api.controllers.Bios",
+        action: "deleteBiosFile",
+        policies: ["methodIsDelete"]
+    },
 
     // Game systems
     {
@@ -462,5 +476,19 @@ module.exports = [
         action: "addRom",
         policies: ["methodIsPost"]
     },
+    {
+        id: "system.roms.file",
+        url: "/systems/:id/roms/:fileName",
+        controller: "@api.controllers.GameSystem",
+        action: "getRom",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.roms.file:delete",
+        url: "/systems/:id/roms/:fileName",
+        controller: "@api.controllers.GameSystem",
+        action: "deleteRom",
+        policies: ["methodIsDelete"]
+    }
 ];
 

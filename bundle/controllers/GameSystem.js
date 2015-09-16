@@ -81,6 +81,40 @@ var GameSystem = (function () {
 
             yield ControllerUtil.uploadFile(directoryPath, request, response);
         }
+
+        /**
+         * Get a ROM informations
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getRom",
+        value: function* getRom(request, response) {
+            var systemId = request.getParameter("id");
+            var fileName = request.getParameter("fileName");
+            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+
+            yield ControllerUtil.getFileMetadata(directoryPath + "/" + fileName, request, response);
+        }
+
+        /**
+         * Delete a ROM
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "deleteRom",
+        value: function* deleteRom(request, response) {
+            var systemId = request.getParameter("id");
+            var fileName = request.getParameter("fileName");
+            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+
+            yield ControllerUtil.deleteFile(directoryPath + "/" + fileName, request, response);
+        }
     }]);
 
     return GameSystem;

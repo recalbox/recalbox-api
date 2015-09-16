@@ -94,5 +94,46 @@ export default class GameSystem
         );
     }
 
+    /**
+     * Get a ROM informations
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *getRom(request, response)
+    {
+        let systemId = request.getParameter("id");
+        let fileName = request.getParameter("fileName");
+        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+
+        yield ControllerUtil.getFileMetadata(
+            directoryPath+"/"+fileName,
+            request,
+            response
+        );
+    }
+
+
+    /**
+     * Delete a ROM
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *deleteRom(request, response)
+    {
+        let systemId = request.getParameter("id");
+        let fileName = request.getParameter("fileName");
+        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+
+        yield ControllerUtil.deleteFile(
+            directoryPath+"/"+fileName,
+            request,
+            response
+        );
+    }
+
 }
 
