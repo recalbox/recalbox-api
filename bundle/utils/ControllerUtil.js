@@ -48,13 +48,24 @@ var _FileInfo2 = _interopRequireDefault(_FileInfo);
  * @param   {string}                            name        The parameter name
  * @param   {solfege.bundle.server.Request}     request     The request
  * @param   {solfege.bundle.server.Response}    response    The response
+ * @param   {string}                            fallback    The fallback parameter name
  */
 
 function* getMainConfigurationParameterValue(name, request, response) {
+    var fallback = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+
     var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
+    var value = yield iniFile.getParameterValue(name);
+
     var settings = {};
-    settings[name] = yield iniFile.getParameterValue(name);
+    if (fallback) {
+        var defaultValue = yield iniFile.getParameterValue(fallback);
+        settings[name] = defaultValue;
+    }
+    if (value) {
+        settings[name] = value;
+    }
 
     response.statusCode = 200;
     response.parameters = settings;

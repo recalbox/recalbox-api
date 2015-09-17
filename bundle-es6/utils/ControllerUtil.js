@@ -17,13 +17,22 @@ import FileInfo from "./FileInfo";
  * @param   {string}                            name        The parameter name
  * @param   {solfege.bundle.server.Request}     request     The request
  * @param   {solfege.bundle.server.Response}    response    The response
+ * @param   {string}                            fallback    The fallback parameter name
  */
-export function* getMainConfigurationParameterValue(name:string, request, response)
+export function* getMainConfigurationParameterValue(name:string, request, response, fallback:string = null)
 {
     let iniFile = new IniFile(config.api.mainConfigurationFilePath);
     iniFile.setDefaultValues(defaultValues);
+    let value = yield iniFile.getParameterValue(name);
+
     let settings = {};
-    settings[name] = yield iniFile.getParameterValue(name);
+    if (fallback) {
+        let defaultValue = yield iniFile.getParameterValue(fallback);
+        settings[name] = defaultValue;
+    }
+    if (value) {
+        settings[name] = value;
+    }
 
     response.statusCode = 200;
     response.parameters = settings;

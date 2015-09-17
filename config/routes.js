@@ -463,6 +463,188 @@ module.exports = [
         policies: ["methodIsGetOrHead"]
     },
     {
+        id: "systems.default",
+        url: "/systems/default",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefault",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.videomode",
+        url: "/systems/default/videomode",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefaultVideoMode",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.videomode:update",
+        url: "/systems/default/videomode",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemsDefaultVideoMode",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "systems.default.shaders",
+        url: "/systems/default/shaders",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefaultShaders",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.shaders:update",
+        url: "/systems/default/shaders",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemsDefaultShaders",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "systems.default.ratio",
+        url: "/systems/default/ratio",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefaultRatio",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.ratio:update",
+        url: "/systems/default/ratio",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemsDefaultRatio",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "systems.default.smooth",
+        url: "/systems/default/smooth",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefaultSmooth",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.smooth:update",
+        url: "/systems/default/smooth",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemsDefaultSmooth",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "systems.default.rewind",
+        url: "/systems/default/rewind",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemsDefaultRewind",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "systems.default.rewind:update",
+        url: "/systems/default/rewind",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemsDefaultRewind",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system",
+        url: "/systems/:id",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystem",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.videomode",
+        url: "/systems/:id/videomode",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemVideoMode",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.videomode:update",
+        url: "/systems/:id/videomode",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemVideoMode",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.shaders",
+        url: "/systems/:id/shaders",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemShaders",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.shaders:update",
+        url: "/systems/:id/shaders",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemShaders",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.ratio",
+        url: "/systems/:id/ratio",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemRatio",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.ratio:update",
+        url: "/systems/:id/ratio",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemRatio",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.smooth",
+        url: "/systems/:id/smooth",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemSmooth",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.smooth:update",
+        url: "/systems/:id/smooth",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemSmooth",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.rewind",
+        url: "/systems/:id/rewind",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemRewind",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.rewind:update",
+        url: "/systems/:id/rewind",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemRewind",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.emulator",
+        url: "/systems/:id/emulator",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemEmulator",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.emulator:update",
+        url: "/systems/:id/emulator",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemEmulator",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "system.core",
+        url: "/systems/:id/core",
+        controller: "@api.controllers.GameSystem",
+        action: "getSystemCore",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.core:update",
+        url: "/systems/:id/core",
+        controller: "@api.controllers.GameSystem",
+        action: "setSystemCore",
+        policies: ["methodIsPut"]
+    },
+    {
         id: "system.roms",
         url: "/systems/:id/roms",
         controller: "@api.controllers.GameSystem",

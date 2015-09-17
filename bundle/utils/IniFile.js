@@ -145,6 +145,11 @@ var IniFile = (function () {
             // The pattern to find the parameter line
             var regexp = new RegExp(";?" + name + " *=.*", "im");
 
+            // Create the parameter if it doesn't exist
+            if (content.search(regexp) === -1) {
+                content += "\n;" + name + "=";
+            }
+
             // If the value is not a number,
             // then wrap the value with double quotes
             if (isNaN(value)) {

@@ -24,6 +24,14 @@ var _utilsControllerUtil = require("../utils/ControllerUtil");
 
 var ControllerUtil = _interopRequireWildcard(_utilsControllerUtil);
 
+var _utilsIniFile = require("../utils/IniFile");
+
+var _utilsIniFile2 = _interopRequireDefault(_utilsIniFile);
+
+var _configRecalboxDefaultValuesJson = require("../../config/recalboxDefaultValues.json");
+
+var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDefaultValuesJson);
+
 /**
  * The access points of the game systems
  */
@@ -48,6 +56,448 @@ var GameSystem = (function () {
 
             response.statusCode = 200;
             response.parameters = list;
+        }
+
+        /**
+         * Get the default system settings
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefault",
+        value: function* getSystemsDefault(request, response) {
+            yield ControllerUtil.getMainConfigurationParameters(/^global\./, request, response);
+        }
+
+        /**
+         * Get the default video mode
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefaultVideoMode",
+        value: function* getSystemsDefaultVideoMode(request, response) {
+            yield ControllerUtil.getMainConfigurationParameterValue("global.videomode", request, response);
+        }
+
+        /**
+         * Set the default video mode
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemsDefaultVideoMode",
+        value: function* setSystemsDefaultVideoMode(request, response) {
+            yield ControllerUtil.setMainConfigurationParameterValue("global.videomode", request, response);
+
+            // Display the new value
+            yield this.getSystemsDefaultVideoMode(request, response);
+        }
+
+        /**
+         * Get the default shaders
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefaultShaders",
+        value: function* getSystemsDefaultShaders(request, response) {
+            yield ControllerUtil.getMainConfigurationParameterValue("global.shaders", request, response);
+        }
+
+        /**
+         * Set the default shaders
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemsDefaultShaders",
+        value: function* setSystemsDefaultShaders(request, response) {
+            yield ControllerUtil.setMainConfigurationParameterValue("global.shaders", request, response);
+
+            // Display the new value
+            yield this.getSystemsDefaultShaders(request, response);
+        }
+
+        /**
+         * Get the default ratio
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefaultRatio",
+        value: function* getSystemsDefaultRatio(request, response) {
+            yield ControllerUtil.getMainConfigurationParameterValue("global.ratio", request, response);
+        }
+
+        /**
+         * Set the default ratio
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemsDefaultRatio",
+        value: function* setSystemsDefaultRatio(request, response) {
+            yield ControllerUtil.setMainConfigurationParameterValue("global.ratio", request, response);
+
+            // Display the new value
+            yield this.getSystemsDefaultRatio(request, response);
+        }
+
+        /**
+         * Get the default smooth setting
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefaultSmooth",
+        value: function* getSystemsDefaultSmooth(request, response) {
+            yield ControllerUtil.getMainConfigurationParameterValue("global.smooth", request, response);
+        }
+
+        /**
+         * Set the default smooth setting
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemsDefaultSmooth",
+        value: function* setSystemsDefaultSmooth(request, response) {
+            yield ControllerUtil.setMainConfigurationParameterValue("global.smooth", request, response);
+
+            // Display the new value
+            yield this.getSystemsDefaultSmooth(request, response);
+        }
+
+        /**
+         * Get the default rewind setting
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemsDefaultRewind",
+        value: function* getSystemsDefaultRewind(request, response) {
+            yield ControllerUtil.getMainConfigurationParameterValue("global.rewind", request, response);
+        }
+
+        /**
+         * Set the default rewind setting
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemsDefaultRewind",
+        value: function* setSystemsDefaultRewind(request, response) {
+            yield ControllerUtil.setMainConfigurationParameterValue("global.rewind", request, response);
+
+            // Display the new value
+            yield this.getSystemsDefaultRewind(request, response);
+        }
+
+        /**
+         * Get the system settings
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystem",
+        value: function* getSystem(request, response) {
+            var systemId = request.getParameter("id");
+
+            // Extract the settings from the main configuration
+            var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+            iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
+            var globalParameters = yield iniFile.getParameters(/^global\./);
+            var systemParameters = yield iniFile.getParameters(new RegExp("^" + systemId + "."));
+
+            // Merge the values
+            var parameters = {};
+            for (var key in globalParameters) {
+                var newKey = key.replace("global", systemId);
+                parameters[newKey] = globalParameters[key];
+            }
+            for (var key in systemParameters) {
+                if (systemParameters[key]) {
+                    parameters[key] = systemParameters[key];
+                }
+            }
+
+            response.statusCode = 200;
+            response.parameters = parameters;
+        }
+
+        /**
+         * Get the video mode of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemVideoMode",
+        value: function* getSystemVideoMode(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".videomode";
+            var fallbackName = "global.videomode";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response, fallbackName);
+        }
+
+        /**
+         * Set the video mode of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemVideoMode",
+        value: function* setSystemVideoMode(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".videomode";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemVideoMode(request, response);
+        }
+
+        /**
+         * Get the shaders of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemShaders",
+        value: function* getSystemShaders(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".shaders";
+            var fallbackName = "global.shaders";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response, fallbackName);
+        }
+
+        /**
+         * Set the shaders of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemShaders",
+        value: function* setSystemShaders(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".shaders";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemShaders(request, response);
+        }
+
+        /**
+         * Get the ratio of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemRatio",
+        value: function* getSystemRatio(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".ratio";
+            var fallbackName = "global.ratio";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response, fallbackName);
+        }
+
+        /**
+         * Set the ratio of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemRatio",
+        value: function* setSystemRatio(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".ratio";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemRatio(request, response);
+        }
+
+        /**
+         * Get the smooth setting of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemSmooth",
+        value: function* getSystemSmooth(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".smooth";
+            var fallbackName = "global.smooth";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response, fallbackName);
+        }
+
+        /**
+         * Set the smooth setting of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemSmooth",
+        value: function* setSystemSmooth(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".smooth";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemSmooth(request, response);
+        }
+
+        /**
+         * Get the rewind setting of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemRewind",
+        value: function* getSystemRewind(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".rewind";
+            var fallbackName = "global.rewind";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response, fallbackName);
+        }
+
+        /**
+         * Set the rewind setting of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemRewind",
+        value: function* setSystemRewind(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".rewind";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemRewind(request, response);
+        }
+
+        /**
+         * Get the emulator of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemEmulator",
+        value: function* getSystemEmulator(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".emulator";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response);
+        }
+
+        /**
+         * Set the emulator of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemEmulator",
+        value: function* setSystemEmulator(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".emulator";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemEmulator(request, response);
+        }
+
+        /**
+         * Get the core of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "getSystemCore",
+        value: function* getSystemCore(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".core";
+
+            yield ControllerUtil.getMainConfigurationParameterValue(parameterName, request, response);
+        }
+
+        /**
+         * Set the core of the specified system
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "setSystemCore",
+        value: function* setSystemCore(request, response) {
+            var systemId = request.getParameter("id");
+            var parameterName = systemId + ".core";
+
+            yield ControllerUtil.setMainConfigurationParameterValue(parameterName, request, response);
+
+            // Display the new value
+            yield this.getSystemCore(request, response);
         }
 
         /**
