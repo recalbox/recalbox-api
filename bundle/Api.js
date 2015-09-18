@@ -14,6 +14,10 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _stream = require("stream");
+
+var _stream2 = _interopRequireDefault(_stream);
+
 var _js2xmlparser = require("js2xmlparser");
 
 var _js2xmlparser2 = _interopRequireDefault(_js2xmlparser);
@@ -58,6 +62,10 @@ var Api = (function () {
             // Allow cross domain access
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
+
+            if (response.body instanceof _stream2["default"]) {
+                return;
+            }
 
             // Convert the body to the requested format
             switch (request.acceptsTypes("json", "xml", "text")) {

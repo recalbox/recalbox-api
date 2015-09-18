@@ -441,9 +441,16 @@ module.exports = [
     },
     {
         id: "bios.file",
-        url: "/bios/:fileName",
+        url: "/bios/metadata/:fileName",
         controller: "@api.controllers.Bios",
         action: "getBiosFile",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "bios.file:download",
+        url: "/bios/:fileName",
+        controller: "@api.controllers.Bios",
+        action: "downloadBiosFile",
         policies: ["methodIsGetOrHead"]
     },
     {
@@ -660,9 +667,16 @@ module.exports = [
     },
     {
         id: "system.roms.file",
-        url: "/systems/:id/roms/:fileName",
+        url: "/systems/:id/roms/metadata/:fileName",
         controller: "@api.controllers.GameSystem",
         action: "getRom",
+        policies: ["methodIsGetOrHead"]
+    },
+    {
+        id: "system.roms.file:download",
+        url: "/systems/:id/roms/:fileName",
+        controller: "@api.controllers.GameSystem",
+        action: "downloadRom",
         policies: ["methodIsGetOrHead"]
     },
     {

@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import fs from "fs";
 import config from "../../config/config";
 import * as ControllerUtil from "../utils/ControllerUtil";
 import IniFile from "../utils/IniFile";
@@ -565,6 +566,35 @@ export default class GameSystem
             response
         );
     }
+
+    /**
+     * Download a ROM
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *downloadRom(request, response)
+    {
+        let systemId = request.getParameter("id");
+        let fileName = request.getParameter("fileName");
+        let filePath = `${config.api.romsDirectoryPath}/${systemId}/${fileName}`;
+        let exists = yield solfege.util.Node.fs.exists(filePath);
+
+        if (!exists) {
+            response.statusCode = 404;
+            return;
+        }
+
+        response.statusCode = 200;
+        response.setHeader(
+            "Content-disposition", 
+            `attachment; filename=${fileName}`
+        );
+        let fileStream = fs.createReadStream(filePath);
+        response.body = fileStream;
+    }
+
 
 
     /**

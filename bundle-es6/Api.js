@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import Stream from "stream";
 import js2xmlparser from "js2xmlparser";
 import controllersPackage from "./controllers"
 
@@ -34,6 +35,10 @@ export default class Api
         // Allow cross domain access
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
+
+        if (response.body instanceof Stream) {
+            return;
+        }
 
         // Convert the body to the requested format
         switch (request.acceptsTypes("json", "xml", "text")) {

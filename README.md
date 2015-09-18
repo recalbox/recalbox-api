@@ -80,7 +80,8 @@ The response returns the items with 2 headers :
 | `GET` `PUT` | `/controllers/gamecon/enabled` | Enable/disable gamecon driver |
 | `GET` `PUT` | `/controllers/gamecon/args` | Gamecon driver arguments |
 | `GET` `POST` | `/bios` | The bios list for all systems |
-| `GET` `DELETE` | `/bios/:fileName` | The file information |
+| `GET` `DELETE` | `/bios/:fileName` | The BIOS file |
+| `GET`       | `/bios/metadata/:fileName` | The file information |
 | `GET`       | `/systems` | The system list |
 | `GET`       | `/systems/default` | The default system settings |
 | `GET` `PUT` | `/systems/default/videomode` | The default resolution |
@@ -97,7 +98,8 @@ The response returns the items with 2 headers :
 | `GET` `PUT` | `/systems/:id/core` | The core of the specified system |
 | `GET` `PUT` | `/systems/:id/emulator` | The emulator of the specified system |
 | `GET` `POST` | `/systems/:id/roms` | The game list of the specified system |
-| `GET` `DELETE` | `/systems/:id/roms/:game` | The game informations |
+| `GET` `DELETE` | `/systems/:id/roms/:game` | The game file |
+| `GET`       | `/systems/:id/roms/metadata/:game` | The game informations |
 
 ### Examples
 

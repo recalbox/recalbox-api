@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import fs from "fs";
 import config from "../../config/config";
 import * as ControllerUtil from "../utils/ControllerUtil";
 
@@ -57,6 +58,33 @@ export default class Bios
             request,
             response
         );
+    }
+
+    /**
+     * Download a file
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *downloadBiosFile(request, response)
+    {
+        let fileName = request.getParameter("fileName");
+        let filePath = config.api.biosDirectoryPath+"/"+fileName;
+        let exists = yield solfege.util.Node.fs.exists(filePath);
+
+        if (!exists) {
+            response.statusCode = 404;
+            return;
+        }
+
+        response.statusCode = 200;
+        response.setHeader(
+            "Content-disposition", 
+            `attachment; filename=${fileName}`
+        );
+        let fileStream = fs.createReadStream(filePath);
+        response.body = fileStream;
     }
 
     /**

@@ -16,6 +16,10 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _fs = require("fs");
+
+var _fs2 = _interopRequireDefault(_fs);
+
 var _configConfig = require("../../config/config");
 
 var _configConfig2 = _interopRequireDefault(_configConfig);
@@ -72,6 +76,31 @@ var Bios = (function () {
         value: function* getBiosFile(request, response) {
             var fileName = request.getParameter("fileName");
             yield ControllerUtil.getFileMetadata(_configConfig2["default"].api.biosDirectoryPath + "/" + fileName, request, response);
+        }
+
+        /**
+         * Download a file
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         */
+    }, {
+        key: "downloadBiosFile",
+        value: function* downloadBiosFile(request, response) {
+            var fileName = request.getParameter("fileName");
+            var filePath = _configConfig2["default"].api.biosDirectoryPath + "/" + fileName;
+            var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
+
+            if (!exists) {
+                response.statusCode = 404;
+                return;
+            }
+
+            response.statusCode = 200;
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+            var fileStream = _fs2["default"].createReadStream(filePath);
+            response.body = fileStream;
         }
 
         /**
