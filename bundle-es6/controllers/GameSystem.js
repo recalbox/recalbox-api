@@ -519,6 +519,7 @@ export default class GameSystem
         let systemId = request.getParameter("id");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
 
+        // Display the file list
         yield ControllerUtil.listDirectory(
             directoryPath,
             "rom",
@@ -540,6 +541,7 @@ export default class GameSystem
         let systemId = request.getParameter("id");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
 
+        // Upload the file
         yield ControllerUtil.uploadFile(
             directoryPath,
             request,
@@ -579,13 +581,18 @@ export default class GameSystem
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
         let filePath = `${config.api.romsDirectoryPath}/${systemId}/${fileName}`;
-        let exists = yield solfege.util.Node.fs.exists(filePath);
 
+        // Check if the file exists
+        let exists = yield solfege.util.Node.fs.exists(filePath);
         if (!exists) {
             response.statusCode = 404;
+            response.parameters = {
+                error: `File not found: ${filePath}`
+            };
             return;
         }
 
+        // Read the file
         response.statusCode = 200;
         response.setHeader(
             "Content-disposition", 

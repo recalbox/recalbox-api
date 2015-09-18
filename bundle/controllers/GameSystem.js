@@ -517,6 +517,7 @@ var GameSystem = (function () {
             var systemId = request.getParameter("id");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
 
+            // Display the file list
             yield ControllerUtil.listDirectory(directoryPath, "rom", null, request, response);
         }
 
@@ -533,6 +534,7 @@ var GameSystem = (function () {
             var systemId = request.getParameter("id");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
 
+            // Upload the file
             yield ControllerUtil.uploadFile(directoryPath, request, response);
         }
 
@@ -566,13 +568,18 @@ var GameSystem = (function () {
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
             var filePath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId + "/" + fileName;
-            var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
 
+            // Check if the file exists
+            var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
             if (!exists) {
                 response.statusCode = 404;
+                response.parameters = {
+                    error: "File not found: " + filePath
+                };
                 return;
             }
 
+            // Read the file
             response.statusCode = 200;
             response.setHeader("Content-disposition", "attachment; filename=" + fileName);
             var fileStream = _fs2["default"].createReadStream(filePath);

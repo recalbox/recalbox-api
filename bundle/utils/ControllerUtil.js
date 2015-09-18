@@ -128,6 +128,16 @@ function* setMainConfigurationParameterValue(name, request, response) {
 function* listDirectory(path, itemName, options, request, response) {
     var max = 50;
 
+    // Check if the directory exists
+    var exists = yield _solfegejs2["default"].util.Node.fs.exists(path);
+    if (!exists) {
+        response.statusCode = 404;
+        response.parameters = {
+            error: "Directory not found: " + path
+        };
+        return;
+    }
+
     // Get the files
     var files = yield _solfegejs2["default"].util.Node.fs.readdir(path);
     var total = files.length;
@@ -188,6 +198,17 @@ function* listDirectory(path, itemName, options, request, response) {
  */
 
 function* uploadFile(directoryPath, request, response) {
+    // Check if the directory exists
+    var exists = yield _solfegejs2["default"].util.Node.fs.exists(directoryPath);
+    if (!exists) {
+        response.statusCode = 404;
+        response.parameters = {
+            error: "Directory not found: " + directoryPath
+        };
+        return;
+    }
+
+    // Get the uploaded file
     var files = yield request.getFiles();
     var createdFiles = [];
     for (var field in files) {
@@ -216,6 +237,17 @@ function* uploadFile(directoryPath, request, response) {
  */
 
 function* getFileMetadata(filePath, request, response) {
+    // Check if the file exists
+    var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
+    if (!exists) {
+        response.statusCode = 404;
+        response.parameters = {
+            error: "File not found: " + filePath
+        };
+        return;
+    }
+
+    // Get file metadata
     try {
         var fileInfo = new _FileInfo2["default"](filePath);
         var metadata = yield fileInfo.getMetadata();
@@ -223,8 +255,10 @@ function* getFileMetadata(filePath, request, response) {
         response.statusCode = 200;
         response.parameters = metadata;
     } catch (error) {
-        response.statusCode = 404;
-        response.parameters = [];
+        response.statusCode = 500;
+        response.parameters = {
+            error: error.message
+        };
     }
 }
 
@@ -238,11 +272,25 @@ function* getFileMetadata(filePath, request, response) {
  */
 
 function* deleteFile(filePath, request, response) {
+    // Check if the file exists
+    var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
+    if (!exists) {
+        response.statusCode = 404;
+        response.parameters = {
+            error: "File not found: " + filePath
+        };
+        return;
+    }
+
+    // Delete the file
     try {
         yield _solfegejs2["default"].util.Node.fs.unlink(filePath);
 
         response.statusCode = 204;
     } catch (error) {
-        response.statusCode = 404;
+        response.statusCode = 500;
+        response.parameters = {
+            error: error.message
+        };
     }
 }

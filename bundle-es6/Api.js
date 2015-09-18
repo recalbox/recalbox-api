@@ -36,8 +36,24 @@ export default class Api
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
 
+        // The body is a Stream. There is no need to format the output
         if (response.body instanceof Stream) {
             return;
+        }
+
+        // If the body and the parameters are empty,
+        // then it means that the URL doesn't exist
+        // @todo Use a feature of the router to do that
+        if (!response.body && 
+            (
+                !response.parameters || 
+                Object.keys(response.parameters).length === 0
+            ) 
+        ) {
+            response.statusCode = 404;
+            response.parameters = {
+                error: "Not found"
+            };
         }
 
         // Convert the body to the requested format
