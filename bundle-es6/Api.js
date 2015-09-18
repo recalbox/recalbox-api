@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import js2xmlparser from "js2xmlparser";
 import controllersPackage from "./controllers"
 
 /**
@@ -46,6 +47,13 @@ export default class Api
             case "xml":
                 response.setHeader("Content-Type", "application/xml");
 
+                let body;
+                if (Array.isArray(response.parameters)) {
+                    body = js2xmlparser("response", {item: response.parameters});
+                } else {
+                    body = js2xmlparser("response", response.parameters);
+                }
+                /*
                 let body = `<?xml version="1.0" encoding="UTF-8" ?>\n<response>\n`;
                 for (let key in response.parameters) {
                     let value = response.parameters[key];
@@ -58,6 +66,7 @@ export default class Api
                     body += `</${key}>\n`;
                 }
                 body += `</response>`;
+                */
                 response.body = body;
                 break;
 

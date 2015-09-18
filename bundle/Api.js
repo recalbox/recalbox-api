@@ -14,6 +14,10 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _js2xmlparser = require("js2xmlparser");
+
+var _js2xmlparser2 = _interopRequireDefault(_js2xmlparser);
+
 var _controllers = require("./controllers");
 
 var _controllers2 = _interopRequireDefault(_controllers);
@@ -67,18 +71,26 @@ var Api = (function () {
                 case "xml":
                     response.setHeader("Content-Type", "application/xml");
 
-                    var body = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<response>\n";
-                    for (var key in response.parameters) {
-                        var value = response.parameters[key];
-                        body += "<" + key + ">";
+                    var body = undefined;
+                    if (Array.isArray(response.parameters)) {
+                        body = (0, _js2xmlparser2["default"])("response", { item: response.parameters });
+                    } else {
+                        body = (0, _js2xmlparser2["default"])("response", response.parameters);
+                    }
+                    /*
+                    let body = `<?xml version="1.0" encoding="UTF-8" ?>\n<response>\n`;
+                    for (let key in response.parameters) {
+                        let value = response.parameters[key];
+                        body += `<${key}>`;
                         if (!isNaN(value)) {
                             body += value;
                         } else {
-                            body += "<![CDATA[" + value + "]]>";
+                            body += `<![CDATA[${value}]]>`;
                         }
-                        body += "</" + key + ">\n";
+                        body += `</${key}>\n`;
                     }
-                    body += "</response>";
+                    body += `</response>`;
+                    */
                     response.body = body;
                     break;
 
