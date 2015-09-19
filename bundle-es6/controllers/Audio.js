@@ -15,6 +15,7 @@ export default class Audio
      */
     *getAudio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^audio\./, request, response);
     }
 
@@ -27,6 +28,7 @@ export default class Audio
      */
     *getAudioDevice(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("audio.device", request, response);
     }
 
@@ -39,6 +41,7 @@ export default class Audio
      */
     *setAudioDevice(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("audio.device", request, response);
 
         // Display the new value
@@ -54,6 +57,7 @@ export default class Audio
      */
     *getAudioVolume(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("audio.volume", request, response);
     }
 
@@ -66,6 +70,7 @@ export default class Audio
      */
     *setAudioVolume(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("audio.volume", request, response);
 
         // Display the new value
@@ -81,6 +86,7 @@ export default class Audio
      */
     *getAudioBackgroundMusic(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("audio.bgmusic", request, response);
     }
 
@@ -93,6 +99,7 @@ export default class Audio
      */
     *setAudioBackgroundMusic(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("audio.bgmusic", request, response);
 
         // Display the new value

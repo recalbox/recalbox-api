@@ -15,6 +15,7 @@ export default class Wifi
      */
     *getWifi(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^wifi\./, request, response);
     }
 
@@ -27,6 +28,7 @@ export default class Wifi
      */
     *getWifiEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("wifi.enabled", request, response);
     }
 
@@ -39,6 +41,7 @@ export default class Wifi
      */
     *setWifiEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("wifi.enabled", request, response);
 
         // Display the new value
@@ -54,6 +57,7 @@ export default class Wifi
      */
     *getWifiSsid(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("wifi.ssid", request, response);
     }
 
@@ -66,6 +70,7 @@ export default class Wifi
      */
     *setWifiSsid(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("wifi.ssid", request, response);
 
         // Display the new value
@@ -81,6 +86,7 @@ export default class Wifi
      */
     *getWifiKey(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("wifi.key", request, response);
     }
 
@@ -93,6 +99,7 @@ export default class Wifi
      */
     *setWifiKey(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("wifi.key", request, response);
 
         // Display the new value

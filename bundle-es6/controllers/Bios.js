@@ -17,6 +17,8 @@ export default class Bios
      */
     *listBios(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
         yield ControllerUtil.listDirectory(
             config.api.biosDirectoryPath,
             "bios",
@@ -36,6 +38,8 @@ export default class Bios
      */
     *addBios(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
         yield ControllerUtil.uploadFile(
             config.api.biosDirectoryPath,
             request,
@@ -52,6 +56,8 @@ export default class Bios
      */
     *getBiosFile(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
         let fileName = request.getParameter("fileName");
         yield ControllerUtil.getFileMetadata(
             config.api.biosDirectoryPath+"/"+fileName,
@@ -69,6 +75,8 @@ export default class Bios
      */
     *downloadBiosFile(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
         let fileName = request.getParameter("fileName");
         let filePath = config.api.biosDirectoryPath+"/"+fileName;
         let exists = yield solfege.util.Node.fs.exists(filePath);
@@ -96,6 +104,8 @@ export default class Bios
      */
     *deleteBiosFile(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
         let fileName = request.getParameter("fileName");
         yield ControllerUtil.deleteFile(
             config.api.biosDirectoryPath+"/"+fileName,

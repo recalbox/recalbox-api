@@ -40,6 +40,7 @@ var Audio = (function () {
      * @param   {solfege.bundle.server.Response}    response    The response
      */
     value: function* getAudio(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^audio\./, request, response);
     }
 
@@ -53,6 +54,7 @@ var Audio = (function () {
   }, {
     key: "getAudioDevice",
     value: function* getAudioDevice(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("audio.device", request, response);
     }
 
@@ -66,6 +68,7 @@ var Audio = (function () {
   }, {
     key: "setAudioDevice",
     value: function* setAudioDevice(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("audio.device", request, response);
 
       // Display the new value
@@ -82,6 +85,7 @@ var Audio = (function () {
   }, {
     key: "getAudioVolume",
     value: function* getAudioVolume(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("audio.volume", request, response);
     }
 
@@ -95,6 +99,7 @@ var Audio = (function () {
   }, {
     key: "setAudioVolume",
     value: function* setAudioVolume(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("audio.volume", request, response);
 
       // Display the new value
@@ -111,6 +116,7 @@ var Audio = (function () {
   }, {
     key: "getAudioBackgroundMusic",
     value: function* getAudioBackgroundMusic(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("audio.bgmusic", request, response);
     }
 
@@ -124,6 +130,7 @@ var Audio = (function () {
   }, {
     key: "setAudioBackgroundMusic",
     value: function* setAudioBackgroundMusic(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("audio.bgmusic", request, response);
 
       // Display the new value

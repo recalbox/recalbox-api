@@ -61,7 +61,17 @@ var Api = (function () {
 
             // Allow cross domain access
             response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST");
+            var allowMethods = response.getHeader("Access-Control-Allow-Methods");
+            if (!allowMethods) {
+                response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST, OPTIONS");
+            }
+
+            // The request is a verification
+            if (request.method === "OPTIONS") {
+                response.statusCode = 200;
+                response.body = "";
+                return;
+            }
 
             // The body is a Stream. There is no need to format the output
             if (response.body instanceof _stream2["default"]) {

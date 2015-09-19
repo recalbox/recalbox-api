@@ -40,6 +40,8 @@ var Kodi = (function () {
      * @param   {solfege.bundle.server.Response}    response    The response
      */
     value: function* getKodi(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
       yield ControllerUtil.getMainConfigurationParameters(/^kodi\./, request, response);
     }
 
@@ -53,6 +55,8 @@ var Kodi = (function () {
   }, {
     key: "getKodiEnabled",
     value: function* getKodiEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.getMainConfigurationParameterValue("kodi.enabled", request, response);
     }
 
@@ -66,6 +70,8 @@ var Kodi = (function () {
   }, {
     key: "setKodiEnabled",
     value: function* setKodiEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.setMainConfigurationParameterValue("kodi.enabled", request, response);
 
       // Display the new value
@@ -82,6 +88,8 @@ var Kodi = (function () {
   }, {
     key: "getKodiAtstartup",
     value: function* getKodiAtstartup(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.getMainConfigurationParameterValue("kodi.atstartup", request, response);
     }
 
@@ -95,6 +103,8 @@ var Kodi = (function () {
   }, {
     key: "setKodiAtstartup",
     value: function* setKodiAtstartup(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.setMainConfigurationParameterValue("kodi.atstartup", request, response);
 
       // Display the new value
@@ -111,6 +121,8 @@ var Kodi = (function () {
   }, {
     key: "getKodiXbutton",
     value: function* getKodiXbutton(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.getMainConfigurationParameterValue("kodi.xbutton", request, response);
     }
 
@@ -124,6 +136,8 @@ var Kodi = (function () {
   }, {
     key: "setKodiXbutton",
     value: function* setKodiXbutton(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       yield ControllerUtil.setMainConfigurationParameterValue("kodi.xbutton", request, response);
 
       // Display the new value

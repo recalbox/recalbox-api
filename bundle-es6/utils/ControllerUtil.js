@@ -21,10 +21,17 @@ import FileInfo from "./FileInfo";
  */
 export function* getMainConfigurationParameterValue(name:string, request, response, fallback:string = null)
 {
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
+    // Get the value
     let iniFile = new IniFile(config.api.mainConfigurationFilePath);
     iniFile.setDefaultValues(defaultValues);
     let value = yield iniFile.getParameterValue(name);
 
+    // Build the response with a fallback
     let settings = {};
     if (fallback) {
         let defaultValue = yield iniFile.getParameterValue(fallback);
@@ -34,6 +41,7 @@ export function* getMainConfigurationParameterValue(name:string, request, respon
         settings[name] = value;
     }
 
+    // Render
     response.statusCode = 200;
     response.parameters = settings;
 }
@@ -48,11 +56,17 @@ export function* getMainConfigurationParameterValue(name:string, request, respon
  */
 export function* getMainConfigurationParameters(pattern:RegExp, request, response)
 {
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Extract the settings from the main configuration
     let iniFile = new IniFile(config.api.mainConfigurationFilePath);
     iniFile.setDefaultValues(defaultValues);
     let parameters = yield iniFile.getParameters(pattern);
 
+    // Render
     response.statusCode = 200;
     response.parameters = parameters;
 }
@@ -67,6 +81,11 @@ export function* getMainConfigurationParameters(pattern:RegExp, request, respons
  */
 export function* setMainConfigurationParameterValue(name:string, request, response)
 {
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Get the raw body from the request
     let iniFile = new IniFile(config.api.mainConfigurationFilePath);
     let body = yield request.getRawBody();
@@ -105,6 +124,10 @@ export function* listDirectory(path:string, itemName:string, options:object, req
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
 
     // Get the files
     let files = yield solfege.util.Node.fs.readdir(path);
@@ -156,6 +179,11 @@ export function* uploadFile(directoryPath:string, request, response)
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Get the uploaded file
     let files = yield request.getFiles();
     let createdFiles = [];
@@ -195,6 +223,10 @@ export function* getFileMetadata(filePath:string, request, response)
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
 
     // Get file metadata
     try {
@@ -232,6 +264,11 @@ export function* deleteFile(filePath:string, request, response)
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Delete the file
     try {
         yield solfege.util.Node.fs.unlink(filePath);
@@ -244,6 +281,4 @@ export function* deleteFile(filePath:string, request, response)
         };
     }
 }
-
-
 

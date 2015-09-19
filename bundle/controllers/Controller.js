@@ -40,6 +40,7 @@ var Controller = (function () {
      * @param   {solfege.bundle.server.Response}    response    The response
      */
     value: function* getControllerPs3(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^controllers\.ps3\./, request, response);
     }
 
@@ -53,6 +54,7 @@ var Controller = (function () {
   }, {
     key: "getControllerPs3Enabled",
     value: function* getControllerPs3Enabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.ps3.enabled", request, response);
     }
 
@@ -66,6 +68,7 @@ var Controller = (function () {
   }, {
     key: "setControllerPs3Enabled",
     value: function* setControllerPs3Enabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.ps3.enabled", request, response);
 
       // Display the new value
@@ -82,6 +85,7 @@ var Controller = (function () {
   }, {
     key: "getControllerPs3Driver",
     value: function* getControllerPs3Driver(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.ps3.driver", request, response);
     }
 
@@ -95,6 +99,7 @@ var Controller = (function () {
   }, {
     key: "setControllerPs3Driver",
     value: function* setControllerPs3Driver(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.ps3.driver", request, response);
 
       // Display the new value
@@ -111,6 +116,7 @@ var Controller = (function () {
   }, {
     key: "getControllerXboxdrv",
     value: function* getControllerXboxdrv(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^controllers\.xboxdrv\./, request, response);
     }
 
@@ -124,6 +130,7 @@ var Controller = (function () {
   }, {
     key: "getControllerXboxdrvEnabled",
     value: function* getControllerXboxdrvEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
     }
 
@@ -137,6 +144,7 @@ var Controller = (function () {
   }, {
     key: "setControllerXboxdrvEnabled",
     value: function* setControllerXboxdrvEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
 
       // Display the new value
@@ -153,6 +161,7 @@ var Controller = (function () {
   }, {
     key: "getControllerXboxdrvNbControls",
     value: function* getControllerXboxdrvNbControls(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
     }
 
@@ -166,6 +175,7 @@ var Controller = (function () {
   }, {
     key: "setControllerXboxdrvNbControls",
     value: function* setControllerXboxdrvNbControls(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
 
       // Display the new value
@@ -182,6 +192,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGpio",
     value: function* getControllerGpio(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gpio\./, request, response);
     }
 
@@ -195,6 +206,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGpioEnabled",
     value: function* getControllerGpioEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
     }
 
@@ -208,6 +220,7 @@ var Controller = (function () {
   }, {
     key: "setControllerGpioEnabled",
     value: function* setControllerGpioEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
 
       // Display the new value
@@ -224,6 +237,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGpioArgs",
     value: function* getControllerGpioArgs(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.args", request, response);
     }
 
@@ -237,6 +251,7 @@ var Controller = (function () {
   }, {
     key: "setControllerGpioArgs",
     value: function* setControllerGpioArgs(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.args", request, response);
 
       // Display the new value
@@ -253,6 +268,7 @@ var Controller = (function () {
   }, {
     key: "getControllerDb9",
     value: function* getControllerDb9(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^controllers\.db9\./, request, response);
     }
 
@@ -266,6 +282,7 @@ var Controller = (function () {
   }, {
     key: "getControllerDb9Enabled",
     value: function* getControllerDb9Enabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.enabled", request, response);
     }
 
@@ -279,6 +296,7 @@ var Controller = (function () {
   }, {
     key: "setControllerDb9Enabled",
     value: function* setControllerDb9Enabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.enabled", request, response);
 
       // Display the new value
@@ -295,6 +313,7 @@ var Controller = (function () {
   }, {
     key: "getControllerDb9Args",
     value: function* getControllerDb9Args(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.args", request, response);
     }
 
@@ -308,6 +327,7 @@ var Controller = (function () {
   }, {
     key: "setControllerDb9Args",
     value: function* setControllerDb9Args(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.args", request, response);
 
       // Display the new value
@@ -324,6 +344,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGamecon",
     value: function* getControllerGamecon(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gamecon\./, request, response);
     }
 
@@ -337,6 +358,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGameconEnabled",
     value: function* getControllerGameconEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
     }
 
@@ -350,6 +372,7 @@ var Controller = (function () {
   }, {
     key: "setControllerGameconEnabled",
     value: function* setControllerGameconEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
 
       // Display the new value
@@ -366,6 +389,7 @@ var Controller = (function () {
   }, {
     key: "getControllerGameconArgs",
     value: function* getControllerGameconArgs(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.args", request, response);
     }
 
@@ -379,6 +403,7 @@ var Controller = (function () {
   }, {
     key: "setControllerGameconArgs",
     value: function* setControllerGameconArgs(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.args", request, response);
 
       // Display the new value

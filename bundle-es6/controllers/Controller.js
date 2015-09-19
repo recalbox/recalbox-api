@@ -15,6 +15,7 @@ export default class Controller
      */
     *getControllerPs3(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^controllers\.ps3\./, request, response);
     }
 
@@ -27,6 +28,7 @@ export default class Controller
      */
     *getControllerPs3Enabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.ps3.enabled", request, response);
     }
 
@@ -39,6 +41,7 @@ export default class Controller
      */
     *setControllerPs3Enabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.ps3.enabled", request, response);
 
         // Display the new value
@@ -54,6 +57,7 @@ export default class Controller
      */
     *getControllerPs3Driver(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.ps3.driver", request, response);
     }
 
@@ -66,6 +70,7 @@ export default class Controller
      */
     *setControllerPs3Driver(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.ps3.driver", request, response);
 
         // Display the new value
@@ -81,6 +86,7 @@ export default class Controller
      */
     *getControllerXboxdrv(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^controllers\.xboxdrv\./, request, response);
     }
 
@@ -93,6 +99,7 @@ export default class Controller
      */
     *getControllerXboxdrvEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
     }
 
@@ -105,6 +112,7 @@ export default class Controller
      */
     *setControllerXboxdrvEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.enabled", request, response);
 
         // Display the new value
@@ -120,6 +128,7 @@ export default class Controller
      */
     *getControllerXboxdrvNbControls(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
     }
 
@@ -132,6 +141,7 @@ export default class Controller
      */
     *setControllerXboxdrvNbControls(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.xboxdrv.nbcontrols", request, response);
 
         // Display the new value
@@ -148,6 +158,7 @@ export default class Controller
      */
     *getControllerGpio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gpio\./, request, response);
     }
 
@@ -160,6 +171,7 @@ export default class Controller
      */
     *getControllerGpioEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
     }
 
@@ -172,6 +184,7 @@ export default class Controller
      */
     *setControllerGpioEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.enabled", request, response);
 
         // Display the new value
@@ -187,6 +200,7 @@ export default class Controller
      */
     *getControllerGpioArgs(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.gpio.args", request, response);
     }
 
@@ -199,6 +213,7 @@ export default class Controller
      */
     *setControllerGpioArgs(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.gpio.args", request, response);
 
         // Display the new value
@@ -215,6 +230,7 @@ export default class Controller
      */
     *getControllerDb9(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^controllers\.db9\./, request, response);
     }
 
@@ -227,6 +243,7 @@ export default class Controller
      */
     *getControllerDb9Enabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.enabled", request, response);
     }
 
@@ -239,6 +256,7 @@ export default class Controller
      */
     *setControllerDb9Enabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.enabled", request, response);
 
         // Display the new value
@@ -254,6 +272,7 @@ export default class Controller
      */
     *getControllerDb9Args(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.db9.args", request, response);
     }
 
@@ -266,6 +285,7 @@ export default class Controller
      */
     *setControllerDb9Args(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.db9.args", request, response);
 
         // Display the new value
@@ -282,6 +302,7 @@ export default class Controller
      */
     *getControllerGamecon(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^controllers\.gamecon\./, request, response);
     }
 
@@ -294,6 +315,7 @@ export default class Controller
      */
     *getControllerGameconEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
     }
 
@@ -306,6 +328,7 @@ export default class Controller
      */
     *setControllerGameconEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.enabled", request, response);
 
         // Display the new value
@@ -321,6 +344,7 @@ export default class Controller
      */
     *getControllerGameconArgs(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("controllers.gamecon.args", request, response);
     }
 
@@ -333,6 +357,7 @@ export default class Controller
      */
     *setControllerGameconArgs(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("controllers.gamecon.args", request, response);
 
         // Display the new value

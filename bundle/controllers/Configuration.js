@@ -52,6 +52,8 @@ var Configuration = (function () {
      * @param   {solfege.bundle.server.Response}    response    The response
      */
     value: function* getConfiguration(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
       iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
 
@@ -73,6 +75,8 @@ var Configuration = (function () {
   }, {
     key: "setConfiguration",
     value: function* setConfiguration(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
       // Get the raw body from the request
       var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
       var body = yield request.getRawBody();
@@ -95,6 +99,7 @@ var Configuration = (function () {
   }, {
     key: "getHostname",
     value: function* getHostname(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.hostname", request, response);
     }
 
@@ -108,6 +113,7 @@ var Configuration = (function () {
   }, {
     key: "setHostname",
     value: function* setHostname(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("system.hostname", request, response);
 
       // Display the new value
@@ -124,6 +130,7 @@ var Configuration = (function () {
   }, {
     key: "getLocale",
     value: function* getLocale(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.language", request, response);
     }
 
@@ -137,6 +144,7 @@ var Configuration = (function () {
   }, {
     key: "setLocale",
     value: function* setLocale(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("system.language", request, response);
 
       // Display the new value
@@ -153,6 +161,7 @@ var Configuration = (function () {
   }, {
     key: "getKeyboardLayout",
     value: function* getKeyboardLayout(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.kblayout", request, response);
     }
 
@@ -166,6 +175,7 @@ var Configuration = (function () {
   }, {
     key: "setKeyboardLayout",
     value: function* setKeyboardLayout(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("system.kblayout", request, response);
 
       // Display the new value
@@ -182,6 +192,7 @@ var Configuration = (function () {
   }, {
     key: "getTimezone",
     value: function* getTimezone(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.timezone", request, response);
     }
 
@@ -195,6 +206,7 @@ var Configuration = (function () {
   }, {
     key: "setTimezone",
     value: function* setTimezone(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("system.timezone", request, response);
 
       // Display the new value
@@ -211,6 +223,7 @@ var Configuration = (function () {
   }, {
     key: "getUpdatesEnabled",
     value: function* getUpdatesEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("updates.enabled", request, response);
     }
 
@@ -224,6 +237,7 @@ var Configuration = (function () {
   }, {
     key: "setUpdatesEnabled",
     value: function* setUpdatesEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("updates.enabled", request, response);
 
       // Display the new value

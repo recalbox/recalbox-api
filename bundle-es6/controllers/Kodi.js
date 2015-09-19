@@ -15,6 +15,8 @@ export default class Kodi
      */
     *getKodi(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
         yield ControllerUtil.getMainConfigurationParameters(/^kodi\./, request, response);
     }
 
@@ -27,6 +29,8 @@ export default class Kodi
      */
     *getKodiEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.getMainConfigurationParameterValue("kodi.enabled", request, response);
     }
 
@@ -39,6 +43,8 @@ export default class Kodi
      */
     *setKodiEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.setMainConfigurationParameterValue("kodi.enabled", request, response);
 
         // Display the new value
@@ -54,6 +60,8 @@ export default class Kodi
      */
     *getKodiAtstartup(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.getMainConfigurationParameterValue("kodi.atstartup", request, response);
     }
 
@@ -66,6 +74,8 @@ export default class Kodi
      */
     *setKodiAtstartup(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.setMainConfigurationParameterValue("kodi.atstartup", request, response);
 
         // Display the new value
@@ -81,6 +91,8 @@ export default class Kodi
      */
     *getKodiXbutton(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.getMainConfigurationParameterValue("kodi.xbutton", request, response);
     }
 
@@ -93,6 +105,8 @@ export default class Kodi
      */
     *setKodiXbutton(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         yield ControllerUtil.setMainConfigurationParameterValue("kodi.xbutton", request, response);
 
         // Display the new value

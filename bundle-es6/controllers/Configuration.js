@@ -19,6 +19,8 @@ export default class Configuration
      */
     *getConfiguration(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         let iniFile = new IniFile(config.api.mainConfigurationFilePath);
         iniFile.setDefaultValues(defaultValues);
 
@@ -39,6 +41,8 @@ export default class Configuration
      */
     *setConfiguration(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
+
         // Get the raw body from the request
         let iniFile = new IniFile(config.api.mainConfigurationFilePath);
         let body = yield request.getRawBody();
@@ -60,6 +64,7 @@ export default class Configuration
      */
     *getHostname(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.hostname", request, response);
     }
 
@@ -72,6 +77,7 @@ export default class Configuration
      */
     *setHostname(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("system.hostname", request, response);
 
         // Display the new value
@@ -87,6 +93,7 @@ export default class Configuration
      */
     *getLocale(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.language", request, response);
     }
 
@@ -99,6 +106,7 @@ export default class Configuration
      */
     *setLocale(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("system.language", request, response);
 
         // Display the new value
@@ -114,6 +122,7 @@ export default class Configuration
      */
     *getKeyboardLayout(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.kblayout", request, response);
     }
 
@@ -126,6 +135,7 @@ export default class Configuration
      */
     *setKeyboardLayout(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("system.kblayout", request, response);
 
         // Display the new value
@@ -141,6 +151,7 @@ export default class Configuration
      */
     *getTimezone(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.timezone", request, response);
     }
 
@@ -153,6 +164,7 @@ export default class Configuration
      */
     *setTimezone(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("system.timezone", request, response);
 
         // Display the new value
@@ -168,6 +180,7 @@ export default class Configuration
      */
     *getUpdatesEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("updates.enabled", request, response);
     }
 
@@ -180,6 +193,7 @@ export default class Configuration
      */
     *setUpdatesEnabled(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("updates.enabled", request, response);
 
         // Display the new value

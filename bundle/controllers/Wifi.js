@@ -40,6 +40,7 @@ var Wifi = (function () {
      * @param   {solfege.bundle.server.Response}    response    The response
      */
     value: function* getWifi(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameters(/^wifi\./, request, response);
     }
 
@@ -53,6 +54,7 @@ var Wifi = (function () {
   }, {
     key: "getWifiEnabled",
     value: function* getWifiEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("wifi.enabled", request, response);
     }
 
@@ -66,6 +68,7 @@ var Wifi = (function () {
   }, {
     key: "setWifiEnabled",
     value: function* setWifiEnabled(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("wifi.enabled", request, response);
 
       // Display the new value
@@ -82,6 +85,7 @@ var Wifi = (function () {
   }, {
     key: "getWifiSsid",
     value: function* getWifiSsid(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("wifi.ssid", request, response);
     }
 
@@ -95,6 +99,7 @@ var Wifi = (function () {
   }, {
     key: "setWifiSsid",
     value: function* setWifiSsid(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("wifi.ssid", request, response);
 
       // Display the new value
@@ -111,6 +116,7 @@ var Wifi = (function () {
   }, {
     key: "getWifiKey",
     value: function* getWifiKey(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("wifi.key", request, response);
     }
 
@@ -124,6 +130,7 @@ var Wifi = (function () {
   }, {
     key: "setWifiKey",
     value: function* setWifiKey(request, response) {
+      response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.setMainConfigurationParameterValue("wifi.key", request, response);
 
       // Display the new value

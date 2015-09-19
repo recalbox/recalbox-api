@@ -48,6 +48,8 @@ var Bios = (function () {
          * @param   {solfege.bundle.server.Response}    response    The response
          */
         value: function* listBios(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
             yield ControllerUtil.listDirectory(_configConfig2["default"].api.biosDirectoryPath, "bios", null, request, response);
         }
 
@@ -61,6 +63,8 @@ var Bios = (function () {
     }, {
         key: "addBios",
         value: function* addBios(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
             yield ControllerUtil.uploadFile(_configConfig2["default"].api.biosDirectoryPath, request, response);
         }
 
@@ -74,6 +78,8 @@ var Bios = (function () {
     }, {
         key: "getBiosFile",
         value: function* getBiosFile(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
             var fileName = request.getParameter("fileName");
             yield ControllerUtil.getFileMetadata(_configConfig2["default"].api.biosDirectoryPath + "/" + fileName, request, response);
         }
@@ -88,6 +94,8 @@ var Bios = (function () {
     }, {
         key: "downloadBiosFile",
         value: function* downloadBiosFile(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
             var fileName = request.getParameter("fileName");
             var filePath = _configConfig2["default"].api.biosDirectoryPath + "/" + fileName;
             var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
@@ -113,6 +121,8 @@ var Bios = (function () {
     }, {
         key: "deleteBiosFile",
         value: function* deleteBiosFile(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
             var fileName = request.getParameter("fileName");
             yield ControllerUtil.deleteFile(_configConfig2["default"].api.biosDirectoryPath + "/" + fileName, request, response);
         }

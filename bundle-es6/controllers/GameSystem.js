@@ -19,6 +19,7 @@ export default class GameSystem
      */
     *getSystems(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         let list = [
             "atari2600",
             "atari7800",
@@ -66,6 +67,7 @@ export default class GameSystem
      */
     *getSystemsDefault(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameters(/^global\./, request, response);
     }
 
@@ -78,6 +80,7 @@ export default class GameSystem
      */
     *getSystemsDefaultVideoMode(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("global.videomode", request, response);
     }
 
@@ -90,6 +93,7 @@ export default class GameSystem
      */
     *setSystemsDefaultVideoMode(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("global.videomode", request, response);
 
         // Display the new value
@@ -105,6 +109,7 @@ export default class GameSystem
      */
     *getSystemsDefaultShaders(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("global.shaders", request, response);
     }
 
@@ -117,6 +122,7 @@ export default class GameSystem
      */
     *setSystemsDefaultShaders(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("global.shaders", request, response);
 
         // Display the new value
@@ -132,6 +138,7 @@ export default class GameSystem
      */
     *getSystemsDefaultRatio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("global.ratio", request, response);
     }
 
@@ -144,6 +151,7 @@ export default class GameSystem
      */
     *setSystemsDefaultRatio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("global.ratio", request, response);
 
         // Display the new value
@@ -159,6 +167,7 @@ export default class GameSystem
      */
     *getSystemsDefaultSmooth(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("global.smooth", request, response);
     }
 
@@ -171,6 +180,7 @@ export default class GameSystem
      */
     *setSystemsDefaultSmooth(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("global.smooth", request, response);
 
         // Display the new value
@@ -186,6 +196,7 @@ export default class GameSystem
      */
     *getSystemsDefaultRewind(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("global.rewind", request, response);
     }
 
@@ -198,6 +209,7 @@ export default class GameSystem
      */
     *setSystemsDefaultRewind(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.setMainConfigurationParameterValue("global.rewind", request, response);
 
         // Display the new value
@@ -214,6 +226,7 @@ export default class GameSystem
      */
     *getSystem(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         let systemId = request.getParameter("id");
 
         // Extract the settings from the main configuration
@@ -247,6 +260,7 @@ export default class GameSystem
      */
     *getSystemVideoMode(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".videomode";
         let fallbackName = "global.videomode";
@@ -268,6 +282,7 @@ export default class GameSystem
      */
     *setSystemVideoMode(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".videomode";
 
@@ -286,6 +301,7 @@ export default class GameSystem
      */
     *getSystemShaders(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".shaders";
         let fallbackName = "global.shaders";
@@ -307,6 +323,7 @@ export default class GameSystem
      */
     *setSystemShaders(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".shaders";
 
@@ -325,6 +342,7 @@ export default class GameSystem
      */
     *getSystemRatio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".ratio";
         let fallbackName = "global.ratio";
@@ -346,6 +364,7 @@ export default class GameSystem
      */
     *setSystemRatio(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".ratio";
 
@@ -364,6 +383,7 @@ export default class GameSystem
      */
     *getSystemSmooth(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".smooth";
         let fallbackName = "global.smooth";
@@ -385,6 +405,7 @@ export default class GameSystem
      */
     *setSystemSmooth(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".smooth";
 
@@ -403,6 +424,7 @@ export default class GameSystem
      */
     *getSystemRewind(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".rewind";
         let fallbackName = "global.rewind";
@@ -424,6 +446,7 @@ export default class GameSystem
      */
     *setSystemRewind(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".rewind";
 
@@ -442,6 +465,7 @@ export default class GameSystem
      */
     *getSystemEmulator(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".emulator";
 
@@ -461,6 +485,7 @@ export default class GameSystem
      */
     *setSystemEmulator(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".emulator";
 
@@ -479,6 +504,7 @@ export default class GameSystem
      */
     *getSystemCore(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".core";
 
@@ -498,6 +524,7 @@ export default class GameSystem
      */
     *setSystemCore(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         let systemId = request.getParameter("id");
         let parameterName = systemId+".core";
 
@@ -516,6 +543,8 @@ export default class GameSystem
      */
     *getRoms(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
         let systemId = request.getParameter("id");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
 
@@ -538,6 +567,8 @@ export default class GameSystem
      */
     *addRom(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
         let systemId = request.getParameter("id");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
 
@@ -558,6 +589,8 @@ export default class GameSystem
      */
     *getRom(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
@@ -578,6 +611,8 @@ export default class GameSystem
      */
     *downloadRom(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
         let filePath = `${config.api.romsDirectoryPath}/${systemId}/${fileName}`;
@@ -613,6 +648,8 @@ export default class GameSystem
      */
     *deleteRom(request, response)
     {
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
         let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;

@@ -54,10 +54,17 @@ var _FileInfo2 = _interopRequireDefault(_FileInfo);
 function* getMainConfigurationParameterValue(name, request, response) {
     var fallback = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
+    // Get the value
     var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
     var value = yield iniFile.getParameterValue(name);
 
+    // Build the response with a fallback
     var settings = {};
     if (fallback) {
         var defaultValue = yield iniFile.getParameterValue(fallback);
@@ -67,6 +74,7 @@ function* getMainConfigurationParameterValue(name, request, response) {
         settings[name] = value;
     }
 
+    // Render
     response.statusCode = 200;
     response.parameters = settings;
 }
@@ -81,11 +89,17 @@ function* getMainConfigurationParameterValue(name, request, response) {
  */
 
 function* getMainConfigurationParameters(pattern, request, response) {
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Extract the settings from the main configuration
     var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
     var parameters = yield iniFile.getParameters(pattern);
 
+    // Render
     response.statusCode = 200;
     response.parameters = parameters;
 }
@@ -100,6 +114,11 @@ function* getMainConfigurationParameters(pattern, request, response) {
  */
 
 function* setMainConfigurationParameterValue(name, request, response) {
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Get the raw body from the request
     var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
     var body = yield request.getRawBody();
@@ -135,6 +154,11 @@ function* listDirectory(path, itemName, options, request, response) {
         response.parameters = {
             error: "Directory not found: " + path
         };
+        return;
+    }
+
+    // The request is a verification
+    if (request.method === "OPTIONS") {
         return;
     }
 
@@ -208,6 +232,11 @@ function* uploadFile(directoryPath, request, response) {
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Get the uploaded file
     var files = yield request.getFiles();
     var createdFiles = [];
@@ -247,6 +276,11 @@ function* getFileMetadata(filePath, request, response) {
         return;
     }
 
+    // The request is a verification
+    if (request.method === "OPTIONS") {
+        return;
+    }
+
     // Get file metadata
     try {
         var fileInfo = new _FileInfo2["default"](filePath);
@@ -279,6 +313,11 @@ function* deleteFile(filePath, request, response) {
         response.parameters = {
             error: "File not found: " + filePath
         };
+        return;
+    }
+
+    // The request is a verification
+    if (request.method === "OPTIONS") {
         return;
     }
 

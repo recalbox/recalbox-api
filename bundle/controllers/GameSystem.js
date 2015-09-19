@@ -56,6 +56,7 @@ var GameSystem = (function () {
          * @param   {solfege.bundle.server.Response}    response    The response
          */
         value: function* getSystems(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
             var list = ["atari2600", "atari7800", "fba", "fba_libretro", "fds", "gamegear", "gb", "gba", "gbc", "gw", "lutro", "lynx", "mame", "mastersystem", "megadrive", "msx", "n64", "neogeo", "nes", "ngp", "pcengine", "prboom", "psx", "scummvm", "sega32x", "segacd", "sg1000", "snes", "vectrex", "virtualboy", "wswan"];
 
             response.statusCode = 200;
@@ -72,6 +73,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefault",
         value: function* getSystemsDefault(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameters(/^global\./, request, response);
         }
 
@@ -85,6 +87,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefaultVideoMode",
         value: function* getSystemsDefaultVideoMode(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameterValue("global.videomode", request, response);
         }
 
@@ -98,6 +101,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemsDefaultVideoMode",
         value: function* setSystemsDefaultVideoMode(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.setMainConfigurationParameterValue("global.videomode", request, response);
 
             // Display the new value
@@ -114,6 +118,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefaultShaders",
         value: function* getSystemsDefaultShaders(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameterValue("global.shaders", request, response);
         }
 
@@ -127,6 +132,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemsDefaultShaders",
         value: function* setSystemsDefaultShaders(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.setMainConfigurationParameterValue("global.shaders", request, response);
 
             // Display the new value
@@ -143,6 +149,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefaultRatio",
         value: function* getSystemsDefaultRatio(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameterValue("global.ratio", request, response);
         }
 
@@ -156,6 +163,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemsDefaultRatio",
         value: function* setSystemsDefaultRatio(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.setMainConfigurationParameterValue("global.ratio", request, response);
 
             // Display the new value
@@ -172,6 +180,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefaultSmooth",
         value: function* getSystemsDefaultSmooth(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameterValue("global.smooth", request, response);
         }
 
@@ -185,6 +194,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemsDefaultSmooth",
         value: function* setSystemsDefaultSmooth(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.setMainConfigurationParameterValue("global.smooth", request, response);
 
             // Display the new value
@@ -201,6 +211,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemsDefaultRewind",
         value: function* getSystemsDefaultRewind(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.getMainConfigurationParameterValue("global.rewind", request, response);
         }
 
@@ -214,6 +225,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemsDefaultRewind",
         value: function* setSystemsDefaultRewind(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             yield ControllerUtil.setMainConfigurationParameterValue("global.rewind", request, response);
 
             // Display the new value
@@ -230,6 +242,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystem",
         value: function* getSystem(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
             var systemId = request.getParameter("id");
 
             // Extract the settings from the main configuration
@@ -264,6 +277,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemVideoMode",
         value: function* getSystemVideoMode(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".videomode";
             var fallbackName = "global.videomode";
@@ -281,6 +295,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemVideoMode",
         value: function* setSystemVideoMode(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".videomode";
 
@@ -300,6 +315,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemShaders",
         value: function* getSystemShaders(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".shaders";
             var fallbackName = "global.shaders";
@@ -317,6 +333,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemShaders",
         value: function* setSystemShaders(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".shaders";
 
@@ -336,6 +353,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemRatio",
         value: function* getSystemRatio(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".ratio";
             var fallbackName = "global.ratio";
@@ -353,6 +371,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemRatio",
         value: function* setSystemRatio(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".ratio";
 
@@ -372,6 +391,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemSmooth",
         value: function* getSystemSmooth(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".smooth";
             var fallbackName = "global.smooth";
@@ -389,6 +409,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemSmooth",
         value: function* setSystemSmooth(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".smooth";
 
@@ -408,6 +429,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemRewind",
         value: function* getSystemRewind(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".rewind";
             var fallbackName = "global.rewind";
@@ -425,6 +447,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemRewind",
         value: function* setSystemRewind(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".rewind";
 
@@ -444,6 +467,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemEmulator",
         value: function* getSystemEmulator(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".emulator";
 
@@ -460,6 +484,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemEmulator",
         value: function* setSystemEmulator(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".emulator";
 
@@ -479,6 +504,7 @@ var GameSystem = (function () {
     }, {
         key: "getSystemCore",
         value: function* getSystemCore(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".core";
 
@@ -495,6 +521,7 @@ var GameSystem = (function () {
     }, {
         key: "setSystemCore",
         value: function* setSystemCore(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
             var systemId = request.getParameter("id");
             var parameterName = systemId + ".core";
 
@@ -514,6 +541,8 @@ var GameSystem = (function () {
     }, {
         key: "getRoms",
         value: function* getRoms(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
             var systemId = request.getParameter("id");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
 
@@ -531,6 +560,8 @@ var GameSystem = (function () {
     }, {
         key: "addRom",
         value: function* addRom(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
+
             var systemId = request.getParameter("id");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
 
@@ -548,6 +579,8 @@ var GameSystem = (function () {
     }, {
         key: "getRom",
         value: function* getRom(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
+
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
@@ -565,6 +598,8 @@ var GameSystem = (function () {
     }, {
         key: "downloadRom",
         value: function* downloadRom(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
             var filePath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId + "/" + fileName;
@@ -596,6 +631,8 @@ var GameSystem = (function () {
     }, {
         key: "deleteRom",
         value: function* deleteRom(request, response) {
+            response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, DELETE, OPTIONS");
+
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
             var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
