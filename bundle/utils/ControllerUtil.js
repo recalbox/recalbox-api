@@ -51,7 +51,7 @@ var _child_process = require("child_process");
  */
 var moveFile = function* moveFile(source, destination) {
     return new Promise(function (resolve, reject) {
-        var command = "mv " + source + " " + destination;
+        var command = "mv \"" + source + "\" \"" + destination + "\"";
         (0, _child_process.exec)(command, function (error) {
             if (error) {
                 reject(error);

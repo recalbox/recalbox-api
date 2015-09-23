@@ -19,7 +19,7 @@ import {exec} from "child_process";
 let moveFile = function*(source:string, destination:string)
 {
     return new Promise(function(resolve, reject) {
-        let command = `mv ${source} ${destination}`;
+        let command = `mv "${source}" "${destination}"`;
         exec(command, function(error) {
             if (error) {
                 reject(error);
