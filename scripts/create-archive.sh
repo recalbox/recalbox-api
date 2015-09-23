@@ -16,6 +16,7 @@ tar cvf api.tar \
     config/config.js \
     config/routes.js \
     config/parameters.json.dist \
+    config/recalboxDefaultValues.json \
     bundle/ \
     node_modules/.bin \
     node_modules/npm \
