@@ -37,9 +37,7 @@ var _FileInfo = require("./FileInfo");
 
 var _FileInfo2 = _interopRequireDefault(_FileInfo);
 
-var _mv = require("mv");
-
-var _mv2 = _interopRequireDefault(_mv);
+var _child_process = require("child_process");
 
 /**
  * Helpers for the controllers
@@ -53,7 +51,8 @@ var _mv2 = _interopRequireDefault(_mv);
  */
 var moveFile = function* moveFile(source, destination) {
     return new Promise(function (resolve, reject) {
-        (0, _mv2["default"])(source, destination, { mkdirp: true }, function (error) {
+        var command = "mv " + source + " " + destination;
+        (0, _child_process.exec)(command, function (error) {
             if (error) {
                 reject(error);
                 return;

@@ -4,7 +4,7 @@ import config from "../../config/config";
 import defaultValues from "../../config/recalboxDefaultValues.json";
 import Pagination from "./Pagination";
 import FileInfo from "./FileInfo";
-import mv from "mv";
+import {exec} from "child_process";
 
 /**
  * Helpers for the controllers
@@ -19,7 +19,8 @@ import mv from "mv";
 let moveFile = function*(source:string, destination:string)
 {
     return new Promise(function(resolve, reject) {
-        mv(source, destination, {mkdirp: true}, function(error) {
+        let command = `mv ${source} ${destination}`;
+        exec(command, function(error) {
             if (error) {
                 reject(error);
                 return;
