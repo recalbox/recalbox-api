@@ -4,10 +4,31 @@ import config from "../../config/config";
 import defaultValues from "../../config/recalboxDefaultValues.json";
 import Pagination from "./Pagination";
 import FileInfo from "./FileInfo";
+import mv from "mv";
 
 /**
  * Helpers for the controllers
  */
+
+/**
+ * Move a file
+ *
+ * @param   {string}    source      The source path
+ * @param   {string}    destination The destination path
+ */
+let moveFile = function*(source:string, destination:string)
+{
+    return new Promise(function(resolve, reject) {
+        mv(source, destination, {mkdirp: true}, function(error) {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve();
+        });
+    });
+}
+
 
 
 /**
@@ -195,7 +216,7 @@ export function* uploadFile(directoryPath:string, request, response)
 
         // Move the file to the directory
         let newPath = directoryPath + "/" + name;
-        yield solfege.util.Node.fs.rename(path, newPath);
+        yield moveFile(path, newPath);
         createdFiles.push(name);
     }
 

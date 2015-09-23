@@ -27,6 +27,7 @@ tar cvf api.tar \
     node_modules/ini \
     node_modules/file-size \
     node_modules/js2xmlparser \
+    node_modules/mv \
     node_modules/pm2
 
 xz --compress --verbose --extreme api.tar

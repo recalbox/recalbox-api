@@ -37,9 +37,31 @@ var _FileInfo = require("./FileInfo");
 
 var _FileInfo2 = _interopRequireDefault(_FileInfo);
 
+var _mv = require("mv");
+
+var _mv2 = _interopRequireDefault(_mv);
+
 /**
  * Helpers for the controllers
  */
+
+/**
+ * Move a file
+ *
+ * @param   {string}    source      The source path
+ * @param   {string}    destination The destination path
+ */
+var moveFile = function* moveFile(source, destination) {
+    return new Promise(function (resolve, reject) {
+        (0, _mv2["default"])(source, destination, { mkdirp: true }, function (error) {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve();
+        });
+    });
+};
 
 /**
  * Get a parameter value from the main configuration
@@ -248,7 +270,7 @@ function* uploadFile(directoryPath, request, response) {
 
         // Move the file to the directory
         var newPath = directoryPath + "/" + _name;
-        yield _solfegejs2["default"].util.Node.fs.rename(path, newPath);
+        yield moveFile(path, newPath);
         createdFiles.push(_name);
     }
 
