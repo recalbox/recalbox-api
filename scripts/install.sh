@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version=1.0.5
+version=1.0.6
 
 wget https://github.com/neolao/recalbox-api/releases/download/$version/recalbox-api-$version.tar.xz
 

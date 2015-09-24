@@ -61,6 +61,7 @@ var Api = (function () {
 
             // Allow cross domain access
             response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Expose-Headers", "Content-Range, Accept-Range");
             var allowMethods = response.getHeader("Access-Control-Allow-Methods");
             if (!allowMethods) {
                 response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, POST, OPTIONS");
