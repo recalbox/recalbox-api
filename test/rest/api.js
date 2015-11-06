@@ -2,6 +2,8 @@ var expect = require('chai').expect;
 var should = require('chai').should();
 var request = require('supertest');
 var pm2 = require('pm2');
+var xml2js = require('xml2js');
+var fs = require('fs');
 var baseUrl = "http://127.0.0.1:1337";
 
 /**
@@ -17,6 +19,7 @@ describe('REST API', function()
      */
     before(function(done)
     {
+        // Start the server
         pm2.connect(function() {
             pm2.start({
                 name               : "recalbox-api-test",
@@ -25,7 +28,7 @@ describe('REST API', function()
                 instances          : 1,
                 max_memory_restart : "100M",
                 node_args          : ["--harmony", "--harmony-proxies"],
-                cwd                : "bundle",
+                cwd                : "test/rest",
                 script             : "console.js",
                 args               : ["server:start"]
             }, function(error, apps) {
@@ -36,28 +39,49 @@ describe('REST API', function()
     });
 
     /**
+     * It runs before each test
+     */
+    beforeEach(function(done)
+    {
+        // Reset the configuration file
+        var source = __dirname + "/share/system/recalbox.conf.template";
+        var destination = __dirname + "/share/system/recalbox.conf";
+        fs.readFile(source, "utf8", function (error, data) {
+            fs.writeFile(destination, data, done);
+        });
+    });
+
+    /**
      * It runs after all tests
      */
     after(function(done)
     {
+        // Stop the server
         pm2.connect(function() {
             pm2.stop("recalbox-api-test", function(error, proc) {
                 pm2.disconnect();
-                process.nextTick(done);
+
+                // Reset the configuration file
+                var source = __dirname + "/share/system/recalbox.conf.template";
+                var destination = __dirname + "/share/system/recalbox.conf";
+                fs.readFile(source, "utf8", function (error, data) {
+                    fs.writeFile(destination, data, done);
+                });
             });
         });
     });
 
     /**
-     * Test the URL /
+     * Test the API GET /
      */
-    describe("/", function()
+    describe("GET /", function()
     {
         it("should return the API homepage", function(done)
         {
             request(baseUrl)
                 .get("/")
                 .set("Accept", "text/plain")
+                .expect(200)
                 .end(function(error, response) {
                     if (error) {
                         done(error);
@@ -69,5 +93,90 @@ describe('REST API', function()
                 });
         });
     });
+
+    /**
+     * Test the API GET /hostname
+     */
+    describe("GET /hostname", function()
+    {
+        it("should return the hostname from the configuration", function(done)
+        {
+            request(baseUrl)
+                .get("/hostname")
+                .set("Accept", "text/plain")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("RECALBOX");
+                    done();
+                });
+        });
+
+        it("should return the hostname in JSON format", function(done)
+        {
+            request(baseUrl)
+                .get("/hostname")
+                .set("Accept", "application/json")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    var response = JSON.parse(response.text);
+                    expect(response).to.deep.equal({hostname:"RECALBOX"});
+                    done();
+                });
+        });
+
+        it("should return the hostname in XML format", function(done)
+        {
+            request(baseUrl)
+                .get("/hostname")
+                .set("Accept", "application/xml")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    xml2js.parseString(response.text, function(error, result) {
+                        expect(result.response).to.deep.equal({hostname:["RECALBOX"]});
+                        done();
+                    });
+                });
+        });
+    });
+
+    /**
+     * Test the API PUT /hostname
+     */
+    describe("PUT /hostname", function()
+    {
+        it("should update the hostname", function(done)
+        {
+            request(baseUrl)
+                .put("/hostname")
+                .set("Accept", "text/plain")
+                .set("Content-Type", "text/plain")
+                .send("HELLO")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("HELLO");
+                    done();
+                });
+        });
+    });
+
 
 });

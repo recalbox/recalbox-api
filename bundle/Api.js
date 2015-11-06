@@ -42,20 +42,48 @@ var Api = (function () {
 
         // The controllers package
         this.controllers = _controllers2["default"];
+
+        // Initialize the configuration
+        this._configuration = {
+            mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf",
+            biosDirectoryPath: "/recalbox/share/bios",
+            romsDirectoryPath: "/recalbox/share/roms"
+        };
     }
 
     /**
-     * Format the response
+     * The configuration
      *
      * @public
-     * @param   {solfege.bundle.server.Request}     request     The request
-     * @param   {solfege.bundle.server.Response}    response    The response
-     * @param   {GeneratorFunction}                 next        The next function
+     * @member  {Object}
      */
 
     _createClass(Api, [{
+        key: "overrideConfiguration",
+
+        /**
+         * Override the configuration of the bundles
+         *
+         * @public
+         * @param   {Object}    configuration   The configuration object
+         */
+        value: function* overrideConfiguration(configuration) {
+            this._configuration = configuration;
+        }
+
+        /**
+         * Format the response
+         *
+         * @public
+         * @param   {solfege.bundle.server.Request}     request     The request
+         * @param   {solfege.bundle.server.Response}    response    The response
+         * @param   {GeneratorFunction}                 next        The next function
+         */
+    }, {
         key: "formatMiddleware",
         value: function* formatMiddleware(request, response, next) {
+            request.configuration = this.configuration;
+
             // Execute the next middleware
             yield* next;
 
@@ -139,6 +167,11 @@ var Api = (function () {
                     }
                     break;
             }
+        }
+    }, {
+        key: "configuration",
+        get: function get() {
+            return this._configuration;
         }
     }]);
 

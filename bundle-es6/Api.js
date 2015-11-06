@@ -17,7 +17,38 @@ export default class Api
     {
         // The controllers package
         this.controllers = controllersPackage;
+
+        // Initialize the configuration
+        this._configuration = {
+            mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf",
+            biosDirectoryPath: "/recalbox/share/bios",
+            romsDirectoryPath: "/recalbox/share/roms"
+        };
     }
+
+    /**
+     * The configuration
+     *
+     * @public
+     * @member  {Object}
+     */
+    get configuration()
+    {
+        return this._configuration;
+    }
+
+
+    /**
+     * Override the configuration of the bundles
+     *
+     * @public
+     * @param   {Object}    configuration   The configuration object
+     */
+    *overrideConfiguration(configuration)
+    {
+        this._configuration = configuration;
+    }
+
 
     /**
      * Format the response
@@ -29,6 +60,8 @@ export default class Api
      */
     *formatMiddleware(request, response, next)
     {
+        request.configuration = this.configuration;
+
         // Execute the next middleware
         yield *next;
 

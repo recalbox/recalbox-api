@@ -1,6 +1,5 @@
 import solfege from "solfegejs";
 import IniFile from "./IniFile";
-import config from "../../config/config";
 import defaultValues from "../../config/recalboxDefaultValues.json";
 import Pagination from "./Pagination";
 import FileInfo from "./FileInfo";
@@ -48,8 +47,12 @@ export function* getMainConfigurationParameterValue(name:string, request, respon
         return;
     }
 
+    // Get the last part of the parameter name
+    let nameParts = name.split(".");
+    let nameLastPart = nameParts.pop();
+
     // Get the value
-    let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+    let iniFile = new IniFile(request.configuration.mainConfigurationFilePath);
     iniFile.setDefaultValues(defaultValues);
     let value = yield iniFile.getParameterValue(name);
 
@@ -57,15 +60,16 @@ export function* getMainConfigurationParameterValue(name:string, request, respon
     let settings = {};
     if (fallback) {
         let defaultValue = yield iniFile.getParameterValue(fallback);
-        settings[name] = defaultValue;
+        settings[nameLastPart] = defaultValue;
     }
     if (value) {
-        settings[name] = value;
+        settings[nameLastPart] = value;
     }
 
     // Render
     response.statusCode = 200;
     response.parameters = settings;
+    response.body = value;
 }
 
 /**
@@ -84,7 +88,7 @@ export function* getMainConfigurationParameters(pattern:RegExp, request, respons
     }
 
     // Extract the settings from the main configuration
-    let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+    let iniFile = new IniFile(request.configuration.mainConfigurationFilePath);
     iniFile.setDefaultValues(defaultValues);
     let parameters = yield iniFile.getParameters(pattern);
 
@@ -109,7 +113,7 @@ export function* setMainConfigurationParameterValue(name:string, request, respon
     }
 
     // Get the raw body from the request
-    let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+    let iniFile = new IniFile(request.configuration.mainConfigurationFilePath);
     let body = yield request.getRawBody();
 
     // Normalize the new value

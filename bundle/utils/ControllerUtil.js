@@ -21,10 +21,6 @@ var _IniFile = require("./IniFile");
 
 var _IniFile2 = _interopRequireDefault(_IniFile);
 
-var _configConfig = require("../../config/config");
-
-var _configConfig2 = _interopRequireDefault(_configConfig);
-
 var _configRecalboxDefaultValuesJson = require("../../config/recalboxDefaultValues.json");
 
 var _configRecalboxDefaultValuesJson2 = _interopRequireDefault(_configRecalboxDefaultValuesJson);
@@ -80,8 +76,12 @@ function* getMainConfigurationParameterValue(name, request, response) {
         return;
     }
 
+    // Get the last part of the parameter name
+    var nameParts = name.split(".");
+    var nameLastPart = nameParts.pop();
+
     // Get the value
-    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    var iniFile = new _IniFile2["default"](request.configuration.mainConfigurationFilePath);
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
     var value = yield iniFile.getParameterValue(name);
 
@@ -89,15 +89,16 @@ function* getMainConfigurationParameterValue(name, request, response) {
     var settings = {};
     if (fallback) {
         var defaultValue = yield iniFile.getParameterValue(fallback);
-        settings[name] = defaultValue;
+        settings[nameLastPart] = defaultValue;
     }
     if (value) {
-        settings[name] = value;
+        settings[nameLastPart] = value;
     }
 
     // Render
     response.statusCode = 200;
     response.parameters = settings;
+    response.body = value;
 }
 
 /**
@@ -116,7 +117,7 @@ function* getMainConfigurationParameters(pattern, request, response) {
     }
 
     // Extract the settings from the main configuration
-    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    var iniFile = new _IniFile2["default"](request.configuration.mainConfigurationFilePath);
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
     var parameters = yield iniFile.getParameters(pattern);
 
@@ -141,7 +142,7 @@ function* setMainConfigurationParameterValue(name, request, response) {
     }
 
     // Get the raw body from the request
-    var iniFile = new _IniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+    var iniFile = new _IniFile2["default"](request.configuration.mainConfigurationFilePath);
     var body = yield request.getRawBody();
 
     // Normalize the new value

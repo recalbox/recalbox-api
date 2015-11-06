@@ -27,7 +27,8 @@
         "babel-plugin-object-assign": "1.2.*",
         "chai"          : "2.3.*",
         "mocha"         : "2.2.*",
-        "supertest"     : "1.1.*"
+        "supertest"     : "1.1.*",
+        "xml2js"        : "0.4.*"
     },
     "scripts": {
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
