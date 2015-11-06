@@ -3,7 +3,7 @@
     "license": "MIT",
     "name": "recalbox-api",
     "description": "REST API for Recalbox",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "repository": {
         "type": "git",
         "url": "https://github.com/neolao/recalbox-api.git"
@@ -24,10 +24,12 @@
     },
     "devDependencies": {
         "babel"         : "5.6.*",
-        "babel-plugin-object-assign": "1.2.*"
+        "babel-plugin-object-assign": "1.2.*",
+        "chai"          : "2.3.*",
+        "mocha"         : "2.2.*",
+        "supertest"     : "1.1.*"
     },
-    "scripts"       :
-    {
+    "scripts": {
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
         "stop"          : "pm2 stop ./scripts/pm2-process-production.json",
         "delete"        : "pm2 delete ./scripts/pm2-process-production.json",
@@ -41,7 +43,9 @@
 
         "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
         "es6-watch"     : "babel bundle-es6 --blacklist=regenerator --plugins=object-assign --watch --out-dir bundle",
-        "es6-compile"   : "babel bundle-es6 --blacklist=regenerator --plugins=object-assign --out-dir bundle"
+        "es6-compile"   : "babel bundle-es6 --blacklist=regenerator --plugins=object-assign --out-dir bundle",
+
+        "test"          : "mocha --harmony --harmony-proxies --recursive --reporter spec --bail"
     }
 
 }
