@@ -178,5 +178,73 @@ describe('REST API', function()
         });
     });
 
+    /**
+     * Test the API GET /wifi
+     */
+    describe("GET /wifi", function()
+    {
+        it("should return the wifi settings from the configuration", function(done)
+        {
+            request(baseUrl)
+                .get("/wifi")
+                .set("Accept", "text/plain")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("enabled=1\nssid=neolao\nkey=1234\n");
+                    done();
+                });
+        });
+
+        it("should return the wifi settings in JSON format", function(done)
+        {
+            request(baseUrl)
+                .get("/wifi")
+                .set("Accept", "application/json")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    var response = JSON.parse(response.text);
+                    expect(response).to.deep.equal({
+                        enabled: "1",
+                        ssid: "neolao",
+                        key: "1234"
+                    });
+                    done();
+                });
+        });
+
+        it("should return the wifi settings in XML format", function(done)
+        {
+            request(baseUrl)
+                .get("/wifi")
+                .set("Accept", "application/xml")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    xml2js.parseString(response.text, function(error, result) {
+                        expect(result.response).to.deep.equal({
+                            enabled: ["1"],
+                            ssid: ["neolao"],
+                            key: ["1234"]
+                        });
+                        done();
+                    });
+                });
+        });
+    });
+
 
 });

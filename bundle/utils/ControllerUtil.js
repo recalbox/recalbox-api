@@ -121,9 +121,19 @@ function* getMainConfigurationParameters(pattern, request, response) {
     iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
     var parameters = yield iniFile.getParameters(pattern);
 
+    // Sanitize the parameter names
+    var sanitizedParameters = {};
+    for (var _name in parameters) {
+        // Get the last part of the parameter name
+        var nameParts = _name.split(".");
+        var nameLastPart = nameParts.pop();
+
+        sanitizedParameters[nameLastPart] = parameters[_name];
+    }
+
     // Render
     response.statusCode = 200;
-    response.parameters = parameters;
+    response.parameters = sanitizedParameters;
 }
 
 /**
@@ -265,13 +275,13 @@ function* uploadFile(directoryPath, request, response) {
     for (var field in files) {
         var file = files[field];
         var size = file.size;
-        var _name = file.name;
+        var _name2 = file.name;
         var path = file.path;
 
         // Move the file to the directory
-        var newPath = directoryPath + "/" + _name;
+        var newPath = directoryPath + "/" + _name2;
         yield moveFile(path, newPath);
-        createdFiles.push(_name);
+        createdFiles.push(_name2);
     }
 
     response.statusCode = 201;

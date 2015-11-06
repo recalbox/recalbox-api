@@ -92,9 +92,19 @@ export function* getMainConfigurationParameters(pattern:RegExp, request, respons
     iniFile.setDefaultValues(defaultValues);
     let parameters = yield iniFile.getParameters(pattern);
 
+    // Sanitize the parameter names
+    let sanitizedParameters = {};
+    for (let name in parameters) {
+        // Get the last part of the parameter name
+        let nameParts = name.split(".");
+        let nameLastPart = nameParts.pop();
+
+        sanitizedParameters[nameLastPart] = parameters[name];
+    }
+
     // Render
     response.statusCode = 200;
-    response.parameters = parameters;
+    response.parameters = sanitizedParameters;
 }
 
 /**
