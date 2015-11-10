@@ -3,7 +3,7 @@
     "license": "MIT",
     "name": "recalbox-api",
     "description": "REST API for Recalbox",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "repository": {
         "type": "git",
         "url": "https://github.com/neolao/recalbox-api.git"

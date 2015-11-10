@@ -132,6 +132,9 @@ var Configuration = (function () {
     value: function* getLocale(request, response) {
       response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.language", request, response);
+
+      // Rename the parameter
+      response.parameters = { "locale": response.parameters.language };
     }
 
     /**
@@ -163,6 +166,9 @@ var Configuration = (function () {
     value: function* getKeyboardLayout(request, response) {
       response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
       yield ControllerUtil.getMainConfigurationParameterValue("system.kblayout", request, response);
+
+      // Rename the parameter
+      response.parameters = { "keyboardlayout": response.parameters.kblayout };
     }
 
     /**

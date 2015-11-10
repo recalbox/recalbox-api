@@ -179,6 +179,90 @@ describe('REST API', function()
     });
 
     /**
+     * Test the API GET /keyboardlayout
+     */
+    describe("GET /keyboardlayout", function()
+    {
+        it("should return the keyboard layout from the configuration", function(done)
+        {
+            request(baseUrl)
+                .get("/keyboardlayout")
+                .set("Accept", "text/plain")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("fr");
+                    done();
+                });
+        });
+
+        it("should return the keyboard layout in JSON format", function(done)
+        {
+            request(baseUrl)
+                .get("/keyboardlayout")
+                .set("Accept", "application/json")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    var response = JSON.parse(response.text);
+                    expect(response).to.deep.equal({keyboardlayout:"fr"});
+                    done();
+                });
+        });
+
+        it("should return the keyboard layout in XML format", function(done)
+        {
+            request(baseUrl)
+                .get("/keyboardlayout")
+                .set("Accept", "application/xml")
+                .expect(200)
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    xml2js.parseString(response.text, function(error, result) {
+                        expect(result.response).to.deep.equal({keyboardlayout:["fr"]});
+                        done();
+                    });
+                });
+        });
+    });
+
+    /**
+     * Test the API PUT /keyboardlayout
+     */
+    describe("PUT /keyboardlayout", function()
+    {
+        it("should update the keyboard layout", function(done)
+        {
+            request(baseUrl)
+                .put("/keyboardlayout")
+                .set("Accept", "text/plain")
+                .set("Content-Type", "text/plain")
+                .send("es")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("es");
+                    done();
+                });
+        });
+    });
+
+    /**
      * Test the API GET /wifi
      */
     describe("GET /wifi", function()

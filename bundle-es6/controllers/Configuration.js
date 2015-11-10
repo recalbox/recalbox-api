@@ -95,6 +95,9 @@ export default class Configuration
     {
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.language", request, response);
+
+        // Rename the parameter
+        response.parameters = {"locale":response.parameters.language};
     }
 
     /**
@@ -124,6 +127,9 @@ export default class Configuration
     {
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, PUT, OPTIONS");
         yield ControllerUtil.getMainConfigurationParameterValue("system.kblayout", request, response);
+
+        // Rename the parameter
+        response.parameters = {"keyboardlayout":response.parameters.kblayout};
     }
 
     /**
