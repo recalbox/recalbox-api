@@ -316,6 +316,9 @@ export function* deleteFile(filePath:string, request, response)
         yield solfege.util.Node.fs.unlink(filePath);
 
         response.statusCode = 204;
+        response.parameters = {
+            success: true
+        };
     } catch (error) {
         response.statusCode = 500;
         response.parameters = {

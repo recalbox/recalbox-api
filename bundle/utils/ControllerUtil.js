@@ -364,6 +364,9 @@ function* deleteFile(filePath, request, response) {
         yield _solfegejs2["default"].util.Node.fs.unlink(filePath);
 
         response.statusCode = 204;
+        response.parameters = {
+            success: true
+        };
     } catch (error) {
         response.statusCode = 500;
         response.parameters = {

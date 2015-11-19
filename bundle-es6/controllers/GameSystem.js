@@ -614,6 +614,7 @@ export default class GameSystem
 
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
+        fileName = decodeURIComponent(fileName);
         let filePath = `${request.configuration.romsDirectoryPath}/${systemId}/${fileName}`;
 
         // Check if the file exists

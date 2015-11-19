@@ -598,6 +598,7 @@ var GameSystem = (function () {
 
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
+            fileName = decodeURIComponent(fileName);
             var filePath = request.configuration.romsDirectoryPath + "/" + systemId + "/" + fileName;
 
             // Check if the file exists
