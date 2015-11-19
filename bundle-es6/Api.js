@@ -144,7 +144,15 @@ export default class Api
                 if (!response.body && response.parameters) {
                     let body = "";
                     for (let key in response.parameters) {
-                        body += `${key}=${response.parameters[key]}\n`;
+                        let value = response.parameters[key];
+                        if (value instanceof Object) {
+                            for (let valueKey in value) {
+                                value = value[valueKey];
+                                break;
+                            }
+                        }
+
+                        body += `${key}=${value}\n`;
                     }
                     response.body = body;
                 }

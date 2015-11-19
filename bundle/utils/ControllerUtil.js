@@ -298,6 +298,9 @@ function* uploadFile(directoryPath, request, response) {
  */
 
 function* getFileMetadata(filePath, request, response) {
+    // Normalize file path
+    filePath = decodeURIComponent(filePath);
+
     // Check if the file exists
     var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
     if (!exists) {
@@ -338,6 +341,9 @@ function* getFileMetadata(filePath, request, response) {
  */
 
 function* deleteFile(filePath, request, response) {
+    // Normalize file path
+    filePath = decodeURIComponent(filePath);
+
     // Check if the file exists
     var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
     if (!exists) {

@@ -1,6 +1,5 @@
 import solfege from "solfegejs";
 import fs from "fs";
-import config from "../../config/config";
 import * as ControllerUtil from "../utils/ControllerUtil";
 import IniFile from "../utils/IniFile";
 import defaultValues from "../../config/recalboxDefaultValues.json";
@@ -230,7 +229,7 @@ export default class GameSystem
         let systemId = request.getParameter("id");
 
         // Extract the settings from the main configuration
-        let iniFile = new IniFile(config.api.mainConfigurationFilePath);
+        let iniFile = new IniFile(request.configuration.mainConfigurationFilePath);
         iniFile.setDefaultValues(defaultValues);
         let globalParameters = yield iniFile.getParameters(/^global\./);
         let systemParameters = yield iniFile.getParameters(new RegExp("^"+systemId+"."));
@@ -546,7 +545,7 @@ export default class GameSystem
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
 
         let systemId = request.getParameter("id");
-        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+        let directoryPath = `${request.configuration.romsDirectoryPath}/${systemId}`;
 
         // Display the file list
         yield ControllerUtil.listDirectory(
@@ -570,7 +569,7 @@ export default class GameSystem
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
 
         let systemId = request.getParameter("id");
-        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+        let directoryPath = `${request.configuration.romsDirectoryPath}/${systemId}`;
 
         // Upload the file
         yield ControllerUtil.uploadFile(
@@ -593,7 +592,7 @@ export default class GameSystem
 
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
-        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+        let directoryPath = `${request.configuration.romsDirectoryPath}/${systemId}`;
 
         yield ControllerUtil.getFileMetadata(
             directoryPath+"/"+fileName,
@@ -615,7 +614,7 @@ export default class GameSystem
 
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
-        let filePath = `${config.api.romsDirectoryPath}/${systemId}/${fileName}`;
+        let filePath = `${request.configuration.romsDirectoryPath}/${systemId}/${fileName}`;
 
         // Check if the file exists
         let exists = yield solfege.util.Node.fs.exists(filePath);
@@ -652,7 +651,7 @@ export default class GameSystem
 
         let systemId = request.getParameter("id");
         let fileName = request.getParameter("fileName");
-        let directoryPath = `${config.api.romsDirectoryPath}/${systemId}`;
+        let directoryPath = `${request.configuration.romsDirectoryPath}/${systemId}`;
 
         yield ControllerUtil.deleteFile(
             directoryPath+"/"+fileName,

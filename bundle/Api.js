@@ -161,7 +161,15 @@ var Api = (function () {
                     if (!response.body && response.parameters) {
                         var _body = "";
                         for (var key in response.parameters) {
-                            _body += key + "=" + response.parameters[key] + "\n";
+                            var value = response.parameters[key];
+                            if (value instanceof Object) {
+                                for (var valueKey in value) {
+                                    value = value[valueKey];
+                                    break;
+                                }
+                            }
+
+                            _body += key + "=" + value + "\n";
                         }
                         response.body = _body;
                     }

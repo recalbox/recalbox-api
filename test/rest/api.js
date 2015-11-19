@@ -330,5 +330,119 @@ describe('REST API', function()
         });
     });
 
+    /**
+     * Test the API GET /systems/:id/roms
+     */
+    describe("GET /systems/:id/roms", function()
+    {
+        it("should return the ROM list of a system", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms")
+                .set("Accept", "text/plain")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    response.text.should.equal("0=a.sfc\n1=dédé.sfc\n2=foo bar.sfc\n");
+                    done();
+                });
+        });
+
+        it("should return the ROM list in JSON format", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms")
+                .set("Accept", "application/json")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    var response = JSON.parse(response.text);
+                    response[0].basename.should.equal("a.sfc");
+                    response[1].basename.should.equal("dédé.sfc");
+                    response[2].basename.should.equal("foo bar.sfc");
+                    done();
+                });
+        });
+
+        it("should return the ROM list in XML format", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms")
+                .set("Accept", "application/xml")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    xml2js.parseString(response.text, function(error, result) {
+                        result.response.item[0].basename[0].should.equal("a.sfc");
+                        result.response.item[1].basename[0].should.equal("dédé.sfc");
+                        result.response.item[2].basename[0].should.equal("foo bar.sfc");
+                        done();
+                    });
+                });
+        });
+    });
+
+    /**
+     * Test the API GET /systems/:id/roms/metadata/:game
+     */
+    describe("GET /systems/:id/roms/metadata/:game", function()
+    {
+        it("should return game information", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms/metadata/a.sfc")
+                .set("Accept", "text/plain")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    expect(response.text).to.contain("basename=a.sfc");
+                    done();
+                });
+        });
+
+        it("should return game information", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms/metadata/dédé.sfc")
+                .set("Accept", "application/json")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+                    var response = JSON.parse(response.text);
+                    response.basename.should.equal("dédé.sfc");
+                    done();
+                });
+        });
+
+        it("should return game information", function(done)
+        {
+            request(baseUrl)
+                .get("/systems/snes/roms/metadata/foo bar.sfc")
+                .set("Accept", "text/plain")
+                .end(function(error, response) {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+
+                    expect(response.text).to.contain("basename=foo bar.sfc");
+                    done();
+                });
+        });
+    });
 
 });

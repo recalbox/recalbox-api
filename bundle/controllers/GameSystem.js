@@ -20,10 +20,6 @@ var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
 
-var _configConfig = require("../../config/config");
-
-var _configConfig2 = _interopRequireDefault(_configConfig);
-
 var _utilsControllerUtil = require("../utils/ControllerUtil");
 
 var ControllerUtil = _interopRequireWildcard(_utilsControllerUtil);
@@ -246,7 +242,7 @@ var GameSystem = (function () {
             var systemId = request.getParameter("id");
 
             // Extract the settings from the main configuration
-            var iniFile = new _utilsIniFile2["default"](_configConfig2["default"].api.mainConfigurationFilePath);
+            var iniFile = new _utilsIniFile2["default"](request.configuration.mainConfigurationFilePath);
             iniFile.setDefaultValues(_configRecalboxDefaultValuesJson2["default"]);
             var globalParameters = yield iniFile.getParameters(/^global\./);
             var systemParameters = yield iniFile.getParameters(new RegExp("^" + systemId + "."));
@@ -544,7 +540,7 @@ var GameSystem = (function () {
             response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
 
             var systemId = request.getParameter("id");
-            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+            var directoryPath = request.configuration.romsDirectoryPath + "/" + systemId;
 
             // Display the file list
             yield ControllerUtil.listDirectory(directoryPath, "rom", null, request, response);
@@ -563,7 +559,7 @@ var GameSystem = (function () {
             response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, OPTIONS");
 
             var systemId = request.getParameter("id");
-            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+            var directoryPath = request.configuration.romsDirectoryPath + "/" + systemId;
 
             // Upload the file
             yield ControllerUtil.uploadFile(directoryPath, request, response);
@@ -583,7 +579,7 @@ var GameSystem = (function () {
 
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
-            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+            var directoryPath = request.configuration.romsDirectoryPath + "/" + systemId;
 
             yield ControllerUtil.getFileMetadata(directoryPath + "/" + fileName, request, response);
         }
@@ -602,7 +598,7 @@ var GameSystem = (function () {
 
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
-            var filePath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId + "/" + fileName;
+            var filePath = request.configuration.romsDirectoryPath + "/" + systemId + "/" + fileName;
 
             // Check if the file exists
             var exists = yield _solfegejs2["default"].util.Node.fs.exists(filePath);
@@ -635,7 +631,7 @@ var GameSystem = (function () {
 
             var systemId = request.getParameter("id");
             var fileName = request.getParameter("fileName");
-            var directoryPath = _configConfig2["default"].api.romsDirectoryPath + "/" + systemId;
+            var directoryPath = request.configuration.romsDirectoryPath + "/" + systemId;
 
             yield ControllerUtil.deleteFile(directoryPath + "/" + fileName, request, response);
         }

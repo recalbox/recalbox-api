@@ -249,6 +249,9 @@ export function* uploadFile(directoryPath:string, request, response)
  */
 export function* getFileMetadata(filePath:string, request, response)
 {
+    // Normalize file path
+    filePath = decodeURIComponent(filePath);
+
     // Check if the file exists
     let exists = yield solfege.util.Node.fs.exists(filePath);
     if (!exists) {
@@ -290,6 +293,9 @@ export function* getFileMetadata(filePath:string, request, response)
  */
 export function* deleteFile(filePath:string, request, response)
 {
+    // Normalize file path
+    filePath = decodeURIComponent(filePath);
+
     // Check if the file exists
     let exists = yield solfege.util.Node.fs.exists(filePath);
     if (!exists) {
