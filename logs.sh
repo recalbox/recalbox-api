@@ -3,4 +3,4 @@
 currentDirectory=$(dirname "$PWD/$0")
 
 cd $currentDirectory
-node $currentDirectory/node_modules/.bin/npm run logs
+$currentDirectory/node_modules/.bin/pm2 logs --lines 5

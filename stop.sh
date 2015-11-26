@@ -3,4 +3,4 @@
 currentDirectory=$(dirname "$PWD/$0")
 
 cd $currentDirectory
-node $currentDirectory/node_modules/.bin/npm stop
+$currentDirectory/node_modules/.bin/pm2 stop ./scripts/pm2-process-production.json

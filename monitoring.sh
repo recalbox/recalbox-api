@@ -3,4 +3,4 @@
 currentDirectory=$(dirname "$PWD/$0")
 
 cd $currentDirectory
-node $currentDirectory/node_modules/.bin/npm run monitoring
+$currentDirectory/node_modules/.bin/pm2 monit ./scripts/pm2-process-production.json

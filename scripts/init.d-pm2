@@ -1,7 +1,8 @@
 #!/bin/bash
 
 NAME=pm2
-PM2=/root/api/node_modules/pm2/bin/pm2
+API=/usr/recalbox-api
+PM2=/usr/recalbox-api/node_modules/pm2/bin/pm2
 USER=root
 
 export PATH=/usr/bin:$PATH
@@ -10,7 +11,7 @@ export PM2_HOME="/root/.pm2"
 
 start() {
     echo "Starting $NAME"
-    $PM2 resurrect
+    $PM2 startOrReload $API/scripts/pm2-process-production.json
 }
 
 stop() {
