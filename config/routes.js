@@ -685,6 +685,23 @@ module.exports = [
         controller: "@api.controllers.GameSystem",
         action: "deleteRom",
         policies: ["methodIsDelete"]
+    },
+
+    // DEVICE
+    {
+        id: "device.reboots:post",
+        url: "/reboots",
+        controller: "@api.controllers.Device",
+        action: "requestReboot",
+        policies: ["methodIsPost"]
+    },
+    {
+        id: "device.shutdowns:post",
+        url: "/shutdowns",
+        controller: "@api.controllers.Device",
+        action: "requestShutdown",
+        policies: ["methodIsPost"]
     }
+
 ];
 
