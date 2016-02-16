@@ -102,6 +102,14 @@ The response returns the items with 2 headers :
 | `GET` `PUT`    | `/wifi/enabled`                    | Enable/disable wifi |
 | `GET` `PUT`    | `/wifi/key`                        | Wifi key |
 | `GET` `PUT`    | `/wifi/ssid`                       | Wifi SSID |
+| `PUT`          | `/gamepads/:index/buttons/a`       | Set A button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/b`       | Set B button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/x`       | Set X button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/y`       | Set Y button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/tl`      | Set L button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/tr`      | Set R button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/start`   | Set START button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/buttons/select`  | Set SELECT button state on a virtual gamepad |
 
 ### Examples
 
