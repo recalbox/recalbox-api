@@ -687,6 +687,22 @@ module.exports = [
         policies: ["methodIsDelete"]
     },
 
+    // GAMEPADS
+    {
+        id: "gamepad.button.a",
+        url: "/gamepads/:index/buttons/a",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonA",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.b",
+        url: "/gamepads/:index/buttons/b",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonB",
+        policies: ["methodIsPut"]
+    },
+
     // DEVICE
     {
         id: "device.reboots:post",
