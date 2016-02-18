@@ -94,7 +94,22 @@ export default class Gamepad
     {
         response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
 
-        response.statusCode = 200;
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${padIndex} not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        yield pad.pressButtonA();
+        yield pad.releaseButtonA();
+
+        response.status = 200;
         response.parameters = {
             success: true
         };

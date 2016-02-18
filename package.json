@@ -33,7 +33,6 @@
         "babel-plugin-typecheck" : "3.6.*",
         "babel-plugin-closure-elimination": "1.0.*",
         "babel-plugin-add-module-exports": "0.1.2",
-        "babel-plugin-object-assign": "1.2.*",
         "chai"          : "2.3.*",
         "mocha"         : "2.2.*",
         "supertest"     : "1.1.*",
