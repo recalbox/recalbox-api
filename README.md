@@ -112,6 +112,7 @@ The response returns the items with 2 headers :
 | `PUT`          | `/gamepads/:index/buttons/tr`      | Set R button state on a virtual gamepad |
 | `PUT`          | `/gamepads/:index/buttons/start`   | Set START button state on a virtual gamepad |
 | `PUT`          | `/gamepads/:index/buttons/select`  | Set SELECT button state on a virtual gamepad |
+| `PUT`          | `/gamepads/:index/direction`       | Set direction state on a virtual gamepad |
 
 ### Examples
 

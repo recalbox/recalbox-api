@@ -5,6 +5,8 @@ import uinput from "./lib/uinput";
 
 /**
  * A virtual gamepad
+ *
+ * @see https://github.com/miroof/node-virtual-gamepads
  */
 export default class Pad
 {
@@ -103,11 +105,7 @@ export default class Pad
      */
     *pressButtonA()
     {
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 0});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
-
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+        yield this.sendEvent({type: 0x01, code: 0x130, value: 1});
     }
 
     /**
@@ -115,8 +113,171 @@ export default class Pad
      */
     *releaseButtonA()
     {
+        yield this.sendEvent({type: 0x01, code: 0x130, value: 0});
     }
 
+    /**
+     * Press the B button
+     */
+    *pressButtonB()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x131, value: 1});
+    }
+
+    /**
+     * Release the B button
+     */
+    *releaseButtonB()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x131, value: 0});
+    }
+
+    /**
+     * Press the X button
+     */
+    *pressButtonX()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x133, value: 1});
+    }
+
+    /**
+     * Release the X button
+     */
+    *releaseButtonX()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x133, value: 0});
+    }
+
+    /**
+     * Press the Y button
+     */
+    *pressButtonY()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x134, value: 1});
+    }
+
+    /**
+     * Release the Y button
+     */
+    *releaseButtonY()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x134, value: 0});
+    }
+
+    /**
+     * Press the L button
+     */
+    *pressButtonL()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x136, value: 1});
+    }
+
+    /**
+     * Release the L button
+     */
+    *releaseButtonL()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x136, value: 0});
+    }
+
+    /**
+     * Press the R button
+     */
+    *pressButtonR()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x137, value: 1});
+    }
+
+    /**
+     * Release the R button
+     */
+    *releaseButtonR()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x137, value: 0});
+    }
+
+    /**
+     * Press the Select button
+     */
+    *pressButtonSelect()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x13a, value: 1});
+    }
+
+    /**
+     * Release the Select button
+     */
+    *releaseButtonSelect()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x13a, value: 0});
+    }
+
+    /**
+     * Press the Start button
+     */
+    *pressButtonStart()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x13b, value: 1});
+    }
+
+    /**
+     * Release the Start button
+     */
+    *releaseButtonStart()
+    {
+        yield this.sendEvent({type: 0x01, code: 0x13b, value: 0});
+    }
+
+    /**
+     * No direction
+     */
+    *directionNone()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+    }
+
+    /**
+     * Left
+     */
+    *directionLeft()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 0});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+    }
+
+    /**
+     * Right
+     */
+    *directionRight()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 255});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+    }
+
+    /**
+     * Up
+     */
+    *directionUp()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 0});
+    }
+
+    /**
+     * Down
+     */
+    *directionDown()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 255});
+    }
+
+    /**
+     * Send an event
+     *
+     * @param   {Object}    event   The event object
+     */
     *sendEvent(event)
     {
         if (!this.uinputFile) {

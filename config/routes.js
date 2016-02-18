@@ -703,6 +703,13 @@ module.exports = [
         policies: ["methodIsDelete"]
     },
     {
+        id: "gamepad.direction",
+        url: "/gamepads/:index/direction",
+        controller: "@api.controllers.Gamepad",
+        action: "setDirection",
+        policies: ["methodIsPut"]
+    },
+    {
         id: "gamepad.button.a",
         url: "/gamepads/:index/buttons/a",
         controller: "@api.controllers.Gamepad",
@@ -714,6 +721,48 @@ module.exports = [
         url: "/gamepads/:index/buttons/b",
         controller: "@api.controllers.Gamepad",
         action: "setButtonB",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.x",
+        url: "/gamepads/:index/buttons/x",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonX",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.y",
+        url: "/gamepads/:index/buttons/y",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonY",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.tl",
+        url: "/gamepads/:index/buttons/tl",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonL",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.tr",
+        url: "/gamepads/:index/buttons/tr",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonR",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.select",
+        url: "/gamepads/:index/buttons/select",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonSelect",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.button.start",
+        url: "/gamepads/:index/buttons/start",
+        controller: "@api.controllers.Gamepad",
+        action: "setButtonStart",
         policies: ["methodIsPut"]
     },
 

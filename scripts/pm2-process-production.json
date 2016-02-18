@@ -8,8 +8,10 @@
         "max_memory_restart" : "100M",
         "merge_logs"         : true,
         "node_args"          : ["--harmony", "--harmony_proxies"],
-        "cwd"                : "bundle",
-        "script"             : "console.js",
+        "script"             : [
+                                   process.env.API_HOME?process.env.API_HOME:".",
+                                   "/bundle/console.js"
+                               ].join(""),
         "args"               : ["server:start"]
     }]
 }
