@@ -80,11 +80,12 @@ class Pad {
         uidev.absfuzz[_uinput2.default.ABS_Y] = 0;
         uidev.absflat[_uinput2.default.ABS_Y] = 15;
 
-        yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, buffer, 0, buffer.length, null);
         try {
+            yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, buffer, 0, buffer.length, null);
             (0, _ioctl2.default)(this.uinputFile, _uinput2.default.UI_DEV_CREATE);
         } catch (error) {
-            console.log(error);
+            console.error("API Gamepad sendEvent error: " + error);
+
             yield _solfegejs2.default.util.Node.fs.close(this.uinputFile);
             this.uinputFile = undefined;
         }
@@ -106,6 +107,9 @@ class Pad {
      */
     *pressButtonA() {
         yield this.sendEvent({ type: 0x03, code: 0x00, value: 0 });
+        yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
+
+        yield this.sendEvent({ type: 0x03, code: 0x00, value: 127 });
         yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
     }
 
@@ -143,8 +147,12 @@ class Pad {
         ev_end.time.tv_sec = Math.round(Date.now() / 1000);
         ev_end.time.tv_usec = Math.round(Date.now() % 1000 * 1000);
 
-        yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, ev_buffer, 0, ev_buffer.length, null);
-        yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, ev_end_buffer, 0, ev_end_buffer.length, null);
+        try {
+            yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, ev_buffer, 0, ev_buffer.length, null);
+            yield _solfegejs2.default.util.Node.fs.write(this.uinputFile, ev_end_buffer, 0, ev_end_buffer.length, null);
+        } catch (error) {
+            console.error("API Gamepad sendEvent error: " + error);
+        }
     }
 }
 exports.default = Pad;
