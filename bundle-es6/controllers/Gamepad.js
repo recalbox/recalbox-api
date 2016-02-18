@@ -75,6 +75,7 @@ export default class Gamepad
         }
 
         let pad = this.pads.get(padIndex);
+        this.pads.delete(padIndex);
         yield pad.disconnect();
 
         response.status = 200;

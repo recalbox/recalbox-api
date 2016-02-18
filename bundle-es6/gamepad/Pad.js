@@ -102,6 +102,8 @@ export default class Pad
      */
     *pressButtonA()
     {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 0});
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
     }
 
     /**
@@ -109,5 +111,47 @@ export default class Pad
      */
     *releaseButtonA()
     {
+    }
+
+    *sendEvent(event)
+    {
+        if (!this.uinputFile) {
+            return;
+        }
+      
+        let input_event = Struct()
+            .struct('time', Struct().word32Sle('tv_sec').word32Sle('tv_usec'))
+            .word16Ule('type')
+            .word16Ule('code')
+            .word32Sle('value');
+        input_event.allocate();
+
+        let ev_buffer = input_event.buffer();
+        let ev = input_event.fields;
+
+        ev.type = event.type;
+        ev.code = event.code;
+        ev.value = event.value;
+        ev.time.tv_sec = Math.round(Date.now() / 1000);
+        ev.time.tv_usec = Math.round(Date.now() % 1000 * 1000);
+
+        let input_event_end = Struct()
+            .struct('time', Struct().word32Sle('tv_sec').word32Sle('tv_usec'))
+            .word16Ule('type')
+            .word16Ule('code')
+            .word32Sle('value');
+        input_event_end.allocate()
+      
+        let ev_end_buffer = input_event_end.buffer();
+        let ev_end = input_event_end.fields;
+
+        ev_end.type = 0;
+        ev_end.code = 0;
+        ev_end.value = 0;
+        ev_end.time.tv_sec = Math.round(Date.now() / 1000);
+        ev_end.time.tv_usec = Math.round(Date.now() % 1000 * 1000);
+
+        yield solfege.util.Node.fs.write(this.uinputFile, ev_buffer, 0, ev_buffer.length, null);
+        yield solfege.util.Node.fs.write(this.uinputFile, ev_end_buffer, 0, ev_end_buffer.length, null);
     }
 }
