@@ -7,7 +7,7 @@
         "log_date_format"    : "YYYY-MM-DD HH:mm Z",
         "max_memory_restart" : "100M",
         "merge_logs"         : true,
-        "node_args"          : ["--harmony", "--harmony-proxies"],
+        "node_args"          : ["--harmony", "--harmony_proxies"],
         "cwd"                : "bundle",
         "script"             : "console.js",
         "args"               : ["server:start"]

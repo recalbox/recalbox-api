@@ -7,6 +7,32 @@ import solfege from "solfegejs";
 export default class Gamepad
 {
     /**
+     * Connect a new virtual gamepad
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *connect(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
+    }
+
+    /**
+     * Disconnect a virtual gamepad
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *disconnect(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "DELETE, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+    }
+
+    /**
      * Set the state of A button
      *
      * @public

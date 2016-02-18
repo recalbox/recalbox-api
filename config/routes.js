@@ -689,6 +689,20 @@ module.exports = [
 
     // GAMEPADS
     {
+        id: "gamepad.connect",
+        url: "/gamepads",
+        controller: "@api.controllers.Gamepad",
+        action: "connect",
+        policies: ["methodIsPost"]
+    },
+    {
+        id: "gamepad.disconnect",
+        url: "/gamepads/:index",
+        controller: "@api.controllers.Gamepad",
+        action: "disconnect",
+        policies: ["methodIsDelete"]
+    },
+    {
         id: "gamepad.button.a",
         url: "/gamepads/:index/buttons/a",
         controller: "@api.controllers.Gamepad",
