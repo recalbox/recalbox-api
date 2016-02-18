@@ -8,12 +8,23 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _Pad = require("../gamepad/Pad");
+
+var _Pad2 = _interopRequireDefault(_Pad);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * The access points of the virtual gamepads
  */
 class Gamepad {
+    /**
+     * Constructor
+     */
+    constructor() {
+        this.pads = new Map();
+    }
+
     /**
      * Connect a new virtual gamepad
      *
@@ -23,6 +34,32 @@ class Gamepad {
      */
     *connect(request, response) {
         response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
+
+        // Create the new gamepad
+        let pad = new _Pad2.default();
+
+        // Find an index
+        let index;
+        let indexMax = 4;
+        for (index = 1; index <= indexMax; index++) {
+            if (!this.pads.has(index)) {
+                break;
+            }
+        }
+        if (index > indexMax) {
+            response.status = 403;
+            response.parameters = {
+                error: "Too many gamepads"
+            };
+            return;
+        }
+
+        yield pad.connect();
+        this.pads.set(index, pad);
+        response.status = 200;
+        response.parameters = {
+            message: `Gamepad ${ index } connected`
+        };
     }
 
     /**
@@ -36,6 +73,23 @@ class Gamepad {
         response.setHeader("Access-Control-Allow-Methods", "DELETE, HEAD, OPTIONS");
 
         let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${ padIndex } not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        yield pad.disconnect();
+
+        response.status = 200;
+        response.parameters = {
+            message: `Gamepad ${ padIndex } is disconnected`
+        };
     }
 
     /**
