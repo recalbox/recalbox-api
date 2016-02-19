@@ -563,7 +563,7 @@ export default class Gamepad
 
         let pad = this.pads.get(padIndex);
         let comboJson = yield request.getRawBody();
-        comboJson = value.toString();
+        comboJson = comboJson.toString();
 
 
         // Parse the combo
