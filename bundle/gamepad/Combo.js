@@ -40,7 +40,7 @@ class Combo {
 
         // Convert JSON to object
         let actions = JSON.parse(json);
-        if (Array.isArray(actions)) {
+        if (!Array.isArray(actions)) {
             throw new Error("The content is not an array");
         }
 
