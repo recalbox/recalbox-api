@@ -27,7 +27,7 @@ export default class Gamepad
 
         // Get the gamepad type
         let padType = yield request.getRawBody();
-        padType = value.toString();
+        padType = padType.toString();
 
 
         // Find an index
