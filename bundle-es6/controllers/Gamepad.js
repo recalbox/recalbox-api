@@ -607,14 +607,14 @@ export default class Gamepad
 
         switch (value) {
             case "pressed":
-                yield pad.directionHorizontalUp();
+                yield pad.directionVerticalUp();
                 break;
             case "released":
-                yield pad.directionHorizontalNone();
+                yield pad.directionVerticalNone();
                 break;
             case "pressedAndReleased":
-                yield pad.directionHorizontalUp();
-                yield pad.directionHorizontalNone();
+                yield pad.directionVerticalUp();
+                yield pad.directionVerticalNone();
                 break;
         }
 
@@ -652,14 +652,14 @@ export default class Gamepad
 
         switch (value) {
             case "pressed":
-                yield pad.directionHorizontalDown();
+                yield pad.directionVerticalDown();
                 break;
             case "released":
-                yield pad.directionHorizontalNone();
+                yield pad.directionVerticalNone();
                 break;
             case "pressedAndReleased":
-                yield pad.directionHorizontalDown();
-                yield pad.directionHorizontalNone();
+                yield pad.directionVerticalDown();
+                yield pad.directionVerticalNone();
                 break;
         }
 
