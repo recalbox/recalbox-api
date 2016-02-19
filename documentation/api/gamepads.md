@@ -112,9 +112,13 @@ curl -X POST -d '[{"type": "direction", "id": "left", "state": "pressed"}, {"typ
 | -------- | ----------- |
 | `value`  | The time to wait in milliseconds |
 
-Example:
+Examples:
 ```sh
 curl -X POST -d '[{"type": "direction", "id": "left", "state": "pressed"}, {"type": "wait", "value": 1000}, {"type": "direction", "id": "none", "state": "pressed"}]' http://recalbox.local:1337/gamepads/1/combo
+```
+
+```sh
+curl -X POST -d @hadoken.json http://recalbox.local:1337/gamepads/1/combo
 ```
 
 Hadoken:

@@ -1,6 +1,7 @@
 import solfege from "solfegejs";
 import ioctl from "ioctl";
 import Struct from "struct";
+import Pad from "./Pad";
 import uinput from "./lib/uinput";
 
 /**
@@ -8,7 +9,7 @@ import uinput from "./lib/uinput";
  *
  * @see https://github.com/miroof/node-virtual-gamepads
  */
-export default class PadSnes
+export default class PadSnes extends Pad
 {
     /**
      * Constructor
@@ -17,9 +18,115 @@ export default class PadSnes
      */
     constructor(index:int8)
     {
-        this.padIndex = index;
+        super(index);
+
         this.uinputFile;
     }
+
+    /**
+     * The identifier of the direction NONE
+     */
+    static get DIRECTION_NONE()
+    {
+        return "none";
+    }
+
+    /**
+     * The identifier of the direction LEFT
+     */
+    static get DIRECTION_LEFT()
+    {
+        return "left";
+    }
+
+    /**
+     * The identifier of the direction RIGHT
+     */
+    static get DIRECTION_RIGHT()
+    {
+        return "right";
+    }
+
+    /**
+     * The identifier of the direction UP
+     */
+    static get DIRECTION_UP()
+    {
+        return "up";
+    }
+
+    /**
+     * The identifier of the direction DOWN
+     */
+    static get DIRECTION_DOWN()
+    {
+        return "down";
+    }
+
+    /**
+     * The identifier of the button A
+     */
+    static get BUTTON_A()
+    {
+        return "a";
+    }
+
+    /**
+     * The identifier of the button B
+     */
+    static get BUTTON_B()
+    {
+        return "b";
+    }
+
+    /**
+     * The identifier of the button X
+     */
+    static get BUTTON_X()
+    {
+        return "x";
+    }
+
+    /**
+     * The identifier of the button Y
+     */
+    static get BUTTON_Y()
+    {
+        return "y";
+    }
+
+    /**
+     * The identifier of the button L
+     */
+    static get BUTTON_L()
+    {
+        return "tl";
+    }
+
+    /**
+     * The identifier of the button R
+     */
+    static get BUTTON_R()
+    {
+        return "tr";
+    }
+
+    /**
+     * The identifier of the button SELECT
+     */
+    static get BUTTON_SELECT()
+    {
+        return "select";
+    }
+
+    /**
+     * The identifier of the button START
+     */
+    static get BUTTON_START()
+    {
+        return "start";
+    }
+
 
     /**
      * Connect the gamepad
@@ -102,6 +209,214 @@ export default class PadSnes
             this.uinputFile = undefined;
         }
     }
+
+    /**
+     * Execute an action on the direction
+     *
+     * @param   {string}    id      The identifier of the direction
+     * @param   {string}    state   The state
+     */
+    *executeDirection(id:string, state?:string)
+    {
+        switch (id) {
+            case PadSnes.DIRECTION_NONE:
+                yield this.directionHorizontalNone();
+                yield this.directionVerticalNone();
+                break;
+
+            case PadSnes.DIRECTION_LEFT:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.directionHorizontalLeft();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.directionHorizontalNone();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.directionHorizontalLeft();
+                        yield this.directionHorizontalNone();
+                }
+                break;
+
+            case PadSnes.DIRECTION_RIGHT:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.directionHorizontalRight();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.directionHorizontalNone();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.directionHorizontalRight();
+                        yield this.directionHorizontalNone();
+                }
+                break;
+
+            case PadSnes.DIRECTION_UP:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.directionVerticalUp();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.directionVerticalNone();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.directionVerticalUp();
+                        yield this.directionVerticalNone();
+                }
+                break;
+
+            case PadSnes.DIRECTION_DOWN:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.directionVerticalDown();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.directionVerticalNone();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.directionVerticalDown();
+                        yield this.directionVerticalNone();
+                }
+                break;
+        }
+    }
+
+    /**
+     * Execute an action on a button
+     *
+     * @param   {string}    id      The identifier of the button
+     * @param   {string}    state   The state
+     */
+    *executeButton(id:string, state?:string)
+    {
+        switch (id) {
+            case PadSnes.BUTTON_A:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonA();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonA();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonA();
+                        yield this.releaseButtonA();
+                }
+                break;
+
+            case PadSnes.BUTTON_B:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonB();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonB();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonB();
+                        yield this.releaseButtonB();
+                }
+                break;
+
+            case PadSnes.BUTTON_X:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonX();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonX();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonX();
+                        yield this.releaseButtonX();
+                }
+                break;
+
+            case PadSnes.BUTTON_Y:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonY();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonY();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonY();
+                        yield this.releaseButtonY();
+                }
+                break;
+
+            case PadSnes.BUTTON_L:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonL();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonL();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonL();
+                        yield this.releaseButtonL();
+                }
+                break;
+
+            case PadSnes.BUTTON_R:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonR();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonR();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonR();
+                        yield this.releaseButtonR();
+                }
+                break;
+
+            case PadSnes.BUTTON_SELECT:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonSelect();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonSelect();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonSelect();
+                        yield this.releaseButtonSelect();
+                }
+                break;
+
+            case PadSnes.BUTTON_START:
+                switch (state) {
+                    case Pad.STATE_PRESSED:
+                        yield this.pressButtonStart();
+                        break;
+                    case Pad.STATE_RELEASED:
+                        yield this.releaseButtonStart();
+                        break;
+                    default:
+                    case Pad.STATE_PRESSED_AND_RELEASED:
+                        yield this.pressButtonStart();
+                        yield this.releaseButtonStart();
+                }
+                break;
+        }
+    }
+
 
     /**
      * Press the A button

@@ -8,9 +8,17 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _Pad = require("../gamepad/Pad");
+
+var _Pad2 = _interopRequireDefault(_Pad);
+
 var _PadSnes = require("../gamepad/PadSnes");
 
 var _PadSnes2 = _interopRequireDefault(_PadSnes);
+
+var _Combo = require("../gamepad/Combo");
+
+var _Combo2 = _interopRequireDefault(_Combo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -130,18 +138,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonA();
-                break;
-            case "released":
-                yield pad.releaseButtonA();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonA();
-                yield pad.releaseButtonA();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_A, value);
 
         response.status = 200;
         response.parameters = {
@@ -174,18 +171,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonB();
-                break;
-            case "released":
-                yield pad.releaseButtonB();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonB();
-                yield pad.releaseButtonB();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_B, value);
 
         response.status = 200;
         response.parameters = {
@@ -218,18 +204,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonX();
-                break;
-            case "released":
-                yield pad.releaseButtonX();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonX();
-                yield pad.releaseButtonX();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_X, value);
 
         response.status = 200;
         response.parameters = {
@@ -262,18 +237,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonY();
-                break;
-            case "released":
-                yield pad.releaseButtonY();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonY();
-                yield pad.releaseButtonY();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_Y, value);
 
         response.status = 200;
         response.parameters = {
@@ -306,18 +270,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonL();
-                break;
-            case "released":
-                yield pad.releaseButtonL();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonL();
-                yield pad.releaseButtonL();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_L, value);
 
         response.status = 200;
         response.parameters = {
@@ -350,18 +303,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonR();
-                break;
-            case "released":
-                yield pad.releaseButtonR();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonR();
-                yield pad.releaseButtonR();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_R, value);
 
         response.status = 200;
         response.parameters = {
@@ -394,18 +336,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonSelect();
-                break;
-            case "released":
-                yield pad.releaseButtonSelect();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonSelect();
-                yield pad.releaseButtonSelect();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_SELECT, value);
 
         response.status = 200;
         response.parameters = {
@@ -438,18 +369,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.pressButtonStart();
-                break;
-            case "released":
-                yield pad.releaseButtonStart();
-                break;
-            default:
-            case "pressedAndReleased":
-                yield pad.pressButtonStart();
-                yield pad.releaseButtonStart();
-        }
+        yield pad.executeButton(_PadSnes2.default.BUTTON_START, value);
 
         response.status = 200;
         response.parameters = {
@@ -479,7 +399,7 @@ class Gamepad {
         }
 
         let pad = this.pads.get(padIndex);
-        yield pad.directionNone();
+        yield pad.executeDirection(_PadSnes2.default.DIRECTION_NONE);
 
         response.status = 200;
         response.parameters = {
@@ -512,18 +432,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.directionHorizontalLeft();
-                break;
-            case "released":
-                yield pad.directionHorizontalNone();
-                break;
-            case "pressedAndReleased":
-                yield pad.directionHorizontalLeft();
-                yield pad.directionHorizontalNone();
-                break;
-        }
+        yield pad.executeDirection(_PadSnes2.default.DIRECTION_LEFT, value);
 
         response.status = 200;
         response.parameters = {
@@ -556,18 +465,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.directionHorizontalRight();
-                break;
-            case "released":
-                yield pad.directionHorizontalNone();
-                break;
-            case "pressedAndReleased":
-                yield pad.directionHorizontalRight();
-                yield pad.directionHorizontalNone();
-                break;
-        }
+        yield pad.executeDirection(_PadSnes2.default.DIRECTION_RIGHT, value);
 
         response.status = 200;
         response.parameters = {
@@ -600,18 +498,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.directionVerticalUp();
-                break;
-            case "released":
-                yield pad.directionVerticalNone();
-                break;
-            case "pressedAndReleased":
-                yield pad.directionVerticalUp();
-                yield pad.directionVerticalNone();
-                break;
-        }
+        yield pad.executeDirection(_PadSnes2.default.DIRECTION_UP, value);
 
         response.status = 200;
         response.parameters = {
@@ -644,18 +531,7 @@ class Gamepad {
         let value = yield request.getRawBody();
         value = value.toString();
 
-        switch (value) {
-            case "pressed":
-                yield pad.directionVerticalDown();
-                break;
-            case "released":
-                yield pad.directionVerticalNone();
-                break;
-            case "pressedAndReleased":
-                yield pad.directionVerticalDown();
-                yield pad.directionVerticalNone();
-                break;
-        }
+        yield pad.executeDirection(_PadSnes2.default.DIRECTION_DOWN, value);
 
         response.status = 200;
         response.parameters = {
@@ -663,6 +539,52 @@ class Gamepad {
         };
     }
 
+    /**
+     * Create a combo
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *createCombo(request, response) {
+        response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${ padIndex } not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        let comboJson = yield request.getRawBody();
+        comboJson = value.toString();
+
+        // Parse the combo
+        let combo = new _Combo2.default(pad);
+        try {
+            yield combo.parseJson(comboJson);
+            yield combo.execute();
+        } catch (error) {
+            console.error(error);
+
+            response.status = 400;
+            response.parameters = {
+                error: "Bad request: " + error
+            };
+            return;
+        }
+
+        // Success
+        response.status = 200;
+        response.parameters = {
+            success: true
+        };
+    }
 }
 exports.default = Gamepad;
 module.exports = exports['default'];

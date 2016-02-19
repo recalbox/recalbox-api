@@ -793,6 +793,13 @@ module.exports = [
         action: "setButtonStart",
         policies: ["methodIsPut"]
     },
+    {
+        id: "gamepad.combo",
+        url: "/gamepads/:index/combo",
+        controller: "@api.controllers.Gamepad",
+        action: "createCombo",
+        policies: ["methodIsPost"]
+    },
 
     // DEVICE
     {
