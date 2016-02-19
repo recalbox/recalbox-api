@@ -703,10 +703,38 @@ module.exports = [
         policies: ["methodIsDelete"]
     },
     {
-        id: "gamepad.direction",
-        url: "/gamepads/:index/direction",
+        id: "gamepad.direction.none",
+        url: "/gamepads/:index/directions/none",
         controller: "@api.controllers.Gamepad",
-        action: "setDirection",
+        action: "setDirectionNone",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.direction.left",
+        url: "/gamepads/:index/directions/left",
+        controller: "@api.controllers.Gamepad",
+        action: "setDirectionLeft",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.direction.right",
+        url: "/gamepads/:index/directions/right",
+        controller: "@api.controllers.Gamepad",
+        action: "setDirectionRight",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.direction.up",
+        url: "/gamepads/:index/directions/up",
+        controller: "@api.controllers.Gamepad",
+        action: "setDirectionUp",
+        policies: ["methodIsPut"]
+    },
+    {
+        id: "gamepad.direction.down",
+        url: "/gamepads/:index/directions/down",
+        controller: "@api.controllers.Gamepad",
+        action: "setDirectionDown",
         policies: ["methodIsPut"]
     },
     {

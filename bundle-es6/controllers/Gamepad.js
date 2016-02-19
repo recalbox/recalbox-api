@@ -459,13 +459,44 @@ export default class Gamepad
     }
 
     /**
-     * Set the state of the direction
+     * Set the state of the direction "none"
      *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
      */
-    *setDirection(request, response)
+    *setDirectionNone(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${padIndex} not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        yield pad.directionNone();
+
+        response.status = 200;
+        response.parameters = {
+            success: true
+        };
+    }
+
+    /**
+     * Set the state of the direction "left"
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setDirectionLeft(request, response)
     {
         response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
 
@@ -485,37 +516,150 @@ export default class Gamepad
         value = value.toString();
 
         switch (value) {
-            default:
-            case "none":
-                yield pad.directionNone();
+            case "pressed":
+                yield pad.directionHorizontalLeft();
                 break;
-            case "up":
-                yield pad.directionUp();
+            case "released":
+                yield pad.directionHorizontalNone();
                 break;
-            case "upAndRelease":
-                yield pad.directionUp();
-                yield pad.directionNone();
+            case "pressedAndReleased":
+                yield pad.directionHorizontalLeft();
+                yield pad.directionHorizontalNone();
                 break;
-            case "down":
-                yield pad.directionDown();
+        }
+
+        response.status = 200;
+        response.parameters = {
+            success: true
+        };
+    }
+
+    /**
+     * Set the state of the direction "right"
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setDirectionRight(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${padIndex} not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        let value = yield request.getRawBody();
+        value = value.toString();
+
+        switch (value) {
+            case "pressed":
+                yield pad.directionHorizontalRight();
                 break;
-            case "downAndRelease":
-                yield pad.directionDown();
-                yield pad.directionNone();
+            case "released":
+                yield pad.directionHorizontalNone();
                 break;
-            case "left":
-                yield pad.directionLeft();
+            case "pressedAndReleased":
+                yield pad.directionHorizontalRight();
+                yield pad.directionHorizontalNone();
                 break;
-            case "leftAndRelease":
-                yield pad.directionLeft();
-                yield pad.directionNone();
+        }
+
+        response.status = 200;
+        response.parameters = {
+            success: true
+        };
+    }
+
+    /**
+     * Set the state of the direction "up"
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setDirectionUp(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${padIndex} not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        let value = yield request.getRawBody();
+        value = value.toString();
+
+        switch (value) {
+            case "pressed":
+                yield pad.directionHorizontalUp();
                 break;
-            case "right":
-                yield pad.directionRight();
+            case "released":
+                yield pad.directionHorizontalNone();
                 break;
-            case "rightAndRelease":
-                yield pad.directionRight();
-                yield pad.directionNone();
+            case "pressedAndReleased":
+                yield pad.directionHorizontalUp();
+                yield pad.directionHorizontalNone();
+                break;
+        }
+
+        response.status = 200;
+        response.parameters = {
+            success: true
+        };
+    }
+
+    /**
+     * Set the state of the direction "down"
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *setDirectionDown(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "PUT, HEAD, OPTIONS");
+
+        let padIndex = request.getParameter("index");
+        padIndex = parseInt(padIndex);
+
+        if (!this.pads.has(padIndex)) {
+            response.status = 404;
+            response.parameters = {
+                error: `Gamepad ${padIndex} not found`
+            };
+            return;
+        }
+
+        let pad = this.pads.get(padIndex);
+        let value = yield request.getRawBody();
+        value = value.toString();
+
+        switch (value) {
+            case "pressed":
+                yield pad.directionHorizontalDown();
+                break;
+            case "released":
+                yield pad.directionHorizontalNone();
+                break;
+            case "pressedAndReleased":
+                yield pad.directionHorizontalDown();
+                yield pad.directionHorizontalNone();
                 break;
         }
 
