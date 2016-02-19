@@ -8,9 +8,9 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
-var _Pad = require("../gamepad/Pad");
+var _PadSnes = require("../gamepad/PadSnes");
 
-var _Pad2 = _interopRequireDefault(_Pad);
+var _PadSnes2 = _interopRequireDefault(_PadSnes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,8 +35,9 @@ class Gamepad {
     *connect(request, response) {
         response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
 
-        // Create the new gamepad
-        let pad = new _Pad2.default();
+        // Get the gamepad type
+        let padType = yield request.getRawBody();
+        padType = value.toString();
 
         // Find an index
         let index;
@@ -54,11 +55,22 @@ class Gamepad {
             return;
         }
 
+        // Create the new gamepad
+        // @todo Create a factory
+        let pad;
+        switch (padType) {
+            default:
+            case "snes":
+                pad = new _PadSnes2.default(index);
+                break;
+        }
+
         yield pad.connect();
         this.pads.set(index, pad);
         response.status = 200;
         response.parameters = {
-            message: `Gamepad ${ index } connected`
+            message: `GamePad ${ index } connected`,
+            index: index
         };
     }
 
@@ -89,7 +101,7 @@ class Gamepad {
 
         response.status = 200;
         response.parameters = {
-            message: `Gamepad ${ padIndex } is disconnected`
+            message: `GamePad ${ padIndex } disconnected`
         };
     }
 
@@ -119,14 +131,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonA();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonA();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonA();
                 yield pad.releaseButtonA();
         }
@@ -163,14 +175,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonB();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonB();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonB();
                 yield pad.releaseButtonB();
         }
@@ -207,14 +219,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonX();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonX();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonX();
                 yield pad.releaseButtonX();
         }
@@ -251,14 +263,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonY();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonY();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonY();
                 yield pad.releaseButtonY();
         }
@@ -295,14 +307,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonL();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonL();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonL();
                 yield pad.releaseButtonL();
         }
@@ -339,14 +351,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonR();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonR();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonR();
                 yield pad.releaseButtonR();
         }
@@ -383,14 +395,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonSelect();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonSelect();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonSelect();
                 yield pad.releaseButtonSelect();
         }
@@ -427,14 +439,14 @@ class Gamepad {
         value = value.toString();
 
         switch (value) {
-            case "press":
+            case "pressed":
                 yield pad.pressButtonStart();
                 break;
-            case "release":
+            case "released":
                 yield pad.releaseButtonStart();
                 break;
             default:
-            case "pressAndRelease":
+            case "pressedAndReleased":
                 yield pad.pressButtonStart();
                 yield pad.releaseButtonStart();
         }

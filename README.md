@@ -102,17 +102,22 @@ The response returns the items with 2 headers :
 | `GET` `PUT`    | `/wifi/enabled`                    | Enable/disable wifi |
 | `GET` `PUT`    | `/wifi/key`                        | Wifi key |
 | `GET` `PUT`    | `/wifi/ssid`                       | Wifi SSID |
-| `POST`         | `/gamepads`                        | Create (and connect) a virtual gamepad |
-| `DELETE`       | `/gamepads/:index`                 | Delete (and disconnect) a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/a`       | Set A button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/b`       | Set B button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/x`       | Set X button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/y`       | Set Y button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/tl`      | Set L button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/tr`      | Set R button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/start`   | Set START button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/buttons/select`  | Set SELECT button state on a virtual gamepad |
-| `PUT`          | `/gamepads/:index/direction`       | Set direction state on a virtual gamepad |
+| `POST`         | `/gamepads`                        | [Create (and connect) a virtual gamepad](documentation/api/gamepads.md) |
+| `DELETE`       | `/gamepads/:index`                 | [Delete (and disconnect) a virtual gamepad](documentation/api/gamepads.md) |
+| `PUT`          | `/gamepads/:index/buttons/a`       | [Set A button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/b`       | [Set B button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/x`       | [Set X button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/y`       | [Set Y button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/tl`      | [Set L button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/tr`      | [Set R button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/start`   | [Set START button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/buttons/select`  | [Set SELECT button state on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/directions/none` | [Set no direction on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/directions/left` | [Set state of the LEFT direction on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/directions/right`| [Set state of the RIGHT direction on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/directions/up`   | [Set state of the UP direction on a virtual gamepad](documentation/api/gamepads.md)  |
+| `PUT`          | `/gamepads/:index/directions/down` | [Set state of the DOWN direction on a virtual gamepad](documentation/api/gamepads.md)  |
+| `POST`         | `/gamepads/:index/combo`           | [Create a combo on a virtual gamepad](documentation/api/gamepads.md)  |
 
 ### Examples
 

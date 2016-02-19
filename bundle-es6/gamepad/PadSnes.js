@@ -4,17 +4,20 @@ import Struct from "struct";
 import uinput from "./lib/uinput";
 
 /**
- * A virtual gamepad
+ * A virtual gamepad for SNES
  *
  * @see https://github.com/miroof/node-virtual-gamepads
  */
-export default class Pad
+export default class PadSnes
 {
     /**
      * Constructor
+     *
+     * @param   {integer}   index   The gamepad index
      */
-    constructor()
+    constructor(index:int8)
     {
+        this.padIndex = index;
         this.uinputFile;
     }
 
@@ -61,7 +64,7 @@ export default class Pad
 
         let uidev = uinput_user_dev.fields;
 
-        uidev.name = "Virtual gamepad"
+        uidev.name = `Pad SNES API ${this.padIndex}`
         uidev.id.bustype = uinput.BUS_USB
         uidev.id.vendor = 0x3
         uidev.id.product = 0x3
@@ -233,8 +236,8 @@ export default class Pad
      */
     *directionNone()
     {
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+        yield this.directionHorizontalNone();
+        yield this.directionVerticalNone();
     }
 
     /**
@@ -242,8 +245,8 @@ export default class Pad
      */
     *directionLeft()
     {
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 0});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+        yield this.directionHorizontalLeft();
+        yield this.directionVerticalNone();
     }
 
     /**
@@ -251,8 +254,8 @@ export default class Pad
      */
     *directionRight()
     {
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 255});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
+        yield this.directionHorizontalRight();
+        yield this.directionVerticalNone();
     }
 
     /**
@@ -260,8 +263,8 @@ export default class Pad
      */
     *directionUp()
     {
-        yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
-        yield this.sendEvent({type: 0x03, code: 0x01, value: 0});
+        yield this.directionHorizontalNone();
+        yield this.directionverticalUp();
     }
 
     /**
@@ -269,8 +272,56 @@ export default class Pad
      */
     *directionDown()
     {
+        yield this.directionHorizontalNone();
+        yield this.directionverticalDown();
+    }
+
+    /**
+     * Horizontal direction to the left
+     */
+    *directionHorizontalLeft()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 0});
+    }
+
+    /**
+     * Horizontal direction to the right
+     */
+    *directionHorizontalRight()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x00, value: 255});
+    }
+
+    /**
+     * Horizontal direction to middle
+     */
+    *directionHorizontalNone()
+    {
         yield this.sendEvent({type: 0x03, code: 0x00, value: 127});
+    }
+
+    /**
+     * Vertical direction to UP
+     */
+    *directionVerticalUp()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 0});
+    }
+
+    /**
+     * Vertical direction to DOWN
+     */
+    *directionVerticalDown()
+    {
         yield this.sendEvent({type: 0x03, code: 0x01, value: 255});
+    }
+
+    /**
+     * Vertical direction to middle
+     */
+    *directionVerticalNone()
+    {
+        yield this.sendEvent({type: 0x03, code: 0x01, value: 127});
     }
 
     /**

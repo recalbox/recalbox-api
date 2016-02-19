@@ -23,15 +23,22 @@ var _uinput2 = _interopRequireDefault(_uinput);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * A virtual gamepad
+ * A virtual gamepad for SNES
  *
  * @see https://github.com/miroof/node-virtual-gamepads
  */
-class Pad {
+class PadSnes {
     /**
      * Constructor
+     *
+     * @param   {integer}   index   The gamepad index
      */
-    constructor() {
+    constructor(index) {
+        if (!(typeof index === 'number' && !isNaN(index) && index >= -128 && index <= 127 && index === Math.floor(index))) {
+            throw new TypeError("Value of argument \"index\" violates contract.\n\nExpected:\nint8\n\nGot:\n" + _inspect(index));
+        }
+
+        this.padIndex = index;
         this.uinputFile;
     }
 
@@ -66,7 +73,7 @@ class Pad {
 
         let uidev = uinput_user_dev.fields;
 
-        uidev.name = "Virtual gamepad";
+        uidev.name = `Pad SNES API ${ this.padIndex }`;
         uidev.id.bustype = _uinput2.default.BUS_USB;
         uidev.id.vendor = 0x3;
         uidev.id.product = 0x3;
@@ -220,40 +227,82 @@ class Pad {
      * No direction
      */
     *directionNone() {
-        yield this.sendEvent({ type: 0x03, code: 0x00, value: 127 });
-        yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
+        yield this.directionHorizontalNone();
+        yield this.directionVerticalNone();
     }
 
     /**
      * Left
      */
     *directionLeft() {
-        yield this.sendEvent({ type: 0x03, code: 0x00, value: 0 });
-        yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
+        yield this.directionHorizontalLeft();
+        yield this.directionVerticalNone();
     }
 
     /**
      * Right
      */
     *directionRight() {
-        yield this.sendEvent({ type: 0x03, code: 0x00, value: 255 });
-        yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
+        yield this.directionHorizontalRight();
+        yield this.directionVerticalNone();
     }
 
     /**
      * Up
      */
     *directionUp() {
-        yield this.sendEvent({ type: 0x03, code: 0x00, value: 127 });
-        yield this.sendEvent({ type: 0x03, code: 0x01, value: 0 });
+        yield this.directionHorizontalNone();
+        yield this.directionverticalUp();
     }
 
     /**
      * Down
      */
     *directionDown() {
+        yield this.directionHorizontalNone();
+        yield this.directionverticalDown();
+    }
+
+    /**
+     * Horizontal direction to the left
+     */
+    *directionHorizontalLeft() {
+        yield this.sendEvent({ type: 0x03, code: 0x00, value: 0 });
+    }
+
+    /**
+     * Horizontal direction to the right
+     */
+    *directionHorizontalRight() {
+        yield this.sendEvent({ type: 0x03, code: 0x00, value: 255 });
+    }
+
+    /**
+     * Horizontal direction to middle
+     */
+    *directionHorizontalNone() {
         yield this.sendEvent({ type: 0x03, code: 0x00, value: 127 });
+    }
+
+    /**
+     * Vertical direction to UP
+     */
+    *directionVerticalUp() {
+        yield this.sendEvent({ type: 0x03, code: 0x01, value: 0 });
+    }
+
+    /**
+     * Vertical direction to DOWN
+     */
+    *directionVerticalDown() {
         yield this.sendEvent({ type: 0x03, code: 0x01, value: 255 });
+    }
+
+    /**
+     * Vertical direction to middle
+     */
+    *directionVerticalNone() {
+        yield this.sendEvent({ type: 0x03, code: 0x01, value: 127 });
     }
 
     /**
@@ -298,5 +347,54 @@ class Pad {
         }
     }
 }
-exports.default = Pad;
+exports.default = PadSnes;
+
+function _inspect(input) {
+    function _ref2(key) {
+        return (/^([A-Z_$][A-Z0-9_$]*)$/i.test(key) ? key : JSON.stringify(key)) + ': ' + _inspect(input[key]) + ';';
+    }
+
+    function _ref(item) {
+        return _inspect(item) === first;
+    }
+
+    if (input === null) {
+        return 'null';
+    } else if (input === undefined) {
+        return 'void';
+    } else if (typeof input === 'string' || typeof input === 'number' || typeof input === 'boolean') {
+        return typeof input;
+    } else if (Array.isArray(input)) {
+        if (input.length > 0) {
+            var first = _inspect(input[0]);
+
+            if (input.every(_ref)) {
+                return first.trim() + '[]';
+            } else {
+                return '[' + input.map(_inspect).join(', ') + ']';
+            }
+        } else {
+            return 'Array';
+        }
+    } else {
+        var keys = Object.keys(input);
+
+        if (!keys.length) {
+            if (input.constructor && input.constructor.name && input.constructor.name !== 'Object') {
+                return input.constructor.name;
+            } else {
+                return 'Object';
+            }
+        }
+
+        var entries = keys.map(_ref2).join('\n  ');
+
+        if (input.constructor && input.constructor.name && input.constructor.name !== 'Object') {
+            return input.constructor.name + ' {\n  ' + entries + '\n}';
+        } else {
+            return '{ ' + entries + '\n}';
+        }
+    }
+}
+
 module.exports = exports['default'];
