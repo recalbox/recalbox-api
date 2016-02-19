@@ -122,10 +122,10 @@ export default class Combo
      */
     wait(milliseconds:uint32)
     {
-        return new Promise(function(resolve, reject) {
-            setTimeout(milliseconds, function() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
                 resolve();
-            });
+            }, milliseconds);
         });
     }
 

@@ -156,10 +156,10 @@ class Combo {
             throw new TypeError("Value of argument \"milliseconds\" violates contract.\n\nExpected:\nuint32\n\nGot:\n" + _inspect(milliseconds));
         }
 
-        return new Promise(function (resolve, reject) {
-            setTimeout(milliseconds, function () {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
                 resolve();
-            });
+            }, milliseconds);
         });
     }
 
