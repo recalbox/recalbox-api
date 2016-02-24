@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     int joystickCount = SDL_NumJoysticks();
 
-    printf("Joystick count %d\n", joystickCount);
+    printf("Joystick count: %d\n", joystickCount);
 
     for (int index = 0; index < joystickCount; index++)
     {

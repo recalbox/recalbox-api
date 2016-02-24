@@ -13,10 +13,11 @@ int main(int argc, char *argv[])
     SDL_JoystickEventState(SDL_ENABLE);
 
     int index = atoi(argv[1]);
+    char guid[65];
     SDL_Joystick* joy = SDL_JoystickOpen(index);
-    const char* name = SDL_JoystickName(joy);
+    SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(joy), guid, 65);
 
-    printf("%s", name);
+    printf("%s", guid);
 
     SDL_JoystickEventState(SDL_DISABLE);
     SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
