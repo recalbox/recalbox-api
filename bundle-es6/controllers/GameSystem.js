@@ -1,4 +1,5 @@
 import solfege from "solfegejs";
+import os from "os";
 import fs from "fs";
 import * as ControllerUtil from "../utils/ControllerUtil";
 import IniFile from "../utils/IniFile";
@@ -659,6 +660,34 @@ export default class GameSystem
             request,
             response
         );
+    }
+
+    /**
+     * Launch a ROM
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *launchRom(request, response)
+    {
+        response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
+
+        let systemId = request.getParameter("id");
+        let fileName = yield request.getRawBody();
+        fileName = fileName.toString();
+
+
+        let platform = os.platform();
+        let architecture = os.arch();
+        let joystickCount = yield solfege.util.Node.child_process.exec(`../../libs/joystickCount-${platform}-${architecture}`);
+
+        response.status = 200;
+        response.parameters = {
+            fileName: fileName,
+            joystickCount: joystickCount
+        };
+
     }
 
 }

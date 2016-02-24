@@ -8,6 +8,10 @@ var _solfegejs = require("solfegejs");
 
 var _solfegejs2 = _interopRequireDefault(_solfegejs);
 
+var _os = require("os");
+
+var _os2 = _interopRequireDefault(_os);
+
 var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
@@ -561,6 +565,31 @@ class GameSystem {
         let directoryPath = `${ request.configuration.romsDirectoryPath }/${ systemId }`;
 
         yield ControllerUtil.deleteFile(directoryPath + "/" + fileName, request, response);
+    }
+
+    /**
+     * Launch a ROM
+     *
+     * @public
+     * @param   {solfege.bundle.server.Request}     request     The request
+     * @param   {solfege.bundle.server.Response}    response    The response
+     */
+    *launchRom(request, response) {
+        response.setHeader("Access-Control-Allow-Methods", "POST, HEAD, OPTIONS");
+
+        let systemId = request.getParameter("id");
+        let fileName = yield request.getRawBody();
+        fileName = fileName.toString();
+
+        let platform = _os2.default.platform();
+        let architecture = _os2.default.arch();
+        let joystickCount = yield _solfegejs2.default.util.Node.child_process.exec(`../../libs/joystickCount-${ platform }-${ architecture }`);
+
+        response.status = 200;
+        response.parameters = {
+            fileName: fileName,
+            joystickCount: joystickCount
+        };
     }
 
 }

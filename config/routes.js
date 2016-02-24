@@ -686,6 +686,13 @@ module.exports = [
         action: "deleteRom",
         policies: ["methodIsDelete"]
     },
+    {
+        id: "system.launcher",
+        url: "/systems/:id/launcher",
+        controller: "@api.controllers.GameSystem",
+        action: "launchRom",
+        policies: ["methodIsPost"]
+    },
 
     // GAMEPADS
     {

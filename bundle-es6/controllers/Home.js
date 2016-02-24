@@ -1,5 +1,4 @@
 import solfege from "solfegejs";
-import joysticks from "../../build/Release/sdl-joystick.node";
 
 /**
  * The home controller
@@ -15,12 +14,10 @@ export default class Home
      */
     *index(request, response)
     {
-        let count = joysticks.getJoystickCount();
-
         response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS");
         response.setHeader('Content-Type', 'text/plain');
         response.statusCode = 200;
-        response.body = "Recalbox API " + count;
+        response.body = "Recalbox API";
         response.parameters = ["Recalbox API"];
     }
 }
