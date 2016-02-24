@@ -6,7 +6,8 @@ var configuration = {
     {
         mainConfigurationFilePath: "/recalbox/share/system/recalbox.conf",
         biosDirectoryPath: "/recalbox/share/bios",
-        romsDirectoryPath: "/recalbox/share/roms"
+        romsDirectoryPath: "/recalbox/share/roms",
+        emulatorLauncherPath: "/usr/lib/python2.7/site-packages/configgen/emulatorlauncher.py"
     },
 
     // Command line configuration
