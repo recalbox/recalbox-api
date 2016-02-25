@@ -7,12 +7,12 @@ libDirectory=$projectDirectory/libs
 platform=$(node -e 'console.log(require("os").platform())')
 arch=$(node -e 'console.log(require("os").arch())')
 
-for sourcePath in $libDirectory/*.cpp
+for sourcePath in $libDirectory/src/*.cpp
 do
 
     fileName=$(basename $sourcePath)
     fileBaseName="${fileName%.*}"
-    targetPath=$libDirectory/$fileBaseName-$platform-$arch
+    targetPath=$libDirectory/bin/$fileBaseName-$platform-$arch
 
     echo "Build $targetPath ..."
 

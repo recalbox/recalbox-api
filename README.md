@@ -96,7 +96,7 @@ The response returns the items with 2 headers :
 | `GET` `PUT`    | `/systems/:id/shaders`             | The shaders of the specified system |
 | `GET` `PUT`    | `/systems/:id/smooth`              | Enable/disable the smooth of the specified system |
 | `GET` `PUT`    | `/systems/:id/videomode`           | The game resolution of the specified system |
-| `POST`         | `/systems/:id/launcher`            | Launch a game |
+| `POST`         | `/systems/:id/launcher`            | [Launch a game](documentation/api/system-launch-game.md) |
 | `GET` `PUT`    | `/timezone`                        | The timezone |
 | `GET` `PUT`    | `/updates/enabled`                 | Enable/disable the updates check at startup |
 | `GET`          | `/wifi`                            | Get wifi settings |
