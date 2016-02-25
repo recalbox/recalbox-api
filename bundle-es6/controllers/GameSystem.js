@@ -692,10 +692,10 @@ export default class GameSystem
             let joystickName = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickName-${platform}-${architecture} ${index}`);
             let joystickDevicePath = `/dev/input/js${index}`;
 
-            emulatorLauncherParmeters[`p${index}index`] = index;
-            emulatorLauncherParmeters[`p${index}guid`] = joystickGuid;
-            emulatorLauncherParmeters[`p${index}name`] = joystickName;
-            emulatorLauncherParmeters[`p${index}devicepath`] = joystickDevicePath;
+            emulatorLauncherParameters[`p${index}index`] = index;
+            emulatorLauncherParameters[`p${index}guid`] = joystickGuid;
+            emulatorLauncherParameters[`p${index}name`] = joystickName;
+            emulatorLauncherParameters[`p${index}devicepath`] = joystickDevicePath;
         }
 
         let command = "python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc";
