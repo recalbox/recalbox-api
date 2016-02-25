@@ -688,8 +688,8 @@ export default class GameSystem
         };
 
         for (let index = 0; index < joystickCount; index++) {
-            let joystickGuid = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickGuid-${platform}-${architecture}`);
-            let joystickName = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickName-${platform}-${architecture}`);
+            let joystickGuid = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickGuid-${platform}-${architecture} ${index}`);
+            let joystickName = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickName-${platform}-${architecture} ${index}`);
             let joystickDevicePath = `/dev/input/js${index}`;
 
             emulatorLauncherParmeters[`p${index}index`] = index;
