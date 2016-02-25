@@ -686,7 +686,7 @@ export default class GameSystem
 
         let emulatorLauncherParameters = {
             system: systemId,
-            rom: `${romsDirectoryPath}/${systemId}/fileName`
+            rom: `${romsDirectoryPath}/${systemId}/${fileName}`
         };
 
         for (let index = 0; index < joystickCount; index++) {
