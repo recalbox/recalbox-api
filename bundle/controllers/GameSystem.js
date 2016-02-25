@@ -583,12 +583,34 @@ class GameSystem {
 
         let platform = _os2.default.platform();
         let architecture = _os2.default.arch();
-        let joystickCount = yield _solfegejs2.default.util.Node.child_process.exec(`../../libs/joystickCount-${ platform }-${ architecture }`);
+        let joystickCount = yield _solfegejs2.default.util.Node.child_process.exec(`${ __dirname }/../../libs/joystickCount-${ platform }-${ architecture }`);
+
+        let emulatorLauncherParameters = {
+            system: systemId,
+            rom: fileName
+        };
+
+        for (let index = 0; index < joystickCount; index++) {
+            let joystickGuid = yield _solfegejs2.default.util.Node.child_process.exec(`${ __dirname }/../../libs/joystickGuid-${ platform }-${ architecture }`);
+            let joystickName = yield _solfegejs2.default.util.Node.child_process.exec(`${ __dirname }/../../libs/joystickName-${ platform }-${ architecture }`);
+            let joystickDevicePath = `/dev/input/js${ index }`;
+
+            emulatorLauncherParmeters[`p${ index }index`] = index;
+            emulatorLauncherParmeters[`p${ index }guid`] = joystickGuid;
+            emulatorLauncherParmeters[`p${ index }name`] = joystickName;
+            emulatorLauncherParmeters[`p${ index }devicepath`] = joystickDevicePath;
+        }
+
+        let command = "python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc";
+        for (let parameterName in emulatorLauncherParameters) {
+            command += ` -${ parameterName } "${ emulatorLauncherParameters[parameterName] }"`;
+        }
+
+        _solfegejs2.default.util.Node.child_process.exec(command);
 
         response.status = 200;
         response.parameters = {
-            fileName: fileName,
-            joystickCount: joystickCount
+            executed: command
         };
     }
 
