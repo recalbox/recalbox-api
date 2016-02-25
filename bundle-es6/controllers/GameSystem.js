@@ -678,13 +678,15 @@ export default class GameSystem
         fileName = fileName.toString();
 
 
+        let emulatorLauncherPath = request.configuration.emulatorLauncherPath;
+        let romsDirectoryPath = request.configuration.romsDirectoryPath;
         let platform = os.platform();
         let architecture = os.arch();
         let joystickCount = yield solfege.util.Node.child_process.exec(`${__dirname}/../../libs/joystickCount-${platform}-${architecture}`);
 
         let emulatorLauncherParameters = {
             system: systemId,
-            rom: fileName
+            rom: `${romsDirectoryPath}/${systemId}/fileName`
         };
 
         for (let index = 0; index < joystickCount; index++) {
@@ -698,7 +700,7 @@ export default class GameSystem
             emulatorLauncherParameters[`p${index + 1}devicepath`] = joystickDevicePath;
         }
 
-        let command = "python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc";
+        let command = `python ${emulatorLauncherPath}`;
         for (let parameterName in emulatorLauncherParameters) {
             command += ` -${parameterName} "${emulatorLauncherParameters[parameterName]}"`;
         }
