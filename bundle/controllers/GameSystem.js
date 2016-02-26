@@ -670,7 +670,7 @@ class GameSystem {
         };
 
         // Check the name and guid
-        for (let settingPlayerIndex in emulationstationgSettingPlayers) {
+        for (let settingPlayerIndex in emulationstationSettingPlayers) {
             let settingPlayer = emulationstationSettingPlayers[settingPlayerIndex];
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
@@ -694,7 +694,7 @@ class GameSystem {
         }
 
         // Check the name only
-        for (let settingPlayerIndex in emulationstationgSettingPlayers) {
+        for (let settingPlayerIndex in emulationstationSettingPlayers) {
             let settingPlayer = emulationstationSettingPlayers[settingPlayerIndex];
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
@@ -715,7 +715,7 @@ class GameSystem {
         }
 
         // Complete with the available gamepads left
-        for (let settingPlayerIndex in emulationstationgSettingPlayers) {
+        for (let settingPlayerIndex in emulationstationSettingPlayers) {
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
 
