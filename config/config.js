@@ -8,7 +8,7 @@ var configuration = {
         biosDirectoryPath: "/recalbox/share/bios",
         romsDirectoryPath: "/recalbox/share/roms",
         emulationstationSettingPath: "/recalbox/share/system/.emulationstation/es_settings.cfg",
-        emulatorLauncherPath: "/usr/lib/python2.7/site-packages/configgen/emulatorlauncher.py"
+        emulatorLauncherPath: "/usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc"
     },
 
     // Command line configuration

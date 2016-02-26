@@ -766,10 +766,12 @@ export default class GameSystem
         // Check the name and guid
         for (let settingPlayerIndex in emulationstationSettingPlayers) {
             let settingPlayer = emulationstationSettingPlayers[settingPlayerIndex];
+            let launcherPlayerId = parseInt(settingPlayerIndex) + 1;
+
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
 
-                if (emulatorLauncherParameters.hasOwnProperty(`p${settingPlayerIndex + 1}index`)) {
+                if (emulatorLauncherParameters.hasOwnProperty(`p${launcherPlayerId}index`)) {
                     continue;
                 }
                 if (settingPlayer.name !== availableGamepad.name) {
@@ -779,10 +781,10 @@ export default class GameSystem
                     continue;
                 }
 
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}index`] = availableGamepad.index;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}guid`] = availableGamepad.guid;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}name`] = availableGamepad.name;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}devicepath`] = availableGamepad.devicePath;
+                emulatorLauncherParameters[`p${launcherPlayerId}index`] = availableGamepad.index;
+                emulatorLauncherParameters[`p${launcherPlayerId}guid`] = availableGamepad.guid;
+                emulatorLauncherParameters[`p${launcherPlayerId}name`] = availableGamepad.name;
+                emulatorLauncherParameters[`p${launcherPlayerId}devicepath`] = availableGamepad.devicePath;
                 availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
@@ -790,37 +792,41 @@ export default class GameSystem
         // Check the name only
         for (let settingPlayerIndex in emulationstationSettingPlayers) {
             let settingPlayer = emulationstationSettingPlayers[settingPlayerIndex];
+            let launcherPlayerId = parseInt(settingPlayerIndex) + 1;
+
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
 
-                if (emulatorLauncherParameters.hasOwnProperty(`p${settingPlayerIndex + 1}index`)) {
+                if (emulatorLauncherParameters.hasOwnProperty(`p${launcherPlayerId}index`)) {
                     continue;
                 }
                 if (settingPlayer.name !== availableGamepad.name) {
                     continue;
                 }
 
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}index`] = availableGamepad.index;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}guid`] = availableGamepad.guid;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}name`] = availableGamepad.name;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}devicepath`] = availableGamepad.devicePath;
+                emulatorLauncherParameters[`p${launcherPlayerId}index`] = availableGamepad.index;
+                emulatorLauncherParameters[`p${launcherPlayerId}guid`] = availableGamepad.guid;
+                emulatorLauncherParameters[`p${launcherPlayerId}name`] = availableGamepad.name;
+                emulatorLauncherParameters[`p${launcherPlayerId}devicepath`] = availableGamepad.devicePath;
                 availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
 
         // Complete with the available gamepads left
         for (let settingPlayerIndex in emulationstationSettingPlayers) {
+            let launcherPlayerId = parseInt(settingPlayerIndex) + 1;
+
             for (let availableGamepadIndex in availableGamepads) {
                 let availableGamepad = availableGamepads[availableGamepadIndex];
 
-                if (emulatorLauncherParameters.hasOwnProperty(`p${settingPlayerIndex + 1}index`)) {
+                if (emulatorLauncherParameters.hasOwnProperty(`p${launcherPlayerId}index`)) {
                     continue;
                 }
 
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}index`] = availableGamepad.index;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}guid`] = availableGamepad.guid;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}name`] = availableGamepad.name;
-                emulatorLauncherParameters[`p${settingPlayerIndex + 1}devicepath`] = availableGamepad.devicePath;
+                emulatorLauncherParameters[`p${launcherPlayerId}index`] = availableGamepad.index;
+                emulatorLauncherParameters[`p${launcherPlayerId}guid`] = availableGamepad.guid;
+                emulatorLauncherParameters[`p${launcherPlayerId}name`] = availableGamepad.name;
+                emulatorLauncherParameters[`p${launcherPlayerId}devicepath`] = availableGamepad.devicePath;
                 availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
