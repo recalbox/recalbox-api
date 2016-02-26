@@ -16,6 +16,10 @@ var _fs = require("fs");
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _xml2js = require("xml2js");
+
+var _xml2js2 = _interopRequireDefault(_xml2js);
+
 var _ControllerUtil = require("../utils/ControllerUtil");
 
 var ControllerUtil = _interopRequireWildcard(_ControllerUtil);
@@ -570,6 +574,8 @@ class GameSystem {
     /**
      * Launch a ROM
      *
+     * @todo Refactor the logic into another class
+     *
      * @public
      * @param   {solfege.bundle.server.Request}     request     The request
      * @param   {solfege.bundle.server.Response}    response    The response
@@ -585,9 +591,16 @@ class GameSystem {
         // Initialize variables
         let emulatorLauncherPath = request.configuration.emulatorLauncherPath;
         let romsDirectoryPath = request.configuration.romsDirectoryPath;
+        let emulationstationSettingPath = request.configuration.emulationstationSettingPath;
         let platform = _os2.default.platform();
         let architecture = _os2.default.arch();
         let joystickCount = yield _solfegejs2.default.util.Node.child_process.exec(`${ __dirname }/../../libs/bin/joystickCount-${ platform }-${ architecture }`);
+
+        // Get EmulationStation settings
+        let emulationstationSettingContent = yield _solfegejs2.default.util.Node.fs.readFile(emulationstationSettingPath);
+        let xmlParser = new _xml2js2.default.Parser();
+        let parseString = _solfegejs2.default.util.Function.createPromise(xmlParser.parseString);
+        let emulationstationSetting = yield parseString(emulationstationSettingContent);
 
         // Set the launcher parameters
         let emulatorLauncherParameters = {
@@ -610,12 +623,13 @@ class GameSystem {
         for (let parameterName in emulatorLauncherParameters) {
             command += ` -${ parameterName } "${ emulatorLauncherParameters[parameterName] }"`;
         }
-        _solfegejs2.default.util.Node.child_process.exec(command);
+        //solfege.util.Node.child_process.exec(command);
 
         // Returns the command
         response.status = 200;
         response.parameters = {
             success: true,
+            settings: emulationstationSetting,
             executed: command
         };
     }

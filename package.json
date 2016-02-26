@@ -22,7 +22,8 @@
         "file-size"                 : "1.0.*",
         "js2xmlparser"              : "1.0.*",
         "ioctl"                     : "1.0.0",
-        "struct"                    : "0.0.8"
+        "struct"                    : "0.0.8",
+        "xml2js"                    : "0.4.*"
     },
     "devDependencies": {
         "babel-cli"     : "6.5.*",
@@ -35,8 +36,7 @@
         "babel-plugin-add-module-exports": "0.1.2",
         "chai"          : "2.3.*",
         "mocha"         : "2.2.*",
-        "supertest"     : "1.1.*",
-        "xml2js"        : "0.4.*"
+        "supertest"     : "1.1.*"
     },
     "scripts": {
         "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
