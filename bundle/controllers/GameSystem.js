@@ -689,7 +689,7 @@ class GameSystem {
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }guid`] = availableGamepad.guid;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }name`] = availableGamepad.name;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }devicepath`] = availableGamepad.devicePath;
-                availableGamepad.splice(availableGamepadIndex, 1);
+                availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
 
@@ -710,7 +710,7 @@ class GameSystem {
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }guid`] = availableGamepad.guid;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }name`] = availableGamepad.name;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }devicepath`] = availableGamepad.devicePath;
-                availableGamepad.splice(availableGamepadIndex, 1);
+                availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
 
@@ -727,7 +727,7 @@ class GameSystem {
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }guid`] = availableGamepad.guid;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }name`] = availableGamepad.name;
                 emulatorLauncherParameters[`p${ settingPlayerIndex + 1 }devicepath`] = availableGamepad.devicePath;
-                availableGamepad.splice(availableGamepadIndex, 1);
+                availableGamepads.splice(availableGamepadIndex, 1);
             }
         }
 
