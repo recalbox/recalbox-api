@@ -1,0 +1,5 @@
+services:
+    recalbox_api_command_start:
+        class: "Command/StartCommand"
+        tags:
+            - { name: "solfege.console.command" }
