@@ -19,6 +19,12 @@ export default class StartCommand extends ContainerAwareCommand
      */
     *execute()
     {
+        let container = this.getContainer();
+        let serverFactory = yield container.get("http_server_factory");
+
+        let server = serverFactory.create("recalbox-api");
+        server.start(1337);
+
         console.info("API started");
     }
 }

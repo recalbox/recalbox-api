@@ -14,8 +14,8 @@
     "main": "./lib/Bundle.js",
     "dependencies": {
         "pm2"                       : "1.0.*",
-        "solfegejs"                 : "2.0.*",
-        "solfegejs-server"          : "2.0.*",
+        "solfegejs"                 : "2.x",
+        "solfegejs-server"          : "2.x",
         "ini"                       : "1.3.*",
         "file-size"                 : "1.0.*",
         "js2xmlparser"              : "1.0.*",
@@ -44,7 +44,8 @@
     "scripts": {
         "watch"         : "babel --watch --out-dir lib lib-es6 --copy-files",
         "compile"       : "babel --out-dir lib lib-es6 --copy-files",
-        "start"         : "node --harmony --harmony-proxies ./run.js"
+        "start"         : "node --harmony --harmony-proxies ./start.js",
+        "console"       : "node --harmony --harmony-proxies ./console.js"
     },
     "babel": {
         "presets": ["stage-0"],
