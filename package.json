@@ -16,6 +16,7 @@
         "pm2"                       : "1.0.*",
         "solfegejs"                 : "2.x",
         "solfegejs-server"          : "2.x",
+        "solfegejs-server-router"   : "2.x",
         "ini"                       : "1.3.*",
         "file-size"                 : "1.0.*",
         "js2xmlparser"              : "1.0.*",
@@ -44,8 +45,8 @@
     "scripts": {
         "watch"         : "babel --watch --out-dir lib lib-es6 --copy-files",
         "compile"       : "babel --out-dir lib lib-es6 --copy-files",
-        "start"         : "node --harmony --harmony-proxies ./start.js",
-        "console"       : "node --harmony --harmony-proxies ./console.js"
+        "start"         : "node --harmony ./start.js",
+        "console"       : "node --harmony ./console.js"
     },
     "babel": {
         "presets": ["stage-0"],

@@ -1,5 +1,23 @@
 services:
+    # Start command
     recalbox_api_command_start:
         class: "Command/StartCommand"
         tags:
             - { name: "solfege.console.command" }
+
+    # Default middleware for api server
+    recalbox_api_server_middleware_default:
+        class: "@http_server_middleware_default"
+        tags:
+            - { name: "http_server_middleware", server_name: "recalbox-api", priority: 100 }
+
+    # Router middleware for api server
+    recalbox_api_server_middleware_router:
+        class: "@http_router_server_middleware"
+        calls:
+            - [loadRoutes, ["@http_router_loader_yaml", "%routes_path%"]]
+        tags:
+            - { name: "http_server_middleware", server_name: "recalbox-api" }
+
+    recalbox_api_controller_home:
+        class: "controllers/Home"

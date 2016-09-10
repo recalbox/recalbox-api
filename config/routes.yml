@@ -1,0 +1,4 @@
+homepage:
+    path:       /
+    controller: "@recalbox_api_controller_home"
+    action:     index
