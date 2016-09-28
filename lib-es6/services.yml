@@ -2,6 +2,8 @@ services:
     # Start command
     recalbox_api_command_start:
         class: "Command/StartCommand"
+        arguments:
+            - "@http_server_factory"
         tags:
             - { name: "solfege.console.command" }
 

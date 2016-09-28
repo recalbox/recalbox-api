@@ -1,0 +1,4 @@
+forever:
+    console_path: "%main_directory_path%/console.js"
+
+routes_path: "%configuration_directory_path%/routes.yml"

@@ -1,17 +1,36 @@
-import ContainerAwareCommand from "solfegejs/lib/bundles/Console/Command/ContainerAwareCommand";
-
 /**
  * Start command
  */
-export default class StartCommand extends ContainerAwareCommand
+export default class StartCommand
 {
     /**
-     * Configure command
+     * Constructor
+     *
+     * @param   {object}    serverFactory   HTTP server factory
      */
-    *configure()
+    constructor(serverFactory)
     {
-        this.setName("recalbox-api:start");
-        this.setDescription("Start Recalbox API");
+        this.serverFactory = serverFactory;
+    }
+
+    /**
+     * Get command name
+     *
+     * @return  {string}    Command name
+     */
+    getName()
+    {
+        return "recalbox-api:start";
+    }
+
+    /**
+     * Get description
+     *
+     * @return  {string}    Command description
+     */
+    getDescription()
+    {
+        return "Start Recalbox API";
     }
 
     /**
@@ -19,10 +38,7 @@ export default class StartCommand extends ContainerAwareCommand
      */
     *execute()
     {
-        let container = this.getContainer();
-        let serverFactory = yield container.get("http_server_factory");
-
-        let server = serverFactory.create("recalbox-api");
+        let server = this.serverFactory.create("recalbox-api");
         server.start(1337);
 
         console.info("API started");
